@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react"
 import { useParams, Link } from "react-router-dom"
-// import game from "../../models/game"
 
 export default function Show() {
     const {id} = useParams()
@@ -11,12 +10,8 @@ export default function Show() {
             try {
                 const response = await fetch(`http://localhost:3001/api/games/${id}`)
                 const data = await response.json()
-                console.log(data)
-                console.log(response)
-                console.log(response.body)
                 setGame(data)
             } catch(e) {
-                console.log('Error!!!!!!!!!!!!!')
                 console.log(e)
             }
         })() 
