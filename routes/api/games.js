@@ -10,5 +10,8 @@ router.get('/seed', gamesCtrl.seed)
 // GET /api/games/index
 router.get('/', gamesCtrl.index)
 
+//Get /api/games/show
+router.get('/:id', gamesCtrl.show)
+
 
 module.exports = router
