@@ -32,9 +32,9 @@ async function index(req, res) {
 }
 
 async function show(req, res) {
-    const id = req.params.id
     try{
-        const game = Games.findById(id)
+        const id = await req.params.id
+        const game = await Games.findById(id)
         res.status(200).json(game)
     } catch(e) {
         res.status(400).json(e)
