@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import Home from './pages/Home'
 import MyAccount from './pages/MyAccount'
 import Cart from './pages/Cart'
+import Show from './pages/Show'
 
 export default function App(){
     const [games, setGames] = useState([])
@@ -26,6 +27,7 @@ export default function App(){
                 <Route path='/' element={<Home games={games}/>} />
                 <Route path='/account' element={<MyAccount />} />
                 <Route path='/cart' element={<Cart />} />
+                <Route path='/:id' element={<Show />} />
             </Routes>
         </main>
     )
