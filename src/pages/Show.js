@@ -10,11 +10,10 @@ export default function Show() {
         (async () => {
             try {
                 const response = await fetch(`http://localhost:3001/api/games/${id}`)
-                const data = response.json()
+                const data = await response.json()
                 console.log(data)
-                console.log(data.promiseResult)
                 console.log(response)
-                console.log(response.data)
+                console.log(response.body)
                 setGame(data)
             } catch(e) {
                 console.log('Error!!!!!!!!!!!!!')
