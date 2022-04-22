@@ -11,6 +11,9 @@ app.use(express.json())
 app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
 app.use(express.static(path.join(__dirname, 'build')));
 
+//API routes
+app.use('/api/games', require('./routes/api/games'))
+
 
 //Catch All route
 app.get('/*', function(req, res) {
