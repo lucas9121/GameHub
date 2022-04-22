@@ -5,7 +5,10 @@ const logger = require('morgan');
 require('dotenv').config();
 require('./config/database');
 const app = express();
+const cors = require('cors')
 
+
+app.use(cors())
 app.use(logger('dev'))
 app.use(express.json())
 // app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
