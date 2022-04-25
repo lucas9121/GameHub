@@ -10,6 +10,9 @@ const gamesCtrl = require('../../controllers/api/games')
 // GET /api/games/index
 router.get('/', gamesCtrl.index)
 
+// PUT /api/games/:id
+router.put('/:id', gamesCtrl.update)
+
 //GET /api/games/:id/edit
 router.get('/:id/edit', gamesCtrl.edit)
 
