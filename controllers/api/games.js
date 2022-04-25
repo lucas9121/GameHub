@@ -3,6 +3,7 @@ const Games = require('../../models/game')
 module.exports = {
     // seed,
     index,
+    update,
     edit,
     show
 }
@@ -29,6 +30,17 @@ async function index(req, res) {
         res.status(200).json(games)
     } catch(e) {
         res.status(400).json(e)
+    }
+}
+
+async function update(req, res) {
+    try{
+        const {body} = await req
+        await Games.findByIdAndUpdate(req.params.id, body, {new: true}, (updatedGame) => {
+            res.status(200).json(updatedGame)
+        })
+    }catch(e){
+        console.log(e)
     }
 }
 
