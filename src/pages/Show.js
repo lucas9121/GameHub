@@ -4,6 +4,7 @@ import { useParams, Link } from "react-router-dom"
 export default function Show() {
     const {id} = useParams()
     const [game, setGame] = useState({})
+    const [reviews, setReviews] = useState([])
 
     useEffect(() => {
         (async () => {
@@ -11,6 +12,7 @@ export default function Show() {
                 const response = await fetch(`http://localhost:3001/api/games/${id}`)
                 const data = await response.json()
                 setGame(data)
+                setReviews(data.reviews)
             } catch(e) {
                 console.log(e)
             }
@@ -39,6 +41,21 @@ export default function Show() {
                 <hr />
                 <div className="about-description">
                     <p>{game.description} </p>
+                </div>
+                <div className='review-div form-group'>
+                    <h3>Customer Reviews</h3>
+                    <hr />
+                    <div className="review-comments">
+                        {
+                           reviews.map((review) => {
+                                return(
+                                    <div>
+                                        <p>{review} <button>Edit</button> </p>
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
                 </div>
             </div>
         </main>
