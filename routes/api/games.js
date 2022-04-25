@@ -10,7 +10,10 @@ const gamesCtrl = require('../../controllers/api/games')
 // GET /api/games/index
 router.get('/', gamesCtrl.index)
 
-//Get /api/games/show
+//GET /api/games/:id/edit
+router.get('/:id/edit', gamesCtrl.edit)
+
+//Get /api/games/:id
 router.get('/:id', gamesCtrl.show)
 
 
