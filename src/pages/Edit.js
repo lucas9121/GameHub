@@ -20,6 +20,9 @@ export default function Edit() {
     return (
         <main className="Edit">
             <h2>Edit {game.name} </h2>
+            <Link to={`/${game._id}`} >Back</Link>
+            <br />
+            <br />
             <form className='edit-form' action={`/api/games/${game._id}?_method=PUT`} method="POST">
                 <div className='row'>
                     <div className='form-group col'>
