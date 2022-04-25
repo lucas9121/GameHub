@@ -3,6 +3,7 @@ const Games = require('../../models/game')
 module.exports = {
     // seed,
     index,
+    edit,
     show
 }
 
@@ -26,6 +27,16 @@ async function index(req, res) {
     try{
         const games = await Games.find({})
         res.status(200).json(games)
+    } catch(e) {
+        res.status(400).json(e)
+    }
+}
+
+async function edit(req, res) {
+    try{
+        const id = await req.params.id
+        const game = await Games.findById(id)
+        res.status(200).json(game)
     } catch(e) {
         res.status(400).json(e)
     }
