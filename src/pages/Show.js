@@ -20,6 +20,9 @@ export default function Show() {
     return(
         <main className="show-div">
             <h2>{game.name} </h2>
+            <Link to={`/${game._id}/edit`} > Edit
+            </Link>
+            <br />
             <img src={game.img} alt={game.name} />
             <div className="purchase-div">
                 <div className="purchase-title">
