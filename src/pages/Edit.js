@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react"
-import { useParams, Link } from "react-router-dom"
+import { useParams, Link, useNavigate, Navigate } from "react-router-dom"
 // import axios from "axios"
 
 
@@ -11,6 +11,7 @@ export default function Edit() {
     const qty = useRef(null)
     const img = useRef(null)
     const description = useRef(null)
+    const navigate = useNavigate()
 
     useEffect(() => {
         (async () => {
@@ -43,6 +44,18 @@ export default function Edit() {
             })
         } catch(e) {
             console.log(e)
+        } finally {
+            navigate(-1)
+        }
+    }
+
+    const handleDelete = async (event) => {
+        try {
+            await fetch(`http://localhost:3001/api/games/${id}`, {method: 'DELETE'})
+        } catch(e) {
+            console.log(e)
+        } finally {
+            navigate(-1)
         }
     }
 
