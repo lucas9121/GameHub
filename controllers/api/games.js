@@ -33,11 +33,24 @@ async function index(req, res) {
     }
 }
 
+// async function delete(req,res) {
+//     try{
+
+//     }catch(e){
+//         res.status()
+//     }
+// }
+
 async function update(req, res) {
     try{
         const {body} = await req
-        await Games.findByIdAndUpdate(req.params.id, body, {new: true}, (updatedGame) => {
-            res.status(200).json(updatedGame)
+        await Games.findByIdAndUpdate(req.params.id, body, {new: true}, (err, updatedGame) => {
+            if(!err){
+                res.status(200).json(updatedGame)
+            } else {
+                res.status(400).json(err)
+            }
+
         })
     }catch(e){
         console.log(e)
