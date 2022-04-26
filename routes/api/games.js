@@ -13,6 +13,9 @@ router.get('/', gamesCtrl.index)
 // PUT /api/games/:id
 router.put('/:id', gamesCtrl.update)
 
+// DELETE /api/games/:id
+router.delete('/:id', gamesCtrl.Delete)
+
 //GET /api/games/:id/edit
 router.get('/:id/edit', gamesCtrl.edit)
 
