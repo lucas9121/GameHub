@@ -3,6 +3,7 @@ const Games = require('../../models/game')
 module.exports = {
     // seed,
     index,
+    Delete,
     update,
     edit,
     show
@@ -33,13 +34,15 @@ async function index(req, res) {
     }
 }
 
-// async function delete(req,res) {
-//     try{
-
-//     }catch(e){
-//         res.status()
-//     }
-// }
+async function Delete(req,res) {
+    try{
+        await Games.findByIdAndDelete(req.params.id, (e) => {
+            if(e) res.status(400).json(e)
+        })
+    }catch(e){
+        res.status()
+    }
+}
 
 async function update(req, res) {
     try{
