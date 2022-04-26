@@ -90,9 +90,7 @@ export default function Edit() {
                 </div>
                 <input className='btn btn-outline-success' type="submit" value="Edit Game" />
             </form>
-            {/* <form action={`/api/games/${game._id}?_method=DELETE`} method="POST">
-                <input className='btn btn-danger' type="submit" value='Delete Game' />
-            </form> */}
+            <button onClick={handleDelete} >Delete</button>
         </main>
         
     )
