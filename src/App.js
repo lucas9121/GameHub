@@ -6,6 +6,7 @@ import MyAccount from './pages/MyAccount'
 import Cart from './pages/Cart'
 import Show from './pages/Show'
 import Edit from './pages/Edit'
+import New from './pages/New'
 
 export default function App(){
     const [games, setGames] = useState([])
@@ -26,6 +27,7 @@ export default function App(){
         <main className='App'>
             <Routes>
                 <Route path='/' element={<Home games={games}/>} />
+                <Route path='/new' element={<New />} />
                 <Route path='/account' element={<MyAccount />} />
                 <Route path='/cart' element={<Cart />} />
                 <Route path='/:id/edit' element={<Edit />} />
