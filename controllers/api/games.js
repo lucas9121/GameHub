@@ -3,6 +3,7 @@ const Games = require('../../models/game')
 module.exports = {
     // seed,
     index,
+    create,
     Delete,
     update,
     edit,
@@ -32,6 +33,16 @@ async function index(req, res) {
     } catch(e) {
         res.status(400).json(e)
     }
+}
+
+async function create(req, res){
+    const game = await Games.create(req.body, (e, createdGame) => {
+        if(!e){
+            res.status(200).json({createdGame: createdGame})
+        } else {
+            res.status(400).json(e)
+        }
+    })
 }
 
 async function Delete(req,res) {
