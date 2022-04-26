@@ -7,8 +7,11 @@ const gamesCtrl = require('../../controllers/api/games')
 // GET /api/games/seed
 // router.get('/seed', gamesCtrl.seed)
 
-// GET /api/games/index
+// GET /api/games
 router.get('/', gamesCtrl.index)
+
+// POST /api/games
+router.post('/', gamesCtrl.create)
 
 // PUT /api/games/:id
 router.put('/:id', gamesCtrl.update)
