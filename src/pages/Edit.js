@@ -24,12 +24,6 @@ export default function Edit() {
         })() 
     }, [])
 
-    // name: 'Game 1',
-    // price: price.current.value,
-    // qty: qty.current.value,
-    // img: img.current.value,
-    // description: description.current.value
-
     const handleSubmit = async (event) => {
         event.preventDefault()
         try {
