@@ -12,17 +12,17 @@ export default function Edit() {
     const img = useRef(null)
     const description = useRef(null)
 
-    // useEffect(() => {
-    //     (async () => {
-    //         try {
-    //             const response = await fetch(`http://localhost:3001/api/games/${id}/edit`)
-    //             const data = await response.json()
-    //             setGame(data)
-    //         } catch(e) {
-    //             console.log(e)
-    //         }
-    //     })() 
-    // }, [])
+    useEffect(() => {
+        (async () => {
+            try {
+                const response = await fetch(`http://localhost:3001/api/games/${id}/edit`)
+                const data = await response.json()
+                setGame(data)
+            } catch(e) {
+                console.log(e)
+            }
+        })() 
+    }, [])
 
     // name: 'Game 1',
     // price: price.current.value,
@@ -35,9 +35,17 @@ export default function Edit() {
         try {
             const response = await fetch(`http://localhost:3001/api/games/${id}`, {
                 method: 'PUT',
-                body: {
-                    name: 'Game 1 new name'
-                }
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type':'application/json'
+                },
+                body: JSON.stringify({
+                    name: name.current.value,
+                    price: price.current.value,
+                    qty: qty.current.value,
+                    img: img.current.value,
+                    description: description.current.value
+                })
             })
         } catch(e) {
             console.log(e)
