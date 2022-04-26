@@ -4,6 +4,8 @@ export default function Home({games}) {
     return(
         <main>
             <h1>Home Page</h1>
+            <Link to='/new' > New game
+            </Link>
             {
                 games.map((game) => {
                     return(
