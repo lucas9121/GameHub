@@ -28,10 +28,10 @@ export default function App(){
         <main className='App'>
             <Routes>
                 <Route path='/' element={<Home games={games} refressh={refressh}/>} />
-                <Route path='/new' element={<New setRefresh={setRefresh} />} />
+                <Route path='/new' element={<New />} />
                 <Route path='/account' element={<MyAccount />} />
                 <Route path='/cart' element={<Cart />} />
-                <Route path='/:id/edit' element={<Edit setRefresh={setRefresh} />} />
+                <Route path='/:id/edit' element={<Edit refressh={refressh} setRefresh={setRefresh} />} />
                 <Route path='/:id' element={<Show />} />
             </Routes>
         </main>
