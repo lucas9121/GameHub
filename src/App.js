@@ -22,13 +22,13 @@ export default function App(){
                 console.log(e)
             }
         })()
-    }, [])
+    }, [refressh])
 
     return(
         <main className='App'>
             <Routes>
-                <Route path='/' element={<Home games={games} refressh={refressh}/>} />
-                <Route path='/new' element={<New />} />
+                <Route path='/' element={<Home games={games}/>} />
+                <Route path='/new' element={<New refressh={refressh} setRefresh={setRefresh}/>} />
                 <Route path='/account' element={<MyAccount />} />
                 <Route path='/cart' element={<Cart />} />
                 <Route path='/:id/edit' element={<Edit refressh={refressh} setRefresh={setRefresh} />} />
