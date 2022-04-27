@@ -1,12 +1,12 @@
 import './App.css'
 import {Routes, Route} from "react-router-dom"
 import { useState, useEffect } from "react"
-import Home from '../Home'
-import MyAccount from '../MyAccount'
-import Cart from '../Cart'
-import Show from '../Show'
-import Edit from '../Edit'
-import New from '../New'
+import Home from '../Home/Home'
+import MyAccount from '../MyAccount/MyAccount'
+import Cart from '../Cart/Cart'
+import Show from '../Show/Show'
+import Edit from '../Edit/Edit'
+import New from '../New/New'
 
 export default function App(){
     const [games, setGames] = useState([])
