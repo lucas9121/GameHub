@@ -1,4 +1,4 @@
-import { useRef, useState } from "react"
+import { useRef} from "react"
 import { useNavigate } from "react-router-dom"
 
 export default function New(){
@@ -8,15 +8,9 @@ export default function New(){
     const qty = useRef(null)
     const description = useRef(null)
     const navigate = useNavigate()
-    const [newGame, setNewGame] = useState({})
 
     const handleSubmit = async (event) => {
         event.preventDefault()
-        console.log('Ref!!!!!!!!!!!!!')
-        console.log(name.current.value)
-        console.log(price.current.value)
-        console.log(img.current.value)
-        console.log(description.current.value)
         try {
             const response = await fetch(`http://localhost:3001/api/games`, {
                 method: 'POST',
@@ -33,17 +27,15 @@ export default function New(){
                 })
             })
             const data = await response.json()
-            console.log(data)
-            setNewGame(data)
+            if(response.status === 200){
+                navigate(`/${data.createdGame._id}`)
+                // navigate(-1)
+            }
         } catch(e) {
             console.log(e)
-        } finally {
-            // navigate(`/${newGame._id}`)
-            navigate(-1)
         }
     }
     
-    console.log(newGame)
     return (
         <main className="New">
             <h2>New Game</h2>
