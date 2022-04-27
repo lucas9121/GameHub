@@ -15,7 +15,7 @@ app.use(express.json())
 app.use(express.static(path.join(__dirname, 'build')));
 
 //API routes
-app.use('/api/user', require('./routes/api/user'))
+app.use('/api/users', require('./routes/api/users'))
 app.use('/api/games', require('./routes/api/games'))
 
 
