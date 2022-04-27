@@ -51,13 +51,25 @@ export default function Edit({refresh ,setRefresh}) {
     }
 
     const handleDelete = async (event) => {
+        console.log(refresh)
         setRefresh(!refresh)
+        console.log(refresh)
         navigate('/')
         try {
+            // console.log(refresh)
+            // setRefresh(!refresh)
+            // console.log(refresh)
+            // navigate('/')
             const res = await fetch(`http://localhost:3001/api/games/${id}`, {method: 'DELETE'})
         } catch(e) {
             console.log(e)
-        }
+        } 
+        // finally {
+        //     console.log(refresh)
+        //     setRefresh(!refresh)
+        //     console.log(refresh)
+        //     navigate('/')
+        // }
     }
 
     return (
