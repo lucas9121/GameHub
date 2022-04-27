@@ -3,7 +3,7 @@ import { useParams, Link, useNavigate} from "react-router-dom"
 // import axios from "axios"
 
 
-export default function Edit() {
+export default function Edit({refressh ,setRefresh}) {
     const {id} = useParams()
     const [game, setGame] = useState({})
     const name = useRef(null)
@@ -12,6 +12,8 @@ export default function Edit() {
     const img = useRef(null)
     const description = useRef(null)
     const navigate = useNavigate()
+    console.log(`refresh is`)
+    console.log(refressh)
 
     useEffect(() => {
         (async () => {
@@ -42,20 +44,32 @@ export default function Edit() {
                     description: description.current.value
                 })
             })
+            if(response.status === 200){
+                console.log('It is working')
+            }
         } catch(e) {
             console.log(e)
         } finally {
-            navigate(-1)
+            console.log('this works too')
+            setRefresh(!refressh)
+            console.log(`refresh is `)
+            console.log(refressh)
+            navigate('/')
         }
     }
 
     const handleDelete = async (event) => {
         try {
-            await fetch(`http://localhost:3001/api/games/${id}`, {method: 'DELETE'})
+            const res = await fetch(`http://localhost:3001/api/games/${id}`, {method: 'DELETE'})
+            if(res.status === 200){
+                console.log('It is working')
+                setRefresh(!refressh)
+                navigate('/')
+            }
         } catch(e) {
             console.log(e)
         } finally {
-            navigate(-1)
+            console.log('this works too')
         }
     }
 
