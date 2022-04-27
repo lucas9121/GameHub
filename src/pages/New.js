@@ -15,7 +15,6 @@ export default function New(){
             const response = await fetch(`http://localhost:3001/api/games`, {
                 method: 'POST',
                 headers: {
-                    // 'Accept': 'application/json',
                     'Content-Type':'application/json'
                 },
                 body: JSON.stringify({
@@ -29,7 +28,6 @@ export default function New(){
             const data = await response.json()
             if(response.status === 200){
                 navigate(`/${data.createdGame._id}`)
-                // navigate(-1)
             }
         } catch(e) {
             console.log(e)
