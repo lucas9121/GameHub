@@ -10,6 +10,7 @@ import New from './pages/New'
 
 export default function App(){
     const [games, setGames] = useState([])
+    const [refressh, setRefresh] = useState(false)
 
     useEffect(() => {
         (async () => {
@@ -26,11 +27,11 @@ export default function App(){
     return(
         <main className='App'>
             <Routes>
-                <Route path='/' element={<Home games={games}/>} />
-                <Route path='/new' element={<New />} />
+                <Route path='/' element={<Home games={games} refressh={refressh}/>} />
+                <Route path='/new' element={<New setRefresh={setRefresh} />} />
                 <Route path='/account' element={<MyAccount />} />
                 <Route path='/cart' element={<Cart />} />
-                <Route path='/:id/edit' element={<Edit />} />
+                <Route path='/:id/edit' element={<Edit setRefresh={setRefresh} />} />
                 <Route path='/:id' element={<Show />} />
             </Routes>
         </main>
