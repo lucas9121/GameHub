@@ -1,7 +1,7 @@
 import { useRef} from "react"
 import { useNavigate } from "react-router-dom"
 
-export default function New(){
+export default function New({refresh, setRefresh}){
     const name = useRef(null)
     const price = useRef(null)
     const img = useRef(null)
@@ -27,6 +27,7 @@ export default function New(){
             })
             const data = await response.json()
             if(response.status === 200){
+                setRefresh(!refresh)
                 navigate(`/${data.createdGame._id}`)
             }
         } catch(e) {
@@ -51,7 +52,7 @@ export default function New(){
                         </div>
                         <div className='form-group col'>
                             <label htmlFor="qty" className='text-light'>Quantity</label>
-                            <input name="qty" type="number" ref={qty} className='form-control form-control-sm' id='qty' required/>
+                            <input name="qty" type="number" ref={qty} defaultValue='100' className='form-control form-control-sm' id='qty' required/>
                             <div id='qty' className="valid-feedback">Looks good!</div>
                             <div id='qty' className="invalid-feedback">Please provide quantity</div>
                         </div>
