@@ -7,12 +7,12 @@ export default function NavBar({ user, setUser}) {
         <nav className="nav">
             <Link to={'/'}><h1>GameHub</h1></Link>
             {
-                user === null ?
-                <AuthPage user={user} setUser={setUser} /> :
+                user  ?
                 <div>
                     <p>Hello {user.name}</p>
-                    {/* <UserLogOut /> */}
-                </div> 
+                    <UserLogOut />
+                </div> :
+                <AuthPage user={user} setUser={setUser} />
             }
         </nav>
     )
