@@ -18,6 +18,12 @@ const userSchema = new Schema({
         trim: true,
         minLength: 5,
         required: true
+    },
+    account: {
+        type: String,
+        require: true,
+        default: "gamer",
+        enum: ["gamer", 'developer', 'admin']
     }
 }, 
 {
