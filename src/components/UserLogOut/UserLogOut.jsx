@@ -1,6 +1,6 @@
 import { logOut } from '../../utilities/users-service';
 
-export default function UserLogOut({ user, setUser }) {
+export default function UserLogOut({ setUser }) {
     function handleLogOut() {
       logOut();
       setUser(null);
@@ -8,7 +8,6 @@ export default function UserLogOut({ user, setUser }) {
 
     return (
       <div className="UserLogOut">
-        <p> Hello {user.name}</p>
         <button className="btn-sm" onClick={handleLogOut}>LOG OUT</button>
       </div>
     );
