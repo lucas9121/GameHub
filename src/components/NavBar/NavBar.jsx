@@ -1,5 +1,19 @@
-export default function NavBar() {
+import AuthPage from "../../pages/AuthPage/AuthPage"
+import UserLogOut from "../UserLogOut/UserLogOut"
+import { Link } from "react-router-dom"
+
+export default function NavBar({ user, setUser}) {
     return(
-        <h1>Nav bar</h1>
+        <nav className="nav">
+            <Link to={'/'}><h1>GameHub</h1></Link>
+            {
+                user ?
+                <div>
+                    <p>Hello {user.name}</p>
+                    <UserLogOut />
+                </div> :
+                <AuthPage user={user} setUser={setUser} />
+            }
+        </nav>
     )
 }
