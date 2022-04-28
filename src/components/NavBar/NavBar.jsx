@@ -9,8 +9,8 @@ export default function NavBar({ user, setUser}) {
             {
                 user  ?
                 <div>
-                    <p>Hello {user.name}</p>
-                    <UserLogOut />
+                    {/* <p>Hello {user.name}</p> */}
+                    <UserLogOut user={user} setUser={setUser} />
                 </div> :
                 <AuthPage user={user} setUser={setUser} />
             }
