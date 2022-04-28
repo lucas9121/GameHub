@@ -7,8 +7,9 @@ import Cart from '../Cart/Cart'
 import Show from '../Show/Show'
 import Edit from '../Edit/Edit'
 import New from '../New/New'
-import AuthPage from '../AuthPage/AuthPage'
+// import AuthPage from '../AuthPage/AuthPage'
 import { getUser } from '../../utilities/users-service'
+import NavBar from '../../components/NavBar/NavBar'
 
 export default function App(){
     const [games, setGames] = useState([])
@@ -29,7 +30,8 @@ export default function App(){
 
     return(
         <main className='App'>
-            <AuthPage user={user} setUser={setUser} />
+            <NavBar user={user} setUser={setUser} />
+            {/* <AuthPage user={user} setUser={setUser} /> */}
             <Routes>
                 <Route path='/' element={<Home games={games} user={user}/>} />
                 <Route path='/new' element={<New refresh={refresh} setRefresh={setRefresh}/>} />
