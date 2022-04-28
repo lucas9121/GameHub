@@ -8,10 +8,12 @@ import Show from '../Show/Show'
 import Edit from '../Edit/Edit'
 import New from '../New/New'
 import AuthPage from '../AuthPage/AuthPage'
+import { getUser } from '../../utilities/users-service'
 
 export default function App(){
     const [games, setGames] = useState([])
     const [refresh, setRefresh] = useState(false)
+    const [user, setUser] = useState(getUser())
 
     useEffect(() => {
         (async () => {
@@ -27,14 +29,14 @@ export default function App(){
 
     return(
         <main className='App'>
-            <AuthPage />
+            <AuthPage user={user} setUser={setUser} />
             <Routes>
-                <Route path='/' element={<Home games={games}/>} />
+                <Route path='/' element={<Home games={games} user={user}/>} />
                 <Route path='/new' element={<New refresh={refresh} setRefresh={setRefresh}/>} />
-                <Route path='/account' element={<MyAccount />} />
+                <Route path='/account' element={<MyAccount user={user} />} />
                 <Route path='/cart' element={<Cart />} />
                 <Route path='/:id/edit' element={<Edit refresh={refresh} setRefresh={setRefresh} />} />
-                <Route path='/:id' element={<Show />} />
+                <Route path='/:id' element={<Show user={user}/>} />
             </Routes>
         </main>
     )
