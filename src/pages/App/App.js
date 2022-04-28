@@ -7,6 +7,7 @@ import Cart from '../Cart/Cart'
 import Show from '../Show/Show'
 import Edit from '../Edit/Edit'
 import New from '../New/New'
+import AuthPage from '../AuthPage/AuthPage'
 
 export default function App(){
     const [games, setGames] = useState([])
@@ -26,6 +27,7 @@ export default function App(){
 
     return(
         <main className='App'>
+            <AuthPage />
             <Routes>
                 <Route path='/' element={<Home games={games}/>} />
                 <Route path='/new' element={<New refresh={refresh} setRefresh={setRefresh}/>} />
