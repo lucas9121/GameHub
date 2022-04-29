@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { useParams, Link } from "react-router-dom"
 
-export default function Show() {
+export default function Show({user}) {
     const {id} = useParams()
     const [game, setGame] = useState({})
     const [reviews, setReviews] = useState([])
@@ -22,10 +22,11 @@ export default function Show() {
     return(
         <main className="show-div">
             <h2>{game.name} </h2>
-            <Link to='/' >Back</Link>
-            <br />
-            <Link to={`/${game._id}/edit`} > Edit
-            </Link>
+            {
+                user && user.account === 'developer' ?
+                <Link to={`/${game._id}/edit`} > Edit
+                </Link> : null
+            }
             <br />
             <br />
             <img src={game.img} alt={game.name} />
@@ -53,7 +54,7 @@ export default function Show() {
                            reviews.map((review) => {
                                 return(
                                     <div>
-                                        <p>{review} <button>Edit</button> </p>
+                                        <p>{review} { user && user.account === "gamer" ? <button>Edit</button> : null } </p>
                                     </div>
                                 )
                             })
