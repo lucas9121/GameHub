@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 
 module.exports = {
   create,
+  index,
   login,
   Delete,
   checkToken
@@ -23,6 +24,15 @@ async function login(req, res) {
     res.status(200).json( createJWT(user) );
   } catch(e) {
     res.status(400).json({msg: e.message, reason: 'Bad Credentials'});
+  }
+}
+
+async function index(req, res) {
+  try{
+      const users = await User.find({})
+      res.status(200).json(users)
+  } catch(e) {
+      res.status(400).json(e)
   }
 }
 
