@@ -1,16 +1,20 @@
 import { Component } from "react";
 import { signUp } from '../../utilities/users-service';
 
+
 export default class SignUpForm extends Component {
     state = {
       name: '',
       email: '',
       password: '',
       confirm: '',
+      account: '',
       error: ''
     };
-    
+
+
     handleChange = (evt) => {
+      console.dir(evt.target)
       this.setState({
         [evt.target.name]: evt.target.value,
         error: ''
@@ -45,6 +49,15 @@ export default class SignUpForm extends Component {
               <input type="password" name="password" value={this.state.password} onChange={this.handleChange} required />
               <label>Confirm</label>
               <input type="password" name="confirm" value={this.state.confirm} onChange={this.handleChange} required />
+              <label>Account Type</label>
+              <select name="account" onChange={(evt) => {
+                // options are elements in the select array. account is equal to the value of the clicked option
+                  this.setState({...this.state, account: evt.target[evt.target.selectedIndex].value} )
+              }}>
+                  <option  value="gamer">Gamer</option>
+                  <option value='developer'>Developer</option>
+                  <option value='admin'>Admin</option>
+              </select>
               <button type="submit" disabled={disable}>SIGN UP</button>
             </form>
           </div>
