@@ -10,7 +10,7 @@ export default function NavBar({ user, setUser}) {
                 user  ?
                 <div>
                     <p>Hello {user.name}</p>
-                    <Link to={'/account'} >My Account</Link>
+                    <Link to={`/account/${user._id}`} >My Account</Link>
                     {
                         user.account === "gamer" ?
                         <Link to={'/cart'} >Cart</Link> :
