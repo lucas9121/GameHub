@@ -3,12 +3,13 @@ import { useNavigate, useParams } from "react-router-dom"
 export default function MyAccount({user, refresh, setRefresh}) {
     const {id} = useParams()
     const navigate = useNavigate()
+    console.log(id)
 
     const handleDelete = async (event) => {
-        setRefresh(!refresh)
-        navigate('/')
         try {
-            const res = await fetch(`http://localhost:3001/api/users/${id}`, {method: 'DELETE'})
+            setRefresh(!refresh)
+            navigate('/')
+            const res = await fetch(`http://localhost:3001/api/users/delete/${id}`, {method: 'DELETE'})
         } catch(e) {
             console.log(e)
         } 
