@@ -6,10 +6,15 @@ const ensureLoggedIn = require('../../config/ensureLoggedIn');
 
 // POST /api/users
 router.post('/', usersCtrl.create);
+
+// GET /api/users/index
+router.get('/index', usersCtrl.index)
+
 // POST /api/users/login
 router.post('/login', usersCtrl.login);
-// DELETE /api/users/:id
-router.delete('/:id', usersCtrl.Delete)
+
+// DELETE /api/users/delete/:id
+router.delete('/delete/:id', usersCtrl.Delete)
 
 // GET /api/users/check-token
 router.get('/check-token', ensureLoggedIn, usersCtrl.checkToken);
