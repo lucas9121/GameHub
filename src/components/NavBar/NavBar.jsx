@@ -11,7 +11,11 @@ export default function NavBar({ user, setUser}) {
                 <div>
                     <p>Hello {user.name}</p>
                     <Link to={'/account'} >My Account</Link>
-                    <Link to={'/cart'} >Cart</Link>
+                    {
+                        user.account === "gamer" ?
+                        <Link to={'/cart'} >Cart</Link> :
+                        <Link to={'/new'}>New Game</Link>
+                    }
                     <UserLogOut user={user} setUser={setUser} />
                 </div> :
                 <AuthPage user={user} setUser={setUser} />
