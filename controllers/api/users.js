@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 module.exports = {
   create,
   login,
+  Delete,
   checkToken
 };
 
@@ -36,6 +37,16 @@ async function create(req, res) {
     res.status(200).json(token);
   } catch (e) {
     res.status(400).json({msg: e.message});
+  }
+}
+
+async function Delete(req,res) {
+  try{
+      await User.findByIdAndDelete(req.params.id, (e) => {
+          if(e) res.status(400).json(e)
+      })
+  }catch(e){
+      res.status(400).json(e)
   }
 }
 
