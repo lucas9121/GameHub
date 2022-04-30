@@ -11,6 +11,7 @@ export default function Show({user}) {
     })
     const [reviewBtn, setReviewBtn] = useState(false)
     const description = useRef(null)
+    console.log(user)
     console.log(reviewBtn)
     console.log(reviews)
 
@@ -27,15 +28,20 @@ export default function Show({user}) {
         })() 
     }, [])
 
+    const handleChange = () => {
+        setNewReview({
+            name: user.name,
+            description: description.current.value
+        })
+    }
+
     const handleSubmit = (evt) => {
         evt.preventDefault()
         try{
-            setNewReview({
-                name: user.name,
-                description: description.current.value
-            })
             setReviews([...reviews, newReview])
             setReviewBtn(false)
+            // reviews.save()
+            // game.save()
             console.log('button is false after submit function')
         }catch(e){
             console.log(e)
@@ -79,7 +85,7 @@ export default function Show({user}) {
                                 <label htmlFor="description">
                                     Write Review
                                 </label>
-                                <textarea name="description" ref={description} maxLength={'300'} cols="40" rows="3"></textarea>
+                                <textarea name="description" ref={description} onChange={handleChange} maxLength={'300'} cols="40" rows="3"></textarea>
                                 <input className='submit btn btn-outline-success' type="submit" value="Submit" />
                             </fieldset>
                         </form> : 
