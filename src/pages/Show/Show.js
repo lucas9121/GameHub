@@ -53,6 +53,10 @@ export default function Show({user}) {
             })
             setReviewBtn(false)
             setRender(!render)
+            setReviews({
+                name: '',
+                description: ''
+            })
             console.log('button is false after submit function')
         }catch(e){
             console.log(e)
@@ -113,7 +117,6 @@ export default function Show({user}) {
                            reviews.map((review, idx) => {
                                 return(
                                     <div key={idx} className="form-group">
-                                        {/* <p>{review}</p> */}
                                         <small>{review.name}</small>
                                         <p>{review.description} { user && user.account === "gamer" && user.name === review.name ? <button>Edit</button> : null } </p>
                                     </div>
