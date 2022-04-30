@@ -1,10 +1,18 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { useParams, Link } from "react-router-dom"
 
 export default function Show({user}) {
     const {id} = useParams()
     const [game, setGame] = useState({})
     const [reviews, setReviews] = useState([])
+    const [newReview, setNewReview] = useState({
+        name: '',
+        description: ''
+    })
+    const [reviewBtn, setReviewBtn] = useState(false)
+    const description = useRef(null)
+    console.log(reviewBtn)
+    console.log(reviews)
 
     useEffect(() => {
         (async () => {
@@ -18,6 +26,21 @@ export default function Show({user}) {
             }
         })() 
     }, [])
+
+    const handleSubmit = (evt) => {
+        evt.preventDefault()
+        try{
+            setNewReview({
+                name: user.name,
+                description: description.current.value
+            })
+            setReviews([...reviews, newReview])
+            setReviewBtn(false)
+            console.log('button is false after submit function')
+        }catch(e){
+            console.log(e)
+        }
+    }
 
     return(
         <main className="show-div">
@@ -49,12 +72,33 @@ export default function Show({user}) {
                 <div className='review-div form-group'>
                     <h3>Customer Reviews</h3>
                     <hr />
+                    {
+                        reviewBtn ?
+                        <form onSubmit={handleSubmit} method="POST">
+                            <fieldset className='new-review'>
+                                <label htmlFor="description">
+                                    Write Review
+                                </label>
+                                <textarea name="description" ref={description} maxLength={'300'} cols="40" rows="3"></textarea>
+                                <input className='submit btn btn-outline-success' type="submit" value="Submit" />
+                            </fieldset>
+                        </form> : 
+                        <button 
+                            onClick={(evt) => {
+                                setReviewBtn(true)
+                                console.log('button is true after being pressed')
+                            }}>
+                            Write a review
+                        </button>
+                    }
                     <div className="review-comments">
                         {
-                           reviews.map((review) => {
+                           reviews.map((review, idx) => {
                                 return(
-                                    <div>
-                                        <p>{review} { user && user.account === "gamer" ? <button>Edit</button> : null } </p>
+                                    <div key={idx} className="form-group">
+                                        {/* <p>{review}</p> */}
+                                        <small>{review.name}</small>
+                                        <p>{review.description} { user && user.account === "gamer" && user.name === review.name ? <button>Edit</button> : null } </p>
                                     </div>
                                 )
                             })
