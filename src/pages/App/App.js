@@ -9,6 +9,7 @@ import Edit from '../Edit/Edit'
 import New from '../New/New'
 import { getUser} from '../../utilities/users-service'
 import NavBar from '../../components/NavBar/NavBar'
+import SearchBar from '../../components/SearchBar/SearchBar'
 
 
 export default function App(){
@@ -37,6 +38,7 @@ export default function App(){
     return(
         <main className='App'>
             <NavBar user={user} setUser={setUser}/>
+            <SearchBar />
             <Routes>
                 <Route path='/' element={<Home games={games} user={user}/>} />
                 <Route path='/new' element={<New refresh={refresh} setRefresh={setRefresh}/>} />
