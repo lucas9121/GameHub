@@ -2,7 +2,7 @@ import AuthPage from "../../pages/AuthPage/AuthPage"
 import UserLogOut from "../UserLogOut/UserLogOut"
 import { Link } from "react-router-dom"
 
-export default function NavBar({ user, setUser}) {
+export default function NavBar({ user, setUser, refresh, setRefresh}) {
     return(
         <nav className="nav">
             <Link to={'/'}><h1>GameHub</h1></Link>
@@ -16,7 +16,7 @@ export default function NavBar({ user, setUser}) {
                         <Link to={'/cart'} >Cart</Link> :
                         <Link to={'/new'}>New Game</Link>
                     }
-                    <UserLogOut user={user} setUser={setUser} />
+                    <UserLogOut user={user} setUser={setUser} refresh={refresh} setRefresh={setRefresh}/>
                 </div> :
                 <AuthPage user={user} setUser={setUser} />
             }

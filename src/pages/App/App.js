@@ -34,7 +34,7 @@ export default function App(){
 
     return(
         <main className='App'>
-            <NavBar user={user} setUser={setUser} />
+            <NavBar user={user} setUser={setUser} refresh={refresh} setRefresh={setRefresh}/>
             {/* <AuthPage user={user} setUser={setUser} /> */}
             <Routes>
                 <Route path='/' element={<Home games={games} user={user}/>} />
