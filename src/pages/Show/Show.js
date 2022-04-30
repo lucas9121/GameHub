@@ -10,9 +10,11 @@ export default function Show({user}) {
         description: ''
     })
     const [reviewBtn, setReviewBtn] = useState(false)
+    const [render, setRender] = useState(false)
     const description = useRef(null)
     console.log(user)
     console.log(reviewBtn)
+    console.log(game)
     console.log(reviews)
 
     useEffect(() => {
@@ -22,6 +24,12 @@ export default function Show({user}) {
                 const data = await response.json()
                 setGame(data)
                 setReviews(data.reviews)
+                // if(reviewBtn){
+                //     setReviews([...data.reviews, newReview])
+                //     data.save()
+                // } else {
+                //     setReviews(data.reviews)
+                // }
             } catch(e) {
                 console.log(e)
             }
@@ -40,6 +48,7 @@ export default function Show({user}) {
         try{
             setReviews([...reviews, newReview])
             setReviewBtn(false)
+            setRender(!render)
             // reviews.save()
             // game.save()
             console.log('button is false after submit function')
