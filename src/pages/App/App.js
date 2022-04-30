@@ -38,7 +38,7 @@ export default function App(){
     return(
         <main className='App'>
             <NavBar user={user} setUser={setUser}/>
-            <SearchBar />
+            <SearchBar games={games} />
             <Routes>
                 <Route path='/' element={<Home games={games} user={user}/>} />
                 <Route path='/new' element={<New refresh={refresh} setRefresh={setRefresh}/>} />
