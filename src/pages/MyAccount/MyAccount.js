@@ -6,6 +6,7 @@ export default function MyAccount({user, setUserDlt, refresh, setRefresh}) {
     const navigate = useNavigate()
 
     const handleDelete = (event) => {
+        // making this an async await makes the code terminate after the try block
         try {
             fetch(`http://localhost:3001/api/users/delete/${id}`, {method: 'DELETE'})
         } catch(e) {
