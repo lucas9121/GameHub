@@ -52,9 +52,7 @@ async function create(req, res) {
 
 async function Delete(req,res) {
   try{
-      await User.findByIdAndDelete(req.params.id, (e) => {
-          if(e) res.status(400).json(e)
-      })
+      await User.findByIdAndDelete(req.params.id)
   }catch(e){
       res.status(400).json(e)
   }

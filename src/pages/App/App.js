@@ -8,8 +8,9 @@ import Show from '../Show/Show'
 import Edit from '../Edit/Edit'
 import New from '../New/New'
 // import AuthPage from '../AuthPage/AuthPage'
-import { getUser } from '../../utilities/users-service'
+import { getUser, logOut } from '../../utilities/users-service'
 import NavBar from '../../components/NavBar/NavBar'
+
 
 export default function App(){
     const [games, setGames] = useState([])
@@ -22,6 +23,9 @@ export default function App(){
                 const res = await fetch('http://localhost:3001/api/games')
                 const data = await res.json()
                 setGames(data)
+                if(!user){
+                    setUser()
+                }
             } catch (e) {
                 console.log(e)
             }
