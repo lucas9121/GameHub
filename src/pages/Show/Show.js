@@ -12,10 +12,6 @@ export default function Show({user}) {
     const [reviewBtn, setReviewBtn] = useState(false)
     const [render, setRender] = useState(false)
     const description = useRef(null)
-    console.log(user)
-    console.log(reviewBtn)
-    console.log(game)
-    console.log(reviews)
 
     useEffect(() => {
         (async () => {
@@ -24,17 +20,11 @@ export default function Show({user}) {
                 const data = await response.json()
                 setGame(data)
                 setReviews(data.reviews)
-                // if(reviewBtn){
-                //     setReviews([...data.reviews, newReview])
-                //     data.save()
-                // } else {
-                //     setReviews(data.reviews)
-                // }
             } catch(e) {
                 console.log(e)
             }
         })() 
-    }, [])
+    }, [render])
 
     const handleChange = () => {
         setNewReview({
@@ -43,14 +33,26 @@ export default function Show({user}) {
         })
     }
 
-    const handleSubmit = (evt) => {
+    const handleSubmit = async (evt) => {
         evt.preventDefault()
         try{
-            setReviews([...reviews, newReview])
+            const response = await fetch(`http://localhost:3001/api/games/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type':'application/json'
+                },
+                body: JSON.stringify({
+                    name: game.name,
+                    price: game.price,
+                    qty: game.qty,
+                    img: game.img,
+                    description: game.description,
+                    reviews: [...reviews, newReview]
+                })
+            })
             setReviewBtn(false)
             setRender(!render)
-            // reviews.save()
-            // game.save()
             console.log('button is false after submit function')
         }catch(e){
             console.log(e)
