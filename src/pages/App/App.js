@@ -7,8 +7,7 @@ import Cart from '../Cart/Cart'
 import Show from '../Show/Show'
 import Edit from '../Edit/Edit'
 import New from '../New/New'
-// import AuthPage from '../AuthPage/AuthPage'
-import { getUser, logOut } from '../../utilities/users-service'
+import { getUser} from '../../utilities/users-service'
 import NavBar from '../../components/NavBar/NavBar'
 
 
@@ -24,12 +23,11 @@ export default function App(){
                 const res = await fetch('http://localhost:3001/api/games')
                 const data = await res.json()
                 setGames(data)
+                // will log me out with the refresh hook if userDlt hook is set to true
                 if(userDlt){
-                    logOut()
                     setUser(getUser())
                     setUserDlt(false)
                 }
-                console.log(user)
             } catch (e) {
                 console.log(e)
             }
@@ -38,8 +36,7 @@ export default function App(){
 
     return(
         <main className='App'>
-            <NavBar user={user} setUser={setUser} refresh={refresh} setRefresh={setRefresh}/>
-            {/* <AuthPage user={user} setUser={setUser} /> */}
+            <NavBar user={user} setUser={setUser}/>
             <Routes>
                 <Route path='/' element={<Home games={games} user={user}/>} />
                 <Route path='/new' element={<New refresh={refresh} setRefresh={setRefresh}/>} />
