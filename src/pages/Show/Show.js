@@ -24,7 +24,7 @@ export default function Show({user}) {
                 console.log(e)
             }
         })() 
-    }, [render])
+    }, [render, id])
 
     const handleChange = () => {
         setNewReview({
