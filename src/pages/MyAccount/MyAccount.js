@@ -31,13 +31,13 @@ export default function MyAccount({user, setUserDlt, refresh, setRefresh}) {
                 <p>{user.email} </p>
                 <h4>Account Type</h4>
                 <p style={{textTransform: 'capitalize'}}>{user.account}</p>
-                <h4>Card</h4>
+                {/* <h4>Card</h4>
                 {
                     user.card.length === 0 ?
                     <p>no card info</p> :
                     <p></p>
                 }
-                <button>Add card info</button>
+                <button>Add card info</button> */}
                 <button onClick={handleDelete}>Delete Account</button>
             </div>
         </div>
