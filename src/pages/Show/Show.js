@@ -94,7 +94,7 @@ export default function Show({user}) {
                     <h3>Customer Reviews</h3>
                     <hr />
                     {
-                        reviewBtn ?
+                        user && reviewBtn ?
                         <form onSubmit={handleSubmit} method="POST">
                             <fieldset className='new-review'>
                                 <label htmlFor="description">
@@ -103,14 +103,19 @@ export default function Show({user}) {
                                 <textarea name="description" ref={description} onChange={handleChange} maxLength={'300'} cols="40" rows="3"></textarea>
                                 <input className='submit btn btn-outline-success' type="submit" value="Submit" />
                             </fieldset>
-                        </form> : 
+                        </form> :
+                        user && !reviewBtn ? 
                         <button 
                             onClick={(evt) => {
                                 setReviewBtn(true)
                                 console.log('button is true after being pressed')
                             }}>
                             Write a review
-                        </button>
+                        </button> :
+                        <div>
+                            <button disabled> Write a review</button>
+                            <small>sign in first</small>
+                        </div>
                     }
                     <div className="review-comments">
                         {
