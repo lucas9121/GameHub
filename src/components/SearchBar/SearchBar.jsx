@@ -1,5 +1,5 @@
 import { useRef, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 
 export default function SearchBar({games}) {
     const searchInput = useRef(null)
@@ -11,6 +11,8 @@ export default function SearchBar({games}) {
         if(results.length === 1){
             // results is an array of objects
             navigate(`/${results[0]._id}`)
+            setResults([])
+            searchInput.current.value = ''
         } else {
             // displaying name on return, setting results like this here is simpler
             setResults([{name: 'Invalid search result'}])
@@ -32,15 +34,15 @@ export default function SearchBar({games}) {
 
     return (
         <div className="SearchBar">
-            <form onSubmit={handleSubmit}>
-                <input type='text' name="Search" ref={searchInput} onChange={handleChange} placeholder="Search..."/>
+            <form onSubmit={handleSubmit} autoComplete="off">
+                <input type='search' name="Search" ref={searchInput} onChange={handleChange} placeholder="Search..."/>
                 <input type='submit' value='Search' />
             </form>
             {
                 results.map((result, idx) => {
                     return(
                         <div key={idx}>
-                            {result.name}
+                            <Link to={`/${result._id}`} >{result.name} </Link>
                         </div>
                     )
                 })
