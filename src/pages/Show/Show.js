@@ -94,7 +94,14 @@ export default function Show({user}) {
                     <h3>Customer Reviews</h3>
                     <hr />
                     {
-                        user && reviewBtn ?
+                        // if user is null
+                        !user ?
+                        <div>
+                            <button disabled> Write a review</button>
+                            <small>sign in first</small>
+                        </div> :
+                        // if user account is admin or gamer
+                        user.account !== 'developer' && reviewBtn ?
                         <form onSubmit={handleSubmit} method="POST">
                             <fieldset className='new-review'>
                                 <label htmlFor="description">
@@ -104,7 +111,7 @@ export default function Show({user}) {
                                 <input className='submit btn btn-outline-success' type="submit" value="Submit" />
                             </fieldset>
                         </form> :
-                        user && !reviewBtn ? 
+                        user.account !== 'developer' && !reviewBtn ? 
                         <button 
                             onClick={(evt) => {
                                 setReviewBtn(true)
@@ -112,10 +119,10 @@ export default function Show({user}) {
                             }}>
                             Write a review
                         </button> :
+                        // if user account is developer
                         <div>
                             <button disabled> Write a review</button>
-                            <small>sign in first</small>
-                        </div>
+                        </div> 
                     }
                     <div className="review-comments">
                         {
