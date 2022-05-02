@@ -6,7 +6,7 @@ export default function MyAccount({user, setUserDlt, refresh, setRefresh}) {
     const navigate = useNavigate()
 
     const handleDelete = (event) => {
-        // making this an async await makes the code terminate after the try block
+        // making this an async await makes the code terminate after the fetch request
         try {
             fetch(`http://localhost:3001/api/users/delete/${id}`, {method: 'DELETE'})
         } catch(e) {
@@ -29,6 +29,7 @@ export default function MyAccount({user, setUserDlt, refresh, setRefresh}) {
                 <p>{user.email} </p>
                 <h4>Account Type</h4>
                 <p style={{textTransform: 'capitalize'}}>{user.account}</p>
+                <button>Add card info</button>
                 <button onClick={handleDelete}>Delete Account</button>
             </div>
         </div>
