@@ -126,6 +126,7 @@ export default function Show({user}) {
                     }
                     <div className="review-comments">
                         {
+                            reviews.length ?
                            reviews.map((review, idx) => {
                                 return(
                                     <div key={idx} className="form-group">
@@ -133,7 +134,8 @@ export default function Show({user}) {
                                         <p>{review.description} { user && user.account === "gamer" && user.name === review.name ? <button>Edit</button> : null } </p>
                                     </div>
                                 )
-                            })
+                            }) :
+                            ''
                         }
                     </div>
                 </div>
