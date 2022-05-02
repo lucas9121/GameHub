@@ -15,7 +15,6 @@ import SearchBar from '../../components/SearchBar/SearchBar'
 export default function App(){
     const [games, setGames] = useState([])
     const [refresh, setRefresh] = useState(false)
-    const [render, setRender] = useState(false)
     const [user, setUser] = useState(getUser())
     const [userDlt, setUserDlt] = useState(false)
 
@@ -39,14 +38,14 @@ export default function App(){
     return(
         <main className='App'>
             <NavBar user={user} setUser={setUser}/>
-            <SearchBar games={games} render={render} setRender={setRender} />
+            <SearchBar games={games} />
             <Routes>
                 <Route path='/' element={<Home games={games} user={user}/>} />
                 <Route path='/new' element={<New refresh={refresh} setRefresh={setRefresh}/>} />
                 <Route path='/account/:id' element={<MyAccount user={user} setUserDlt={setUserDlt} refresh={refresh} setRefresh={setRefresh} />} />
                 <Route path='/cart' element={<Cart />} />
                 <Route path='/:id/edit' element={<Edit refresh={refresh} setRefresh={setRefresh} />} />
-                <Route path='/:id' element={<Show user={user} render={render} setRender={setRender}/>} />
+                <Route path='/:id' element={<Show user={user}/>} />
             </Routes>
         </main>
     )
