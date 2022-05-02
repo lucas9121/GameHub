@@ -45,7 +45,7 @@ export default function App(){
                 <Route path='/account/:id' element={<MyAccount user={user} setUserDlt={setUserDlt} refresh={refresh} setRefresh={setRefresh} />} />
                 <Route path='/cart' element={<Cart />} />
                 <Route path='/:id/edit' element={<Edit refresh={refresh} setRefresh={setRefresh} />} />
-                <Route path='/:id' element={<Show user={user}/>} />
+                <Route path='/:id' element={<Show user={user} games={games}/>} />
             </Routes>
         </main>
     )
