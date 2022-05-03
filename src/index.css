@@ -2,7 +2,6 @@ body {
     background: linear-gradient(45deg, black, black, rgb(0 123 255), black, black);
     /* background: linear-gradient(45deg, black, black, rgb(0 123 255), rgb(0 123 255), black, black);
     background: linear-gradient(45deg, black, rgb(0 123 255), rgb(0 123 255), black); */
-    width: 100vw;
     min-height: 100vh;
     max-height: max-content;
 }
