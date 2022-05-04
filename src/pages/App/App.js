@@ -37,9 +37,9 @@ export default function App(){
     }, [refresh])
 
     return(
-        <main className={styles.App} onClick={() => setClicked(true)}>
+        <main className={styles.App}>
             <NavBar user={user} setUser={setUser} clicked={clicked} setClicked={setClicked}/>
-            <SearchBar games={games} />
+            <SearchBar games={games} clicked={clicked} setClicked={setClicked}/>
             <Routes>
                 <Route path='/' element={<Home games={games} user={user}/>} />
                 <Route path='/new' element={<New refresh={refresh} setRefresh={setRefresh}/>} />
