@@ -30,7 +30,7 @@ export default function NavBar({ user, setUser}) {
                 <div>
                     <div className={styles.dropdown}>
                         {/* I had to add this div to center the dropdown item */}
-                        <div><p style={{margin: '15%'}} ></p></div>
+                        <div><p></p></div>
                         <button onClick={dropdown} onToggle={(evt) => {
                             console.log('toggle')
                         }} >Hello {user.name}</button>
