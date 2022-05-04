@@ -33,7 +33,7 @@
 
 }
 
-.NavBar > div > div  {
+.dropdown  {
     display: flex;
     align-items: center;
     /* flex-direction: column; */
@@ -42,7 +42,7 @@
     height: 5vh;
 }
 
-.NavBar > div > div > a {
+.dropdown > a {
     text-decoration: none;
     color: white;
     background-color: rgb(52 58 64);
@@ -51,7 +51,7 @@
     padding: 5% 0;
 }
 
-.NavBar > div > div > a:hover {
+.dropdown > a:hover {
     color: rgb(203 211 218);
     text-decoration: underline;
 }
