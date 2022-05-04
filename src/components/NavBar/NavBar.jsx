@@ -38,16 +38,18 @@ export default function NavBar({ user, setUser}) {
                                 options.map((option, idx) => {
                                     return(
                                         idx === options.length - 1 ?
-                                        <Link to={option.url} style={{borderRadius: '0 0 10px 10px'}} onClick={dropdown} >{option.name}</Link>
+                                        <Link key={idx} to={option.url} style={{borderRadius: '0 0 10px 10px'}} onClick={dropdown} >{option.name}</Link>
                                         :
-                                        <Link to={option.url} onClick={dropdown}>{option.name}</Link>
+                                        <Link key={idx} to={option.url} onClick={dropdown}>{option.name}</Link>
                                     )
                                 })
                             }
                     </div>
                     <UserLogOut setUser={setUser}/>
                 </div> :
-                <AuthPage user={user} setUser={setUser} />
+                <div>
+                    <AuthPage user={user} setUser={setUser} />
+                </div>
             }
         </nav>
     )
