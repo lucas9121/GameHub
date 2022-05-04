@@ -1,3 +1,21 @@
+@media (min-width: 768px){
+    .SearchBar{
+        width: 500px;
+    }
+}
+
+@media (min-width: 992px){
+    .SearchBar{
+        width: 650px;
+    }
+}
+
+@media (min-width: 1200px){ 
+    .SearchBar{
+        width: 800px;
+    }
+}
+
 .positioning{
     padding: 1% 15%;
 }
@@ -5,7 +23,6 @@
 .SearchBar{
     position: absolute;
     z-index: 1;
-    width: 800px;
 }
 
 .SearchBar > form > input:nth-of-type(1) {
@@ -13,18 +30,44 @@
     border-radius: 15px;
     height: 40px;
     font-size: 1.3rem;
-    padding: 0 10px;
+    padding: 5px 10px;
+    color: rgb(203 211 218);
+    background: linear-gradient(45deg, black, black, rgb(0 123 255), black, black);;
+    border-width: 2px;
+    border-style: inset;
+    border-color: white;
 }
+
+.SearchBar > form > input:nth-of-type(1):hover {
+    outline: none;
+    border: none;
+    background: rgb(52 58 64);
+}
+
+.SearchBar > form > input:nth-of-type(1):focus-visible {
+    outline: none;
+    border: none;
+    background: rgb(52 58 64);
+}
+
 .SearchBar > form > input:nth-of-type(2) {
     display: none;
 }
 
 .SearchBar > div {
-    background-color: rgb(255, 255, 255, .5);
-    padding: 0 10px;
+    background-color: rgb(52 58 64);
+    padding: 5px 10px;
+    font-size: 1.3rem;
+    background-color: rgb(52 58 64);
+
+}
+
+.SearchBar > div:hover {
+    background-color: rgb(61, 69, 77);
 }
 
 .SearchBar > div > a {
-    color: black;
+    color: rgb(203 211 218);
     text-decoration: none;
+    display: flex;
 }
