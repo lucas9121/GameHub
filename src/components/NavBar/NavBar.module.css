@@ -30,8 +30,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 35%;
-
 }
 
 .dropdown  {
@@ -69,8 +67,4 @@
 .dropdown > a:hover {
     color: rgb(203 211 218);
     text-decoration: underline;
-}
-
-.noUser{
-    display: flex;
 }
