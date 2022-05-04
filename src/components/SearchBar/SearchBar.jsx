@@ -1,5 +1,6 @@
 import { useRef, useState } from "react"
 import { useNavigate, Link } from "react-router-dom"
+import styles from './SearchBar.module.css'
 
 export default function SearchBar({games}) {
     const searchInput = useRef(null)
@@ -33,7 +34,7 @@ export default function SearchBar({games}) {
     }
 
     return (
-        <div className="SearchBar">
+        <div className={styles.SearchBar}>
             <form onSubmit={handleSubmit} autoComplete="off">
                 <input type='search' name="Search" ref={searchInput} onChange={handleChange} placeholder="Search..."/>
                 <input type='submit' value='Search' />
