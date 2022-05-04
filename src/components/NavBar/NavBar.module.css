@@ -33,12 +33,25 @@
 
 }
 
-.NavBar > div > a {
-    text-decoration: none;
-    color: white;
+.NavBar > div > div  {
+    display: flex;
+    align-items: center;
+    /* flex-direction: column; */
+    /* flex: 1 1 auto; */
+    /* overflow-y: auto; */
+    height: 5vh;
 }
 
-.NavBar > div > a:hover {
+.NavBar > div > div > a {
+    text-decoration: none;
+    color: white;
+    background-color: rgb(52 58 64);
+    width: 100%;
+    text-align: center;
+    padding: 5% 0;
+}
+
+.NavBar > div > div > a:hover {
     color: rgb(203 211 218);
     text-decoration: underline;
 }
