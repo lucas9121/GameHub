@@ -28,10 +28,10 @@ export default function NavBar({ user, setUser}) {
             {
                 user  ?
                 <div>
-                    <div>
-                        <p onClick={dropdown} onToggle={(evt) => {
+                    <div className="dropdown">
+                        <button onClick={dropdown} onToggle={(evt) => {
                             console.log('toggle')
-                        }} >Hello {user.name}</p>
+                        }} >Hello {user.name}</button>
                             {
                                 options.map((option) => {
                                     return(
