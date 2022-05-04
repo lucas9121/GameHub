@@ -27,6 +27,10 @@
     border-radius: 9px 9px 0 0;
 }
 
+.sub:hover .banner{
+    display: flex;
+}
+
 .banner{
     display: none;
     flex: 1;
@@ -35,13 +39,9 @@
     align-items: center;
     border-radius: 0 0 9px 9px;
     font-family: serif;
-    color: var(--light);
-    background: var(--dark);
     color: white;
-}
-
-.sub:hover .banner-div{
-    display: flex !important;
+    background: rgb(52 58 64);
+    color: white;
 }
 
 .banner > h2 {
