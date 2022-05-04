@@ -2,22 +2,19 @@ import { Link } from "react-router-dom"
 
 export default function Home({games}) {
     return(
-        <main>
+        <main className="main-div">
             <h1>Home Page</h1>
-            <Link to='/new' > New game
-            </Link>
             {
                 games.map((game) => {
                     return(
-                        <div className="game-div">
-                            <img src={game.img} alt={game.name} width="400" height="400" />
-                            <div>
-                                <Link to={`/${game._id}`} >
-                                    <h2>{game.name} </h2>
-                                </Link>
+                        <div className="sub-div">
+                            <Link style={{backgroundImage: `url(${game.img})`}} to={`/${game._id}`} alt={game.name} ></Link>
+                            {/* <img src={game.img} alt={game.name} width="400" height="400" /> */}
+                            <div className="banner-div">
+                                <h2>{game.name} </h2>
                                 <div> 
-                                    <p>Price: {game.price}</p>
-                                    <p>QTY: {game.qty} </p>
+                                    {game.price <= 0 ? <p>Free</p> : <p>${game.price}</p>}
+                                    {game.qty > 0 ? <p className="text-success stock">Available</p> : <p className="text-danger stock">Sold Out</p> }
                                 </div>
                             </div>
                         </div>
