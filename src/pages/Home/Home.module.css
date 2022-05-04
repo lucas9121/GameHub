@@ -1,4 +1,4 @@
-.main-div{
+.main{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     grid-gap: 0.5em 0.2em;
@@ -6,32 +6,32 @@
     /* background-color: rgb(169, 169, 169, 0.3); */
     border-radius: 10px;
 }
-.sub-div {
+.sub {
     display: flex;
     flex-direction: column;
     height: 350px;
     border-radius: 10px;
 }
-.sub-div > a {
+.sub > a {
     flex: 12;
     background-size: cover;
     background-repeat: round;
     border-radius: 9px;
 }
 
-.sub-div:hover {
+.sub:hover {
     width: 101%;
     height: 370px;
     border-radius: 10px;
 }
-.sub-div:hover > a {
+.sub:hover > a {
     border-radius: 9px 9px 0 0;
 }
-.sub-div:hover .banner-div{
+.sub:hover .banner-div{
     display: flex;
 }
 
-.banner-div{
+.banner{
     display: none;
     flex: 1;
     min-width: 0;
@@ -42,7 +42,7 @@
     color: var(--light);
     background: var(--dark);
 }
-.banner-div > h2 {
+.banner > h2 {
     flex: 1;
     margin: 0;
     font-size: larger;
@@ -51,11 +51,11 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.banner-div > div {
+.banner > div {
     flex-direction: column;
     text-align: center;
 }
-.banner-div > div > p {
+.banner > div > p {
     font-size: 120%;
     line-height: 105%;
     margin: 1px;
