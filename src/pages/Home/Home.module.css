@@ -1,0 +1,62 @@
+.main-div{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 0.5em 0.2em;
+    padding: 10px 0;
+    /* background-color: rgb(169, 169, 169, 0.3); */
+    border-radius: 10px;
+}
+.sub-div {
+    display: flex;
+    flex-direction: column;
+    height: 350px;
+    border-radius: 10px;
+}
+.sub-div > a {
+    flex: 12;
+    background-size: cover;
+    background-repeat: round;
+    border-radius: 9px;
+}
+
+.sub-div:hover {
+    width: 101%;
+    height: 370px;
+    border-radius: 10px;
+}
+.sub-div:hover > a {
+    border-radius: 9px 9px 0 0;
+}
+.sub-div:hover .banner-div{
+    display: flex;
+}
+
+.banner-div{
+    display: none;
+    flex: 1;
+    min-width: 0;
+    font-size: medium;
+    align-items: center;
+    border-radius: 0 0 9px 9px;
+    font-family: serif;
+    color: var(--light);
+    background: var(--dark);
+}
+.banner-div > h2 {
+    flex: 1;
+    margin: 0;
+    font-size: larger;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.banner-div > div {
+    flex-direction: column;
+    text-align: center;
+}
+.banner-div > div > p {
+    font-size: 120%;
+    line-height: 105%;
+    margin: 1px;
+}
