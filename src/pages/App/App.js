@@ -17,6 +17,7 @@ export default function App(){
     const [refresh, setRefresh] = useState(false)
     const [user, setUser] = useState(getUser())
     const [userDlt, setUserDlt] = useState(false)
+    const [clicked, setClicked] = useState(false)
 
     useEffect(() => {
         (async () => {
@@ -36,8 +37,8 @@ export default function App(){
     }, [refresh])
 
     return(
-        <main className={styles.App}>
-            <NavBar user={user} setUser={setUser}/>
+        <main className={styles.App} onClick={() => setClicked(true)}>
+            <NavBar user={user} setUser={setUser} clicked={clicked} setClicked={setClicked}/>
             <SearchBar games={games} />
             <Routes>
                 <Route path='/' element={<Home games={games} user={user}/>} />
