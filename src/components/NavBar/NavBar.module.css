@@ -6,6 +6,7 @@
     padding: 0, 10px;
     background-color: rgb(52 58 64);
     color: white;
+    border-radius: 0 0 10px 10px;
 }
 
 .NavBar > a {
@@ -37,8 +38,6 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    /* flex: 1 1 auto; */
-    /* overflow-y: auto; */
     height: 5vh;
 }
 
@@ -48,6 +47,7 @@
     border: none;
     font-size: 1rem;
     cursor: pointer;
+    font-family: serif;
 }
 
 .dropdown > button:hover {
