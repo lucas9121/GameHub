@@ -34,20 +34,24 @@ export default function SearchBar({games}) {
     }
 
     return (
-        <div className={styles.SearchBar}>
-            <form onSubmit={handleSubmit} autoComplete="off">
-                <input type='search' name="Search" ref={searchInput} onChange={handleChange} placeholder="Search..."/>
-                <input type='submit' value='Search' />
-            </form>
-            {
-                results.map((result, idx) => {
-                    return(
-                        <div key={idx}>
-                            <Link to={`/${result._id}`} >{result.name} </Link>
-                        </div>
-                    )
-                })
-            }
+        // this div needs to have margin/padding to set the position of the bottom div
+        <div className={styles.positioning}>
+            {/* this div needs to have absolute position for z-index to work. If margin/padding isn't set here it follows flexbox rule */}
+            <div className={styles.SearchBar}>
+                <form onSubmit={handleSubmit} autoComplete="off">
+                    <input type='search' name="Search" ref={searchInput} onChange={handleChange} placeholder="Search..."/>
+                    <input type='submit' value='Search' />
+                </form>
+                {
+                    results.map((result, idx) => {
+                        return(
+                            <div key={idx}>
+                                <Link to={`/${result._id}`} >{result.name} </Link>
+                            </div>
+                        )
+                    })
+                }
+            </div>
         </div>
     )
 }
