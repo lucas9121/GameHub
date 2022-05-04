@@ -45,6 +45,10 @@ export default function SearchBar({games}) {
                 {
                     results.map((result, idx) => {
                         return(
+                            idx === results.length - 1 ?
+                            <div key={idx} style={{borderRadius: '0 0 15px 15px'}}>
+                                <Link to={`/${result._id}`} >{result.name} </Link>
+                            </div> :
                             <div key={idx}>
                                 <Link to={`/${result._id}`} >{result.name} </Link>
                             </div>
