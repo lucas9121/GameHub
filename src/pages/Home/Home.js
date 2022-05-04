@@ -8,7 +8,7 @@ export default function Home({games}) {
             {
                 games.map((game) => {
                     return(
-                        <div className={styles.sub}>
+                        <div className={styles.sub} style={game.qty > 0 ? {border: 'solid green'} : {border: 'solid red'}}>
                             <Link style={{backgroundImage: `url(${game.img})`}} to={`/${game._id}`} alt={game.name} ></Link>
                             {/* <img src={game.img} alt={game.name} width="400" height="400" /> */}
                             <div className={styles.banner}>

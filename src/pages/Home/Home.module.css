@@ -27,9 +27,6 @@
 .sub:hover > a {
     border-radius: 9px 9px 0 0;
 }
-.sub:hover .banner-div{
-    display: flex;
-}
 
 .banner{
     display: none;
@@ -41,7 +38,13 @@
     font-family: serif;
     color: var(--light);
     background: var(--dark);
+    color: white;
 }
+
+.sub:hover .banner-div{
+    display: flex !important;
+}
+
 .banner > h2 {
     flex: 1;
     margin: 0;
@@ -51,10 +54,12 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
 .banner > div {
     flex-direction: column;
     text-align: center;
 }
+
 .banner > div > p {
     font-size: 120%;
     line-height: 105%;
