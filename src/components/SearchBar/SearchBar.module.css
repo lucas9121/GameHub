@@ -1,7 +1,11 @@
+.positioning{
+    padding: 1% 15%;
+}
+
 .SearchBar{
     position: absolute;
     z-index: 1;
-    width: 80%;
+    width: 800px;
 }
 
 .SearchBar > form > input:nth-of-type(1) {
