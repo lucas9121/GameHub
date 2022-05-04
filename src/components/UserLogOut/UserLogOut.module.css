@@ -1,0 +1,13 @@
+.UserLogOut > button{
+    background: none;
+    color: white;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    font-family: serif;
+}
+
+.UserLogOut > button:hover {
+    color: rgb(203 211 218);
+    text-decoration: underline;
+}
