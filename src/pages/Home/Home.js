@@ -13,7 +13,7 @@ export default function Home({games}) {
                                 <h2>{game.name} </h2>
                                 <div> 
                                     {game.price <= 0 ? <p>Free</p> : <p>${game.price}</p>}
-                                    {game.qty > 0 ? <p className="text-success stock">Available</p> : <p className="text-danger stock">Sold Out</p> }
+                                    {game.qty > 0 ? <p style={{color: 'green', fontSize: 'small'}}>Available</p> : <p style={{color: 'red', fontSize: 'small'}}>Sold Out</p> }
                                 </div>
                             </div>
                         </div>
