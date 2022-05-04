@@ -32,7 +32,7 @@ export default function NavBar({ user, setUser}) {
                 <div>
                     <div className={styles.dropdown}>
                         {/* I had to add this div to center the dropdown item */}
-                        <div><p></p></div>
+                        <div><p style={{margin: '1.5vh'}}></p></div>
                         <button onClick={dropdown}>Hello {user.name}</button>
                             {
                                 options.map((option, idx) => {
@@ -47,7 +47,7 @@ export default function NavBar({ user, setUser}) {
                     </div>
                     <UserLogOut setUser={setUser}/>
                 </div> :
-                <div>
+                <div className="AuthPage">
                     <AuthPage user={user} setUser={setUser} />
                 </div>
             }
