@@ -1,4 +1,4 @@
-import './App.css'
+import styles from './App.module.css'
 import {Routes, Route} from "react-router-dom"
 import { useState, useEffect } from "react"
 import Home from '../Home/Home'
@@ -36,7 +36,7 @@ export default function App(){
     }, [refresh])
 
     return(
-        <main className='App'>
+        <main className={styles.App}>
             <NavBar user={user} setUser={setUser}/>
             <SearchBar games={games} />
             <Routes>
