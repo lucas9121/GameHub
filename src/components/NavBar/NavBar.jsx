@@ -47,7 +47,7 @@ export default function NavBar({ user, setUser}) {
                     </div>
                     <UserLogOut setUser={setUser}/>
                 </div> :
-                <div className="AuthPage">
+                <div className={styles.noUser}>
                     <AuthPage user={user} setUser={setUser} />
                 </div>
             }
