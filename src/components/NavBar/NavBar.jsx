@@ -4,25 +4,31 @@ import { Link } from "react-router-dom"
 import styles from "./NavBar.module.css"
 import { useState, useEffect } from "react"
 
-export default function NavBar({ user, setUser}) {
+export default function NavBar({ user, setUser, setClicked, clicked}) {
     const [options, setOptions] = useState([])
     const [toggle, setToggle] = useState(false)
 
     const dropdown = () => {
-        setToggle(!toggle) 
+        setToggle(!toggle)
+        setClicked(false)
     }
     
     useEffect(() => {
+        if(clicked) setOptions([])
         if(toggle){
             if(user.account ===  "gamer"){
                 setOptions([{url: `/account/${user._id}`, name: 'My Account' }, {url: '/cart', name: 'Cart' } ]);
+                setClicked(false)
+                console.log(clicked)
             } else {
                 setOptions([{url: `/account/${user._id}`, name: 'My Account' }, {url: '/new', name: 'New Game' }]);
+                setClicked(false)
             }
         } else {
             setOptions([])
+            setClicked(false)
         } 
-    }, [toggle])
+    }, [toggle, clicked])
 
     return(
         <nav className={styles.NavBar}>
