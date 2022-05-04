@@ -1,0 +1,17 @@
+@media (min-width: 1200px){ 
+    .App{
+        max-width: 1140px;
+    }
+}
+
+@media (min-width: 992px){
+    .App{
+        max-width: 960px;
+    }
+}
+
+@media (min-width: 768px){
+    .App{
+        max-width: 720px;
+    } 
+}
