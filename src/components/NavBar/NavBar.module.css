@@ -48,6 +48,7 @@
     font-size: 1rem;
     cursor: pointer;
     font-family: serif;
+    text-transform: capitalize;
 }
 
 .dropdown > button:hover {
@@ -68,4 +69,8 @@
 .dropdown > a:hover {
     color: rgb(203 211 218);
     text-decoration: underline;
+}
+
+.noUser{
+    display: flex;
 }
