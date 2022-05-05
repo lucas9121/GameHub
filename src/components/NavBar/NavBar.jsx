@@ -4,9 +4,8 @@ import { Link } from "react-router-dom"
 import styles from "./NavBar.module.css"
 import { useState, useEffect } from "react"
 
-export default function NavBar({ user, setUser, setActClk, actClk, setSearchClk}) {
+export default function NavBar({ user, setUser, setActClk, actClk, setSearchClk, signClk, setSignClk}) {
     const [options, setOptions] = useState([])
-    const [toggle, setToggle] = useState(false)
 
     const dropdown = () => {
         setActClk(!actClk)
@@ -27,7 +26,7 @@ export default function NavBar({ user, setUser, setActClk, actClk, setSearchClk}
 
     return(
         <nav className={styles.NavBar}>
-            <Link to={'/'} onClick={() => {setActClk(false), setSearchClk(false)}} ><h1>GameHub</h1></Link>
+            <Link to={'/'} onClick={() => {setActClk(false); setSearchClk(false)}} ><h1>GameHub</h1></Link>
             {
                 user  ?
                 <div>
@@ -46,10 +45,10 @@ export default function NavBar({ user, setUser, setActClk, actClk, setSearchClk}
                                 })
                             }
                     </div>
-                    <UserLogOut setUser={setUser} actClk={actClk} setActClk={setActClk}/>
+                    <UserLogOut setUser={setUser} actClk={actClk} setSignClk={setSignClk} setActClk={setActClk} setSearchClk={setSearchClk}/>
                 </div> :
                 <div className={styles.noUser}>
-                    <AuthPage user={user} setUser={setUser} actClk={actClk} setActClk={setActClk}/>
+                    <AuthPage user={user} setUser={setUser} signClk={signClk} setSignClk={setSignClk} setActClk={setActClk} setSearchClk={setSearchClk}/>
                 </div>
             }
         </nav>
