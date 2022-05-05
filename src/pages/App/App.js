@@ -17,7 +17,8 @@ export default function App(){
     const [refresh, setRefresh] = useState(false)
     const [user, setUser] = useState(getUser())
     const [userDlt, setUserDlt] = useState(false)
-    const [clicked, setClicked] = useState(false)
+    const [actClk, setActClk] = useState(false)
+    const [searchClk, setSearchClk] = useState(false)
 
     useEffect(() => {
         (async () => {
@@ -38,8 +39,8 @@ export default function App(){
 
     return(
         <main className={styles.App}>
-            <NavBar user={user} setUser={setUser} clicked={clicked} setClicked={setClicked}/>
-            <SearchBar games={games} clicked={clicked} setClicked={setClicked}/>
+            <NavBar user={user} setUser={setUser}  actClk={actClk} setActClk={setActClk} setSearchClk={setSearchClk}/>
+            <SearchBar games={games} searchClk={searchClk} setSearchClk={setSearchClk} setActClk={setActClk}/>
             <Routes>
                 <Route path='/' element={<Home games={games} user={user}/>} />
                 <Route path='/new' element={<New refresh={refresh} setRefresh={setRefresh}/>} />
