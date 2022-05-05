@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react"
 import { useParams, Link } from "react-router-dom"
+import styles from './Show.module.css'
 
 export default function Show({user}) {
     const {id} = useParams()
@@ -57,25 +58,22 @@ export default function Show({user}) {
                 name: '',
                 description: ''
             })
-            console.log('button is false after submit function')
         }catch(e){
             console.log(e)
         }
     }
 
     return(
-        <main className="show-div">
-            <h2>{game.name} </h2>
+        <main className={styles.show}>
             {
                 user && user.account === 'developer' ?
                 <Link to={`/${game._id}/edit`} > Edit
                 </Link> : null
             }
-            <br />
-            <br />
+            <h2>{game.name} </h2>
             <img src={game.img} alt={game.name} />
-            <div className="purchase-div">
-                <div className="purchase-title">
+            <div className={styles.purchase}>
+                <div className={styles.title}>
                     <h4>Buy {game.name} </h4>
                 </div>
                 <p>Quantity: {game.qty} </p>
@@ -84,13 +82,13 @@ export default function Show({user}) {
                     <button>Add to Cart</button>
                 </div>
             </div>
-            <div className="about-div">
+            <div className={styles.about}>
                 <h3>About this Game:</h3>
                 <hr />
-                <div className="about-description">
+                <div className={styles.description}>
                     <p>{game.description} </p>
                 </div>
-                <div className='review-div form-group'>
+                <div className={styles.review + "form-group"}>
                     <h3>Customer Reviews</h3>
                     <hr />
                     {
@@ -103,7 +101,7 @@ export default function Show({user}) {
                         // if user account is admin or gamer
                         user.account !== 'developer' && reviewBtn ?
                         <form onSubmit={handleSubmit} method="POST">
-                            <fieldset className='new-review'>
+                            <fieldset className={styles.new}>
                                 <label htmlFor="description">
                                     Write Review
                                 </label>
@@ -115,7 +113,6 @@ export default function Show({user}) {
                         <button 
                             onClick={(evt) => {
                                 setReviewBtn(true)
-                                console.log('button is true after being pressed')
                             }}>
                             Write a review
                         </button> :
@@ -124,7 +121,7 @@ export default function Show({user}) {
                             <button disabled> Write a review</button>
                         </div> 
                     }
-                    <div className="review-comments">
+                    <div className={styles.comments}>
                         {
                             reviews.length &&
                            reviews.map((review, idx) => {
