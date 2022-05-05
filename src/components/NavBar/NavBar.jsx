@@ -4,12 +4,13 @@ import { Link } from "react-router-dom"
 import styles from "./NavBar.module.css"
 import { useState, useEffect } from "react"
 
-export default function NavBar({ user, setUser, setActClk, actClk}) {
+export default function NavBar({ user, setUser, setActClk, actClk, setSearchClk}) {
     const [options, setOptions] = useState([])
     const [toggle, setToggle] = useState(false)
 
     const dropdown = () => {
         setActClk(!actClk)
+        setSearchClk(false)
     }
     
     useEffect(() => {
@@ -26,7 +27,7 @@ export default function NavBar({ user, setUser, setActClk, actClk}) {
 
     return(
         <nav className={styles.NavBar}>
-            <Link to={'/'} onClick={() => {setActClk(false)}} ><h1>GameHub</h1></Link>
+            <Link to={'/'} onClick={() => {setActClk(false), setSearchClk(false)}} ><h1>GameHub</h1></Link>
             {
                 user  ?
                 <div>
