@@ -4,35 +4,29 @@ import { Link } from "react-router-dom"
 import styles from "./NavBar.module.css"
 import { useState, useEffect } from "react"
 
-export default function NavBar({ user, setUser, setClicked, clicked}) {
+export default function NavBar({ user, setUser, setActClk, actClk}) {
     const [options, setOptions] = useState([])
     const [toggle, setToggle] = useState(false)
 
     const dropdown = () => {
-        setToggle(!toggle)
-        setClicked(false)
+        setActClk(!actClk)
     }
     
     useEffect(() => {
-        if(clicked) setOptions([])
-        if(toggle){
+        if(actClk){
             if(user.account ===  "gamer"){
                 setOptions([{url: `/account/${user._id}`, name: 'My Account' }, {url: '/cart', name: 'Cart' } ]);
-                setClicked(false)
-                console.log(clicked)
             } else {
                 setOptions([{url: `/account/${user._id}`, name: 'My Account' }, {url: '/new', name: 'New Game' }]);
-                setClicked(false)
             }
         } else {
             setOptions([])
-            setClicked(false)
         } 
-    }, [toggle, clicked])
+    }, [actClk])
 
     return(
         <nav className={styles.NavBar}>
-            <Link to={'/'}><h1>GameHub</h1></Link>
+            <Link to={'/'} onClick={() => {setActClk(false)}} ><h1>GameHub</h1></Link>
             {
                 user  ?
                 <div>
@@ -51,10 +45,10 @@ export default function NavBar({ user, setUser, setClicked, clicked}) {
                                 })
                             }
                     </div>
-                    <UserLogOut setUser={setUser}/>
+                    <UserLogOut setUser={setUser} actClk={actClk} setActClk={setActClk}/>
                 </div> :
                 <div className={styles.noUser}>
-                    <AuthPage user={user} setUser={setUser} />
+                    <AuthPage user={user} setUser={setUser} actClk={actClk} setActClk={setActClk}/>
                 </div>
             }
         </nav>
