@@ -128,7 +128,22 @@ export default function Show({user}) {
                                 return(
                                     <div key={idx} className="form-group">
                                         <small>{review.name}</small>
-                                        <p>{review.description} { user && user.account === "gamer" && user.name === review.name ? <button className="btn">Edit</button> : null } </p>
+                                        <p>{review.description} </p>
+                                        <div>
+                                            { user && user.account === "gamer" && user.name === review.name ? <button className="btn" onClick={() => {console.log(review)}} >Edit</button> : null } 
+                                            { user && user.account === "gamer" && user.name === review.name ? <button 
+                                            // onClick={(evt) => {
+                                            //     try{
+                                            //         fetch(`http://localhost:3001/api/expenses/${month._id}`, {method: 'DELETE'});
+                                            //     }catch(err){
+                                            //         console.log(err);
+                                            //     }finally{
+                                            //         setRefresh(!refresh);
+                                            //     }
+                                            // }}
+                                            > Delete </button> : null } 
+                                        </div>
+
                                     </div> 
                                 )
                             })
