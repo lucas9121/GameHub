@@ -45,9 +45,9 @@ export default function App(){
             <SearchBar games={games} searchClk={searchClk} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk}/>
             <Routes>
                 <Route path='/' element={<Home games={games} user={user} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk}/>} />
-                <Route path='/new' element={<New refresh={refresh} setRefresh={setRefresh} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk}/>} />
+                <Route path='/new' element={<New user={user} refresh={refresh} setRefresh={setRefresh} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk}/>} />
                 <Route path='/account/:id' element={<MyAccount user={user} setUserDlt={setUserDlt} refresh={refresh} setRefresh={setRefresh} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk} />} />
-                <Route path='/cart' element={<Cart setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk} />} />
+                <Route path='/cart' element={<Cart user={user} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk} />} />
                 <Route path='/:id/edit' element={<Edit refresh={refresh} setRefresh={setRefresh} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk} />} />
                 <Route path='/:id' element={<Show user={user} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk}/>} />
             </Routes>
