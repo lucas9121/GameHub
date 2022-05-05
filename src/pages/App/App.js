@@ -19,6 +19,8 @@ export default function App(){
     const [userDlt, setUserDlt] = useState(false)
     const [actClk, setActClk] = useState(false)
     const [searchClk, setSearchClk] = useState(false)
+    const [signClk, setSignClk] = useState(false)
+    
 
     useEffect(() => {
         (async () => {
@@ -39,15 +41,15 @@ export default function App(){
 
     return(
         <main className={styles.App}>
-            <NavBar user={user} setUser={setUser}  actClk={actClk} setActClk={setActClk} setSearchClk={setSearchClk}/>
-            <SearchBar games={games} searchClk={searchClk} setSearchClk={setSearchClk} setActClk={setActClk}/>
+            <NavBar user={user} setUser={setUser}  actClk={actClk} setActClk={setActClk} signClk={signClk} setSignClk={setSignClk} setSearchClk={setSearchClk}/>
+            <SearchBar games={games} searchClk={searchClk} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk}/>
             <Routes>
-                <Route path='/' element={<Home games={games} user={user}/>} />
-                <Route path='/new' element={<New refresh={refresh} setRefresh={setRefresh}/>} />
-                <Route path='/account/:id' element={<MyAccount user={user} setUserDlt={setUserDlt} refresh={refresh} setRefresh={setRefresh} />} />
-                <Route path='/cart' element={<Cart />} />
-                <Route path='/:id/edit' element={<Edit refresh={refresh} setRefresh={setRefresh} />} />
-                <Route path='/:id' element={<Show user={user}/>} />
+                <Route path='/' element={<Home games={games} user={user} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk}/>} />
+                <Route path='/new' element={<New refresh={refresh} setRefresh={setRefresh} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk}/>} />
+                <Route path='/account/:id' element={<MyAccount user={user} setUserDlt={setUserDlt} refresh={refresh} setRefresh={setRefresh} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk} />} />
+                <Route path='/cart' element={<Cart setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk} />} />
+                <Route path='/:id/edit' element={<Edit refresh={refresh} setRefresh={setRefresh} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk} />} />
+                <Route path='/:id' element={<Show user={user} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk}/>} />
             </Routes>
         </main>
     )
