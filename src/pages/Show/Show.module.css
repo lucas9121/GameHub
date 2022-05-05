@@ -83,6 +83,18 @@ hr {
     border: none;
     width: 100%;
 }
+.review > button {
+    color: #fff;
+    background-color: rgb(0 123 255);
+    background-color: transparent;
+    border-width: 2px;
+    border-radius: 10px;
+}
+
+.review > button:hover{
+    background-color: rgb(0 86 179);
+}
+
 .new  {
     display: flex;
     flex-direction: column;
