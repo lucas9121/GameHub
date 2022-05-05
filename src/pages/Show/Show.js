@@ -88,7 +88,7 @@ export default function Show({user}) {
                 <div className={styles.description}>
                     <p>{game.description} </p>
                 </div>
-                <div className={styles.review + "form-group"}>
+                <div className={styles.review}>
                     <h3>Customer Reviews</h3>
                     <hr />
                     {
