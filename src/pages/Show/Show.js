@@ -79,7 +79,7 @@ export default function Show({user}) {
                 <p>Quantity: {game.qty} </p>
                 <div>
                     <p>Price: {game.price}</p>
-                    <button>Add to Cart</button>
+                    <button className="btn">Add to Cart</button>
                 </div>
             </div>
             <div className={styles.about}>
@@ -95,7 +95,7 @@ export default function Show({user}) {
                         // if user is null
                         !user ?
                         <div>
-                            <button disabled> Write a review</button>
+                            <button className="btn" disabled> Write a review</button>
                             <small>sign in first</small>
                         </div> :
                         // if user account is admin or gamer
@@ -110,7 +110,7 @@ export default function Show({user}) {
                             </fieldset>
                         </form> :
                         user.account !== 'developer' && !reviewBtn ? 
-                        <button 
+                        <button className="btn" 
                             onClick={(evt) => {
                                 setReviewBtn(true)
                             }}>
@@ -118,7 +118,7 @@ export default function Show({user}) {
                         </button> :
                         // if user account is developer
                         <div>
-                            <button disabled> Write a review</button>
+                            <button className="btn" disabled> Write a review</button>
                         </div> 
                     }
                     <div className={styles.comments}>
@@ -128,7 +128,7 @@ export default function Show({user}) {
                                 return(
                                     <div key={idx} className="form-group">
                                         <small>{review.name}</small>
-                                        <p>{review.description} { user && user.account === "gamer" && user.name === review.name ? <button>Edit</button> : null } </p>
+                                        <p>{review.description} { user && user.account === "gamer" && user.name === review.name ? <button className="btn">Edit</button> : null } </p>
                                     </div> 
                                 )
                             })
