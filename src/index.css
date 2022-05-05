@@ -5,3 +5,9 @@ body {
     min-height: 100vh;
     max-height: max-content;
 }
+
+.btn {
+    padding: 0vw;
+    font-size: 12px;
+    text-transform: uppercase;
+}
