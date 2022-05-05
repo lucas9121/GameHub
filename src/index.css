@@ -7,7 +7,9 @@ body {
 }
 
 .btn {
-    padding: 0vw;
+    padding: 2px;
     font-size: 12px;
     text-transform: uppercase;
+    border: 1px solid transparent;
+    cursor: pointer;
 }
