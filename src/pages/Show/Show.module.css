@@ -11,7 +11,8 @@
     text-transform: uppercase;
 }
 .show > img {
-    width: 40%;
+    width: 60%;
+    height: 60%;
     border-radius: 5px;
 }
 
@@ -118,6 +119,10 @@ hr {
 .comments > div {
     width: 80%;
     border-radius: 5px;
+    border-style: inset;
+    border-color: rgb(0, 255, 255, 0.4);
+    margin-top: 2%;
+    padding: 1% 1% 0 1%;
 }
 .comments > div > small {
     color: rgb(23, 162, 184);
@@ -125,4 +130,16 @@ hr {
     width: 17%;
     text-align: center;
     font-style: italic;
+}
+
+.comments > div > p {
+    margin: 1% 0;
+}
+
+.comments > div > div {
+    margin-top: 2%;
+    display: flex;
+    justify-content: space-between;
+    width: 136px;
+    padding-left: 27px;
 }
