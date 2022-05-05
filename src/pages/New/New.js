@@ -1,7 +1,7 @@
 import { useRef} from "react"
 import { useNavigate } from "react-router-dom"
 
-export default function New({refresh, setRefresh}){
+export default function New({refresh, setRefresh, user}){
     const name = useRef(null)
     const price = useRef(null)
     const img = useRef(null)
@@ -22,7 +22,8 @@ export default function New({refresh, setRefresh}){
                     price: price.current.value,
                     img: img.current.value,
                     qty: qty.current.value,
-                    description: description.current.value
+                    description: description.current.value,
+                    dev: user.name
                 })
             })
             const data = await response.json()
