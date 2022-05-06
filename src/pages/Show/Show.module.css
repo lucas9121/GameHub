@@ -154,37 +154,3 @@ hr {
     width: 136px;
     padding-left: 27px;
 }
-
-@media(min-width: 370px) {
-    .show > h2 {
-        margin-bottom: 5%;
-        font-size: 2rem;
-    }
-    .show > img {
-        width: 90%;
-        height: 90%;
-    }
-    .purchase {
-        width: 86%;
-    }
-    .comments > div > p {
-        margin: 5% 0;
-    }
-}
-
-@media (min-width: 768px){
-    .show > h2 {
-        font-size: 4rem;
-        text-transform: uppercase;
-    }
-    .show > img {
-        width: 60%;
-        height: 60%;
-    }
-    .purchase {
-        width: 30.5%;
-    }
-    .comments > div > p {
-        margin: 1% 0;
-    }
-}

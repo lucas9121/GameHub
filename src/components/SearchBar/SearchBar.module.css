@@ -53,12 +53,6 @@
     display: flex;
 }
 
-@media(min-width: 375px){
-    .Searchbar{
-        padding: 22% 15% 5% 15%
-    }
-}
-
 @media (min-width: 768px){
     .SearchBar{
         width: 500px;

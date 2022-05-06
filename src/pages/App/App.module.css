@@ -6,11 +6,6 @@
     margin-left: auto;
 }
 
-@media (min-width: 375px){
-    .App{
-        padding: 0;
-    }
-}
 @media (min-width: 768px){
     .App{
         max-width: 720px;
