@@ -12,4 +12,8 @@ body {
     text-transform: uppercase;
     border: 1px solid transparent;
     cursor: pointer;
+    border-width: 2px;
+    border-radius: 10px;
+    padding: 3px;
+    height: fit-content;
 }
