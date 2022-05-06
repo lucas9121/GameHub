@@ -33,7 +33,10 @@ export default function MyAccount({user, setUserDlt, refresh, setRefresh}) {
         try{
             await fetch(`http://localhost:3001/api/users/${id}`, {
                 method: 'PUT',
-                headers: {'Content-Type': 'application/json'},
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
                 body: JSON.stringify({
                     name: name.current.value,
                     username: username.current.value,
@@ -76,6 +79,8 @@ export default function MyAccount({user, setUserDlt, refresh, setRefresh}) {
                 <div className="account-info">
                     <h4>Name</h4>
                     <p>{user.name}</p>
+                    <h4>Username</h4>
+                    <p>{user.username}</p>
                     <h4>Email</h4>
                     <p>{user.email} </p>
                     <h4>Account Type</h4>
