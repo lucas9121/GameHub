@@ -6,25 +6,10 @@ const SALT_ROUNDS = 6
 
 const userSchema = new Schema({
     name: {type: String, required: true},
-    email: {
-        type: String,
-        unique: true,
-        trim: true,
-        lowercase: true,
-        required: true
-    },
-    password: {
-        type: String,
-        trim: true,
-        minLength: 5,
-        required: true
-    },
-    account: {
-        type: String,
-        require: true,
-        default: "gamer",
-        enum: ["gamer", 'developer', 'admin']
-    }
+    username: {type: String, required: true},
+    email: {type: String, unique: true, trim: true, lowercase: true, required: true},
+    password: {type: String, trim: true, minLength: 5, required: true},
+    account: {type: String, require: true, default: "gamer", enum: ["gamer", 'developer', 'admin']}
 }, 
 {
     timestamps: true,
@@ -36,9 +21,12 @@ const userSchema = new Schema({
     }
 });
 
+
+// allows the password to be changed and the new on to be saved
 userSchema.pre('save', async function(next) {
+    //if password wasn't changed
     if(!this.isModified('password')) return next();
-    // update password with computed hash
+    // if it was, update new password with computed hash
     this.password = await bcrypt.hash(this.password, SALT_ROUNDS);
     return next();
 })
