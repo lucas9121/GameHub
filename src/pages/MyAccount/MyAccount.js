@@ -10,6 +10,7 @@ export default function MyAccount({user, setUserDlt, refresh, setRefresh}) {
     const name = useRef(null)
     const username = useRef(null)
     const email = useRef(null)
+    console.log(user)
 
     const handleDelete = (event) => {
         // making this an async await makes the code terminate after the fetch request
@@ -39,6 +40,7 @@ export default function MyAccount({user, setUserDlt, refresh, setRefresh}) {
                 })
             })
             console.log('edit made')
+            setEditBtn(false)
             setRefresh(!refresh)
         }catch(e){
             console.log(e)
