@@ -13,6 +13,9 @@ router.get('/index', usersCtrl.index)
 // POST /api/users/login
 router.post('/login', usersCtrl.login);
 
+// PUT /api/users/:id
+router.put('/:id', usersCtrl.update)
+
 // DELETE /api/users/delete/:id
 router.delete('/delete/:id', usersCtrl.Delete)
 
