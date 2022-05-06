@@ -1,21 +1,3 @@
-@media (min-width: 768px){
-    .SearchBar{
-        width: 500px;
-    }
-}
-
-@media (min-width: 992px){
-    .SearchBar{
-        width: 650px;
-    }
-}
-
-@media (min-width: 1200px){ 
-    .SearchBar{
-        width: 800px;
-    }
-}
-
 .positioning{
     padding: 12% 15%;
 }
@@ -69,4 +51,28 @@
     color: rgb(203 211 218);
     text-decoration: none;
     display: flex;
+}
+
+@media(min-width: 375px){
+    .Searchbar{
+        padding: 22% 15% 5% 15%
+    }
+}
+
+@media (min-width: 768px){
+    .SearchBar{
+        width: 500px;
+    }
+}
+
+@media (min-width: 992px){
+    .SearchBar{
+        width: 650px;
+    }
+}
+
+@media (min-width: 1200px){ 
+    .SearchBar{
+        width: 800px;
+    }
 }

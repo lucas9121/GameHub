@@ -72,3 +72,18 @@
 .noUser{
     width: 40%;
 }
+
+@media(min-width: 375px){
+    .NavBar{
+        position: absolute;
+        z-index: 2;
+        left: 4%;
+        right: 3%;
+    }
+    .NavBar > a > h1 {
+        font-size: 2rem;
+    }
+    .NavBar > button {
+        font-size: .8rem;
+    }
+}
