@@ -15,9 +15,11 @@ export default function Show({user}) {
     const description = useRef(null)
     const [editBtn, setEditBtn] = useState(false)
     const [index, setIndex] = useState(0)
+    const [dltBtn, setDltBtn] = useState(false)
 
     useEffect(() => {
         (async () => {
+            console.log(dltBtn)
             try {
                 const response = await fetch(`http://localhost:3001/api/games/${id}`)
                 const data = await response.json()
@@ -60,9 +62,6 @@ export default function Show({user}) {
                 name: '',
                 description: ''
             })
-            console.log('checking if it works')
-            console.log(newReview)
-            console.log(reviews)
         }catch(e){
             console.log(e)
         }
@@ -70,8 +69,6 @@ export default function Show({user}) {
 
     const handleEditClick =  (event) => {
         event.preventDefault()
-        console.log('before try')
-        console.log(reviews)
         reviews.splice(index, 1, newReview)
         try {
             console.log('inside try')
@@ -91,11 +88,35 @@ export default function Show({user}) {
                 name: '',
                 description: ''
             })
-            console.log('end of try block')
         }catch(e){
             console.log(e)
         }
     }
+    useEffect(() => {
+        console.log(dltBtn)
+        if(dltBtn){
+            reviews.splice(index, 1)
+            console.log(dltBtn)
+            try {
+                fetch(`http://localhost:3001/api/games/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type':'application/json'
+                    },
+                    body: JSON.stringify({
+                        reviews: reviews
+                    })
+                })
+                setRender(!render)
+                setDltBtn(false)
+                console.log('comment deleted')
+            }catch(e){
+                console.log(e)
+            }
+        }
+    }, [dltBtn])
+
 
     return(
         <main className={styles.show}>
@@ -185,17 +206,7 @@ export default function Show({user}) {
                                         <div>
                                             {/* gives the index number of the element to the ternary above and then tells it to open the form */}
                                             { user && user.account === "gamer" && user.name === review.name ? <button className="btn" onClick={() => {setEditBtn(true); setIndex(idx)}} >Edit</button> : null } 
-                                            { user && user.account === "gamer" && user.name === review.name ? <button onClick={() => {console.log(reviews); console.log(newReview)}}
-                                            // onClick={(evt) => {
-                                            //     try{
-                                            //         fetch(`http://localhost:3001/api/expenses/${month._id}`, {method: 'DELETE'});
-                                            //     }catch(err){
-                                            //         console.log(err);
-                                            //     }finally{
-                                            //         setRefresh(!refresh);
-                                            //     }
-                                            // }}
-                                            > Delete </button> : null } 
+                                            { user && user.account === "gamer" && user.name === review.name ? <button onClick={(evt) => {setDltBtn(true); setIndex(idx) }}> Delete </button> : null } 
                                         </div>
 
                                     </div> 
