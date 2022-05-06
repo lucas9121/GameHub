@@ -8,6 +8,7 @@ module.exports = {
   login,
   Delete,
   update,
+  show,
   checkToken
 };
 
@@ -72,6 +73,16 @@ async function update(req, res) {
       })
   }catch(e){
       console.log(e)
+  }
+}
+
+async function show(req, res) {
+  try{
+      const {id} = await req.params
+      const user = await User.findById(id)
+      res.status(200).json(user)
+  } catch(e) {
+      res.status(400).json(e)
   }
 }
 
