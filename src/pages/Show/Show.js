@@ -6,13 +6,15 @@ export default function Show({user}) {
     const {id} = useParams()
     const [game, setGame] = useState({})
     const [reviews, setReviews] = useState([])
+    const [render, setRender] = useState(false)
     const [newReview, setNewReview] = useState({
         name: '',
         description: ''
     })
     const [reviewBtn, setReviewBtn] = useState(false)
-    const [render, setRender] = useState(false)
     const description = useRef(null)
+    const [editBtn, setEditBtn] = useState(false)
+    const [index, setIndex] = useState(0)
 
     useEffect(() => {
         (async () => {
@@ -54,10 +56,42 @@ export default function Show({user}) {
             })
             setReviewBtn(false)
             setRender(!render)
-            setReviews({
+            setNewReview({
                 name: '',
                 description: ''
             })
+            console.log('checking if it works')
+            console.log(newReview)
+            console.log(reviews)
+        }catch(e){
+            console.log(e)
+        }
+    }
+
+    const handleEditClick =  (event) => {
+        event.preventDefault()
+        console.log('before try')
+        console.log(reviews)
+        reviews.splice(index, 1, newReview)
+        try {
+            console.log('inside try')
+            fetch(`http://localhost:3001/api/games/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type':'application/json'
+                },
+                body: JSON.stringify({
+                    reviews: reviews
+                })
+            })
+            setEditBtn(false)
+            setRender(!render)
+            setNewReview({
+                name: '',
+                description: ''
+            })
+            console.log('end of try block')
         }catch(e){
             console.log(e)
         }
@@ -71,7 +105,7 @@ export default function Show({user}) {
                 </Link> : null
             }
             <h2>{game.name} </h2>
-            <img src={game.img} alt={game.name} />
+            <img src={game.img} alt={game.name} width="700" height="700" />
             <div className={styles.purchase}>
                 <div className={styles.title}>
                     <h4>Buy {game.name} </h4>
@@ -100,15 +134,18 @@ export default function Show({user}) {
                         </div> :
                         // if user account is admin or gamer
                         user.account !== 'developer' && reviewBtn ?
-                        <form onSubmit={handleSubmit} method="POST">
-                            <fieldset className={styles.new}>
-                                <label htmlFor="description">
-                                    Write Review
-                                </label>
-                                <textarea name="description" ref={description} onChange={handleChange} maxLength={'300'} cols="40" rows="3"></textarea>
-                                <input className='submit btn btn-outline-success' type="submit" value="Submit" />
-                            </fieldset>
-                        </form> :
+                            <form onSubmit={handleSubmit} method="POST">
+                                <fieldset className={styles.new}>
+                                    <label htmlFor="description">
+                                        Write Review
+                                    </label>
+                                    <textarea name="description" ref={description} onChange={handleChange} maxLength={'300'} cols="40" rows="3"></textarea>
+                                    <div>
+                                        <input className='submit btn btn-outline-success' type="submit" value="Submit" />
+                                        <button onClick={() => {setReviewBtn(false)}}>Cancel</button> 
+                                    </div>
+                                </fieldset>
+                            </form> :
                         user.account !== 'developer' && !reviewBtn ? 
                         <button className="btn" 
                             onClick={(evt) => {
@@ -125,13 +162,30 @@ export default function Show({user}) {
                         {
                             reviews.length &&
                            reviews.map((review, idx) => {
-                                return(
+                                return( 
+                                    // opens the edit form instead of element the matches it in the array
+                                    editBtn && index === idx ?
+                                    <div key={idx} className="form-group">
+                                        <small>{review.name}</small>
+                                        <form onSubmit={handleEditClick} method="POST">
+                                            <fieldset className={styles.new}>
+                                                <textarea name="description" ref={description} defaultValue={review.description} onChange={handleChange} maxLength={'300'} cols="40" rows="3"></textarea>
+                                                <div>
+                                                    <input className='submit btn btn-outline-success' type="submit" value="Submit" />
+                                                    {/* just closes the edit form */}
+                                                    <button onClick={() => {setEditBtn(false)}}>Cancel</button> 
+                                                </div>
+                                            </fieldset>
+                                        </form>
+                                    </div> :
+                            
                                     <div key={idx} className="form-group">
                                         <small>{review.name}</small>
                                         <p>{review.description} </p>
                                         <div>
-                                            { user && user.account === "gamer" && user.name === review.name ? <button className="btn" onClick={() => {console.log(review)}} >Edit</button> : null } 
-                                            { user && user.account === "gamer" && user.name === review.name ? <button 
+                                            {/* gives the index number of the element to the ternary above and then tells it to open the form */}
+                                            { user && user.account === "gamer" && user.name === review.name ? <button className="btn" onClick={() => {setEditBtn(true); setIndex(idx)}} >Edit</button> : null } 
+                                            { user && user.account === "gamer" && user.name === review.name ? <button onClick={() => {console.log(reviews); console.log(newReview)}}
                                             // onClick={(evt) => {
                                             //     try{
                                             //         fetch(`http://localhost:3001/api/expenses/${month._id}`, {method: 'DELETE'});
