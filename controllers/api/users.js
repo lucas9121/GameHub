@@ -7,6 +7,7 @@ module.exports = {
   index,
   login,
   Delete,
+  update,
   checkToken
 };
 
@@ -55,6 +56,22 @@ async function Delete(req,res) {
       await User.findByIdAndDelete(req.params.id)
   }catch(e){
       res.status(400).json(e)
+  }
+}
+
+async function update(req, res) {
+  try{
+      const {body} = await req
+      await User.findByIdAndUpdate(req.params.id, body, {new: true}, (err, updatedUser) => {
+          if(!err){
+              res.status(200).json(updatedUser)
+          } else {
+              res.status(400).json(err)
+          }
+
+      })
+  }catch(e){
+      console.log(e)
   }
 }
 
