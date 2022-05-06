@@ -27,10 +27,11 @@ export default function MyAccount({user, setUserDlt, refresh, setRefresh}) {
         }
     }
 
-    const handleSubmit = (evt) => {
+    const handleSubmit = async (evt) => {
         evt.preventDefault()
+        console.log(name.current.value)
         try{
-            fetch(`http://localhost:3001/api/users/${id}`, {
+            await fetch(`http://localhost:3001/api/users/${id}`, {
                 method: 'PUT',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
