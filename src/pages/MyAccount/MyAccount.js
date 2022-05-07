@@ -54,7 +54,7 @@ export default function MyAccount({user, setUserDlt, refresh, setRefresh}) {
 
 
     return(
-        <div className={sytles.MyAccount}>
+        <div className={styles.MyAccount}>
             <h2>My Account</h2> 
             {
                 editBtn ?
