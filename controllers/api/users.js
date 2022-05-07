@@ -65,7 +65,7 @@ async function update(req, res) {
       const {body} = await req
       await User.findByIdAndUpdate(req.params.id, body, {new: true}, (err, updatedUser) => {
           if(!err){
-              res.status(200).json(updatedUser)
+              res.status(200).json(createJWT(updatedUser))
           } else {
               res.status(400).json(err)
           }
@@ -80,7 +80,7 @@ async function show(req, res) {
   try{
       const {id} = await req.params
       const user = await User.findById(id)
-      res.status(200).json(user)
+      res.status(200).json(createJWT(user))
   } catch(e) {
       res.status(400).json(e)
   }
