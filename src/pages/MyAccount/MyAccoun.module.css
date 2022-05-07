@@ -1,0 +1,7 @@
+.MyAccount {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    padding: 5px;
+    height: 65vh;
+}
