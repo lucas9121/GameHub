@@ -1,5 +1,4 @@
 .NavBar {
-    border: solid red;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -26,7 +25,6 @@
 }
 
 .NavBar > div {
-    border: dotted green;
     display: flex;
     align-items: center;
     justify-content: space-between;
