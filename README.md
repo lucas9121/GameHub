@@ -6,5 +6,7 @@ Built using full MERN Stack development, Gamehub is a mock online gaming store. 
 
 ### [ERD](https://miro.com/app/board/uXjVO3Q1pPU=/)
 
+### [Wireframe](https://miro.com/app/board/uXjVO2geB1U=/)
+
 
 
