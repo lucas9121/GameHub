@@ -10,6 +10,7 @@ import New from '../New/New'
 import { getUser} from '../../utilities/users-service'
 import NavBar from '../../components/NavBar/NavBar'
 import SearchBar from '../../components/SearchBar/SearchBar'
+import Footer from '../../components/Footer/Footer'
 
 
 export default function App(){
@@ -51,6 +52,7 @@ export default function App(){
                 <Route path='/:id/edit' element={<Edit refresh={refresh} setRefresh={setRefresh} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk} />} />
                 <Route path='/:id' element={<Show user={user} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk}/>} />
             </Routes>
+            <Footer />
         </main>
     )
 }
