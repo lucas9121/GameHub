@@ -1,5 +1,7 @@
 .footer {
     color: white;
+    background-color: rgb(52 58 64);
+    border-radius: 10px 10px 0 0;
 }
 
 .footer > nav {
@@ -21,10 +23,10 @@
     list-style-type: none;
 }
 
-.ul > li > a:nth-last-of-type(1) {
+.ul > li:nth-last-of-type(2) > a {
     color: white;
 }
 
-.ul > li > a:nth-last-of-type(2) {
+.ul > li:nth-last-of-type(1) > a {
     color: cornflowerblue;
 }
