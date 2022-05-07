@@ -6,6 +6,15 @@
     margin-left: auto;
 }
 
+.noUser{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 85vh;
+    font-size: 3rem;
+    color: white;
+}
+
 @media (min-width: 768px){
     .App{
         max-width: 720px;
