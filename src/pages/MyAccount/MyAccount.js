@@ -1,6 +1,7 @@
 import { useState, useRef } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { logOut } from "../../utilities/users-service"
+import styles from './MyAccount.module.css'
 
 export default function MyAccount({user, setUserDlt, refresh, setRefresh}) {
     const {id} = useParams()
@@ -53,7 +54,7 @@ export default function MyAccount({user, setUserDlt, refresh, setRefresh}) {
 
 
     return(
-        <div className='myAccount'>
+        <div className={sytles.MyAccount}>
             <h2>My Account</h2> 
             {
                 editBtn ?
