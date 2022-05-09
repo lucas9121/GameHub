@@ -8,14 +8,16 @@ export default function NavBar({ user, setUser, setActClk, actClk, setSearchClk,
     const [options, setOptions] = useState([])
 
     const dropdown = () => {
+        // opens or closes dropdown on navbar
         setActClk(!actClk)
+        //removes focus from search bar
         setSearchClk(false)
     }
     
     useEffect(() => {
         if(actClk){
             if(user.account ===  "gamer"){
-                setOptions([{url: `/account/${user._id}`, name: 'My Account' }, {url: '/cart', name: 'Cart' } ]);
+                setOptions([{url: `/account/${user._id}`, name: 'My Account' }, {url: '/cart', name: 'Cart' }, <UserLogOut setUser={setUser} actClk={actClk} setSignClk={setSignClk} setActClk={setActClk} setSearchClk={setSearchClk}/> ]);
             } else {
                 setOptions([{url: `/account/${user._id}`, name: 'My Account' }, {url: '/new', name: 'New Game' }]);
             }
@@ -30,22 +32,25 @@ export default function NavBar({ user, setUser, setActClk, actClk, setSearchClk,
             {
                 user  ?
                 <div>
-                    <div className={styles.dropdown}>
+                    <ul className={styles.dropdown}>
                         {/* I had to add this div to center the dropdown item */}
                         <div><p style={{margin: '1.5vh'}}></p></div>
-                        <button onClick={dropdown}>Hello {user.name}</button>
-                            {
-                                options.map((option, idx) => {
-                                    return(
-                                        idx === options.length - 1 ?
-                                        <Link key={idx} to={option.url} style={{borderRadius: '0 0 10px 10px'}} onClick={dropdown} >{option.name}</Link>
-                                        :
-                                        <Link key={idx} to={option.url} onClick={dropdown}>{option.name}</Link>
-                                    )
-                                })
-                            }
-                    </div>
-                    <UserLogOut setUser={setUser} actClk={actClk} setSignClk={setSignClk} setActClk={setActClk} setSearchClk={setSearchClk}/>
+                            <li><button onClick={dropdown}>Hello {user.name}</button></li>
+                                {
+                                    options.map((option, idx) => {
+                                        return(
+                                            idx === options.length - 1 ?
+                                            <li key={idx} style={{borderRadius: '0 0 10px 10px'}}>{option}</li>
+                                            // <Link key={idx} to={`${option.url}`} style={{borderRadius: '0 0 10px 10px', position: 'relative', zIndex: '2'}} onClick={dropdown} >{option.name}</Link>
+                                            :
+                                            <li key={idx}><Link to={`${option.url}`} onClick={dropdown}>{option.name}</Link></li>
+                                        )
+                                    })
+                                }
+
+                    </ul>
+                    <Link to='/cart'>Cart</Link>
+                    {/* <UserLogOut setUser={setUser} actClk={actClk} setSignClk={setSignClk} setActClk={setActClk} setSearchClk={setSearchClk}/> */}
                 </div> :
                 <div className={styles.noUser}>
                     <AuthPage user={user} setUser={setUser} signClk={signClk} setSignClk={setSignClk} setActClk={setActClk} setSearchClk={setSearchClk}/>
