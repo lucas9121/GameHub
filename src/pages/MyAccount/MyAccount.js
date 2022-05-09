@@ -12,7 +12,6 @@ export default function MyAccount({user, setUser, setUserDlt, refresh, setRefres
     const name = useRef(null)
     const username = useRef(null)
     const email = useRef(null)
-    console.log(user)
 
     const handleDelete = (event) => {
         // making this an async await makes the code terminate after the fetch request
