@@ -1,4 +1,5 @@
 .MyAccount {
+    flex: 13;
     display: flex;
     flex-direction: column;
     color: white;
