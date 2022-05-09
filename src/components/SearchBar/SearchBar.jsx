@@ -1,4 +1,5 @@
 import { useRef, useState } from "react"
+import { BsBorderBottom } from "react-icons/bs"
 import { useNavigate, Link } from "react-router-dom"
 import styles from './SearchBar.module.css'
 
@@ -39,7 +40,7 @@ export default function SearchBar({games}) {
             {/* this div needs to have absolute position for z-index to work. If margin/padding isn't set here it follows flexbox rule */}
             <div className={styles.SearchBar}>
                 <form onSubmit={handleSubmit} autoComplete="off">
-                    <input type='search' name="Search" ref={searchInput} onChange={handleChange} placeholder="Search..."/>
+                    <input type='search' style={results.length > 0 ? {borderRadius: '15px 15px 0 0', borderBottom: '2px solid'} : null} name="Search" ref={searchInput} onChange={handleChange} placeholder="Search..."/>
                     <input type='submit' value='Search' />
                 </form>
                 {
