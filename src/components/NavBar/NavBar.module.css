@@ -10,6 +10,7 @@
 }
 
 .NavBar > a {
+    flex: 6;
     color: rgb(0 123 255);
     text-decoration: none;
 }
@@ -26,6 +27,7 @@
 }
 
 .NavBar > div {
+    flex: 1;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -36,9 +38,19 @@
     align-items: center;
     flex-direction: column;
     height: 5vh;
+    position: relative;
+    z-index: 2;
 }
 
-.dropdown > button {
+.dropdown > li:nth-of-type(1){
+    list-style-type: disclosure-closed;
+}
+
+.dropdown:active > li:nth-of-type(1) {
+    list-style-type: disclosure-open;
+}
+
+.dropdown > li > button {
     background: none;
     color: white;
     border: none;
@@ -48,12 +60,12 @@
     text-transform: capitalize;
 }
 
-.dropdown > button:hover {
+.dropdown > li > button:hover {
     color: rgb(203 211 218);
     text-decoration: underline;
 }
 
-.dropdown > a {
+.dropdown > li > a {
     text-decoration: none;
     color: white;
     background-color: rgb(52 58 64);
@@ -63,7 +75,7 @@
     font-size: 1rem;
 }
 
-.dropdown > a:hover {
+.dropdown > li > a:hover {
     color: rgb(203 211 218);
     text-decoration: underline;
 }
