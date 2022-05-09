@@ -37,6 +37,7 @@
 }
 
 .SearchBar > div {
+    display: block;
     padding: 5px 10px;
     font-size: 1.3rem;
     background-color: rgb(52, 58, 64, 0.7);
@@ -51,6 +52,10 @@
     color: rgb(203 211 218);
     text-decoration: none;
     display: flex;
+}
+
+.SearchBar:focus-visible > div {
+    display: none;
 }
 
 @media (min-width: 768px){
