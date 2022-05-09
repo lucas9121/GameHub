@@ -2,8 +2,9 @@ import { useState, useRef } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { logOut } from "../../utilities/users-service"
 import styles from './MyAccount.module.css'
+import { getUser} from '../../utilities/users-service'
 
-export default function MyAccount({user, setUserDlt, refresh, setRefresh}) {
+export default function MyAccount({user, setUser, setUserDlt, refresh, setRefresh}) {
     const {id} = useParams()
     const navigate = useNavigate()
     const [editBtn, setEditBtn] = useState(false)
@@ -31,8 +32,9 @@ export default function MyAccount({user, setUserDlt, refresh, setRefresh}) {
     const handleSubmit = async (evt) => {
         evt.preventDefault()
         console.log(name.current.value)
+        let data;
         try{
-            await fetch(`http://localhost:3001/api/users/${id}`, {
+            const res = await fetch(`http://localhost:3001/api/users/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json',
@@ -44,6 +46,14 @@ export default function MyAccount({user, setUserDlt, refresh, setRefresh}) {
                     email: email.current.value
                 })
             })
+            // I need to turn data into json
+            ///////////////////////// ALWAYS PUT AWAIT //////////////////////////////
+            data = await res.json()
+            // makes new token
+            localStorage.setItem('token', data);
+            // takes token, decodes and sets user to it
+            setUser(getUser())
+            console.log(data)
             console.log('edit made')
             setEditBtn(false)
             setRefresh(!refresh)
