@@ -41,7 +41,6 @@ export default function App(){
     }, [refresh])
 
     return(
-        user ?
         <main className={styles.App}>
             <NavBar user={user} setUser={setUser}  actClk={actClk} setActClk={setActClk} signClk={signClk} setSignClk={setSignClk} setSearchClk={setSearchClk}/>
             <SearchBar games={games} searchClk={searchClk} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk}/>
@@ -54,14 +53,6 @@ export default function App(){
                 <Route path='/:id' element={<Show user={user} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk}/>} />
             </Routes>
             <Footer />
-        </main> :
-
-        <main className={styles.App}>
-             <NavBar user={user} setUser={setUser}  actClk={actClk} setActClk={setActClk} signClk={signClk} setSignClk={setSignClk} setSearchClk={setSearchClk}/>
-             <div className={styles.nuUser}>
-                <h1> Welcome to Gamehub</h1>
-             </div>
-             <Footer />
         </main>
     )
 }
