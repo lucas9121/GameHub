@@ -31,7 +31,6 @@ export default function MyAccount({user, setUser, setUserDlt, refresh, setRefres
 
     const handleSubmit = async (evt) => {
         evt.preventDefault()
-        console.log(name.current.value)
         let data;
         try{
             const res = await fetch(`http://localhost:3001/api/users/${id}`, {
@@ -53,7 +52,6 @@ export default function MyAccount({user, setUser, setUserDlt, refresh, setRefres
             localStorage.setItem('token', data);
             // takes token, decodes and sets user to it
             setUser(getUser())
-            console.log(data)
             console.log('edit made')
             setEditBtn(false)
             setRefresh(!refresh)
