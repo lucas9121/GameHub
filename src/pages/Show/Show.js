@@ -126,7 +126,7 @@ export default function Show({user}) {
                 </Link> : null
             }
             <h2>{game.name} </h2>
-            <img src={game.img} alt={game.name} width="700" height="700" />
+            <img src={game.img} alt={game.name} max-width="700" max-height="700" />
             <div className={styles.purchase}>
                 <div className={styles.title}>
                     <h4>Buy {game.name} </h4>
