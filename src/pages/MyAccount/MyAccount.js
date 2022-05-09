@@ -65,6 +65,7 @@ export default function MyAccount({user, setUser, setUserDlt, refresh, setRefres
         <div className={styles.MyAccount}>
             <h2>My Account</h2> 
             {
+                // if true, display the edit form
                 editBtn ?
                 <div className="account-info" onSubmit={handleSubmit}>
                     <form autoComplete="off">
@@ -81,10 +82,12 @@ export default function MyAccount({user, setUser, setUserDlt, refresh, setRefres
                         <option value='admin'>Admin</option>
                     </select>
                     <button type="submit">Edit Account</button>
+                    {/* Set hook to false, which will hide the form without submitting it */}
                     <button onClick={() => {setEditBtn(false)}} >Cancel</button>
                     </form>
                     <button onClick={handleDelete}>Delete Account</button>
                 </div> :
+                // display regular information
                 <div className="account-info">
                     <h4>Name</h4>
                     <p>{user.name}</p>
@@ -94,6 +97,7 @@ export default function MyAccount({user, setUser, setUserDlt, refresh, setRefres
                     <p>{user.email} </p>
                     <h4>Account Type</h4>
                     <p style={{textTransform: 'capitalize'}}>{user.account}</p>
+                    {/* sets hook to true, which will display the form */}
                     <button onClick={() => {setEditBtn(true)}}>Edit Account</button>
                     <button onClick={handleDelete}>Delete Account</button>
                 </div>
