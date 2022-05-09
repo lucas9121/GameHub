@@ -35,7 +35,7 @@ export default function NavBar({ user, setUser, setActClk, actClk, setSearchClk,
                     <ul className={styles.dropdown}>
                         {/* I had to add this div to center the dropdown item */}
                         <div><p style={{margin: '1.5vh'}}></p></div>
-                            <li><button onClick={dropdown}>Hello {user.name}</button></li>
+                            <li style={actClk ? {listStyleType: 'disclosure-open'} : null}><button onClick={dropdown}>Hello {user.name}</button></li>
                                 {
                                     options.map((option, idx) => {
                                         return(
