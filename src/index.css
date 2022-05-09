@@ -30,11 +30,11 @@ body {
     background-color: rgb(0 86 179);
 }
 
-.sub-btn {
+.sec-btn {
     background-color: rgb(23, 162, 184);
 }
 
-.sub-btn:hover {
+.sec-btn:hover {
     background-color: rgb(25 149 168);
 }
 
@@ -66,11 +66,11 @@ body {
     color: rgb(0 86 179);
 }
 
-.sub {
+.sec {
     color: rgb(23, 162, 184);
 }
 
-.sub:hover {
+.sec:hover {
     color: rgb(25 149 168);
 }
 
