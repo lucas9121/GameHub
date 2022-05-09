@@ -6,6 +6,7 @@
     padding: 1% 1% 2% 0;
     border-top: solid 3px black;
     border-radius: 10px;
+    overflow: scroll;
 }
 .sub {
     display: flex;
