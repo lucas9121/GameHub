@@ -1,8 +1,10 @@
 .main{
+    flex: 13;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     grid-gap: 0.5em 0.2em;
-    padding: 6% 0;
+    padding: 1% 1% 2% 0;
+    border-top: solid 3px black;
     border-radius: 10px;
 }
 .sub {
