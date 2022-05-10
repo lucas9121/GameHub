@@ -5,4 +5,7 @@
     color: white;
     padding: 5px;
     height: 65vh;
+    align-items: center;
+    overflow: scroll;
+    font-size: 1.5rem;
 }
