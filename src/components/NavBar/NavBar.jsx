@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import styles from "./NavBar.module.css"
 import { useState, useEffect } from "react"
 
-export default function NavBar({ user, setUser, setActClk, actClk, setSearchClk, signClk, setSignClk}) {
+export default function NavBar({ user, setUser, showSignin, setShowSignin, setActClk, actClk, setSearchClk, signClk, setSignClk}) {
     // dropdown hook
     const [options, setOptions] = useState([])
 
@@ -60,9 +60,11 @@ export default function NavBar({ user, setUser, setActClk, actClk, setSearchClk,
                     <Link to='/cart'>Cart</Link>
                 </div> :
                 // if there isn't a user
-                <div className={styles.noUser}>
-                    <AuthPage user={user} setUser={setUser} signClk={signClk} setSignClk={setSignClk} setActClk={setActClk} setSearchClk={setSearchClk}/>
-                </div>
+                <ul className={styles.noUser}>
+                    <li><h3 onClick={() => setShowSignin(!showSignin)}>Sign in</h3></li>
+                    <li><Link to='/cart'>Cart</Link></li>
+                    {/* <AuthPage user={user} setUser={setUser} signClk={signClk} setSignClk={setSignClk} setActClk={setActClk} setSearchClk={setSearchClk}/> */}
+                </ul>
             }
         </nav>
     )
