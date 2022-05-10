@@ -9,36 +9,41 @@
     border-radius: 0 0 10px 10px;
 }
 
-.NavBar > a {
+.NavBar > div:nth-of-type(1) {
     flex: 6;
+}
+
+.NavBar > div:nth-of-type(1) > a {
+
     color: rgb(0 123 255);
     text-decoration: none;
 }
 
-.NavBar > a:hover {
+.NavBar > div:nth-of-type(1) > a:hover {
     color: rgb(0 86 179);
 }
 
-.NavBar > a > h1 {
+.NavBar > div:nth-of-type(1) > a > h1 {
     font-size: 3rem;
     font-family: monospace;
     margin: 0;
+    width: fit-content;
 
 }
 
-.NavBar > div {
+.NavBar > div:nth-of-type(2) {
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.NavBar > div > a {
+.NavBar > div:nth-of-type(2) > a {
     text-decoration: none;
     color: white;
 }
 
-.NavBar > div > a:hover {
+.NavBar > div:nth-of-type(2) > a:hover {
     color: rgb(203 211 218);
     text-decoration: underline;
 }
