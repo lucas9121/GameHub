@@ -32,7 +32,7 @@ export default function NavBar({ user, setUser, showSignin, setShowSignin, setAc
     }, [actClk])
 
     return(
-        <nav className={styles.NavBar}>
+        <nav className={styles.NavBar} style={showSignin ? {borderRadius: '0'} : null}>
             <div>
                 <Link to={'/'} onClick={() => {setActClk(false); setSearchClk(false)}} ><h1>GameHub</h1></Link>
             </div>
