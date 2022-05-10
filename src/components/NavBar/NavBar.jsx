@@ -5,6 +5,7 @@ import styles from "./NavBar.module.css"
 import { useState, useEffect } from "react"
 
 export default function NavBar({ user, setUser, setActClk, actClk, setSearchClk, signClk, setSignClk}) {
+    // dropdown hook
     const [options, setOptions] = useState([])
 
     const dropdown = () => {
@@ -15,13 +16,17 @@ export default function NavBar({ user, setUser, setActClk, actClk, setSearchClk,
     }
     
     useEffect(() => {
+        // if hook is true
         if(actClk){
+            // dropdown options if user has a gamer account
             if(user.account ===  "gamer"){
-                setOptions([{url: `/account/${user._id}`, name: 'My Account' }, {url: '/cart', name: 'Cart' }, <UserLogOut setUser={setUser} actClk={actClk} setSignClk={setSignClk} setActClk={setActClk} setSearchClk={setSearchClk}/> ]);
+                setOptions([{url: `/account/${user._id}`, name: 'My Account' }, <UserLogOut setUser={setUser} actClk={actClk} setSignClk={setSignClk} setActClk={setActClk} setSearchClk={setSearchClk}/> ]);
             } else {
-                setOptions([{url: `/account/${user._id}`, name: 'My Account' }, {url: '/new', name: 'New Game' }]);
+                // dropdown options if user has a developer or admin account
+                setOptions([{url: `/account/${user._id}`, name: 'My Account' }, {url: '/new', name: 'New Game' }, <UserLogOut setUser={setUser} actClk={actClk} setSignClk={setSignClk} setActClk={setActClk} setSearchClk={setSearchClk}/>]);
             }
         } else {
+            // closes dropdown if hook is false
             setOptions([])
         } 
     }, [actClk])
@@ -30,6 +35,7 @@ export default function NavBar({ user, setUser, setActClk, actClk, setSearchClk,
         <nav className={styles.NavBar}>
             <Link to={'/'} onClick={() => {setActClk(false); setSearchClk(false)}} ><h1>GameHub</h1></Link>
             {
+                // if there is a user
                 user  ?
                 <div>
                     <ul className={styles.dropdown}>
@@ -39,9 +45,9 @@ export default function NavBar({ user, setUser, setActClk, actClk, setSearchClk,
                                 {
                                     options.map((option, idx) => {
                                         return(
+                                            // adds bottom border radius to last item
                                             idx === options.length - 1 ?
                                             <li key={idx} style={{borderRadius: '0 0 10px 10px'}}>{option}</li>
-                                            // <Link key={idx} to={`${option.url}`} style={{borderRadius: '0 0 10px 10px', position: 'relative', zIndex: '2'}} onClick={dropdown} >{option.name}</Link>
                                             :
                                             <li key={idx}><Link to={`${option.url}`} onClick={dropdown}>{option.name}</Link></li>
                                         )
@@ -50,8 +56,8 @@ export default function NavBar({ user, setUser, setActClk, actClk, setSearchClk,
 
                     </ul>
                     <Link to='/cart'>Cart</Link>
-                    {/* <UserLogOut setUser={setUser} actClk={actClk} setSignClk={setSignClk} setActClk={setActClk} setSearchClk={setSearchClk}/> */}
                 </div> :
+                // if there isn't a user
                 <div className={styles.noUser}>
                     <AuthPage user={user} setUser={setUser} signClk={signClk} setSignClk={setSignClk} setActClk={setActClk} setSearchClk={setSearchClk}/>
                 </div>
