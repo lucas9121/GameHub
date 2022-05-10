@@ -21,7 +21,9 @@ export default function MyAccount({user, setUser, setUserDlt, refresh, setRefres
             console.log(e)
         } finally {
             console.log('user deleted')
+            // activates use effect on app page to refresh page
             setRefresh(!refresh)
+            // activates conditional on app page to remove token, which will log user out after being deleted
             setUserDlt(true)
             navigate('/')
             logOut()
@@ -53,6 +55,7 @@ export default function MyAccount({user, setUser, setUserDlt, refresh, setRefres
             setUser(getUser())
             console.log('edit made')
             setEditBtn(false)
+            // activates use effect on app page to refresh page
             setRefresh(!refresh)
         }catch(e){
             console.log(e)
@@ -80,11 +83,10 @@ export default function MyAccount({user, setUser, setUserDlt, refresh, setRefres
                         <option value='developer'>Developer</option>
                         <option value='admin'>Admin</option>
                     </select>
-                    <button type="submit">Edit Account</button>
+                    <button type="submit" className="btn yes-btn">Edit Account</button>
                     {/* Set hook to false, which will hide the form without submitting it */}
-                    <button onClick={() => {setEditBtn(false)}} >Cancel</button>
+                    <button className="btn no-btn" onClick={() => {setEditBtn(false)}} >Cancel</button>
                     </form>
-                    <button onClick={handleDelete}>Delete Account</button>
                 </div> :
                 // display regular information
                 <div className="account-info">
@@ -97,8 +99,8 @@ export default function MyAccount({user, setUser, setUserDlt, refresh, setRefres
                     <h4>Account Type</h4>
                     <p style={{textTransform: 'capitalize'}}>{user.account}</p>
                     {/* sets hook to true, which will display the form */}
-                    <button onClick={() => {setEditBtn(true)}}>Edit Account</button>
-                    <button onClick={handleDelete}>Delete Account</button>
+                    <button className="btn main-btn" onClick={() => {setEditBtn(true)}}>Edit Account</button>
+                    <button className="btn no-btn" onClick={handleDelete}>Delete Account</button>
                 </div>
             }
         </div>
