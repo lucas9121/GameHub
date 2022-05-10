@@ -9,18 +9,27 @@ import Edit from '../Edit/Edit'
 import New from '../New/New'
 import { getUser} from '../../utilities/users-service'
 import NavBar from '../../components/NavBar/NavBar'
+import AuthPage from '../AuthPage/AuthPage'
 import SearchBar from '../../components/SearchBar/SearchBar'
 import Footer from '../../components/Footer/Footer'
+
 
 
 export default function App(){
     const [games, setGames] = useState([])
     const [refresh, setRefresh] = useState(false)
     const [user, setUser] = useState(getUser())
+
+    // checks if the delete account button was pressed
     const [userDlt, setUserDlt] = useState(false)
+
+    // displays navbar dropdown options
     const [actClk, setActClk] = useState(false)
     const [searchClk, setSearchClk] = useState(false)
     const [signClk, setSignClk] = useState(false)
+
+    // displays sign up/ log in div
+    const [showSignin, setShowSignin] = useState(false)
     
 
     useEffect(() => {
@@ -42,7 +51,11 @@ export default function App(){
 
     return(
         <main className={styles.App}>
-            <NavBar user={user} setUser={setUser}  actClk={actClk} setActClk={setActClk} signClk={signClk} setSignClk={setSignClk} setSearchClk={setSearchClk}/>
+            <NavBar user={user} setUser={setUser}  actClk={actClk} setActClk={setActClk} showSignin={showSignin} setShowSignin={setShowSignin} signClk={signClk} setSignClk={setSignClk} setSearchClk={setSearchClk}/>
+            {
+                showSignin &&
+                <AuthPage user={user} setUser={setUser} signClk={signClk} setSignClk={setSignClk} setActClk={setActClk} setSearchClk={setSearchClk}/>
+            }
             <SearchBar games={games} searchClk={searchClk} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk}/>
             <Routes>
                 <Route path='/' element={<Home games={games} user={user} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk}/>} />
