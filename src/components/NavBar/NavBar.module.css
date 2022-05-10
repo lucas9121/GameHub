@@ -33,11 +33,22 @@
     justify-content: space-between;
 }
 
+.NavBar > div > a {
+    text-decoration: none;
+    color: white;
+}
+
+.NavBar > div > a:hover {
+    color: rgb(203 211 218);
+    text-decoration: underline;
+}
+
 .dropdown  {
     display: flex;
     align-items: center;
     flex-direction: column;
     height: 5vh;
+    padding: 0;
     position: relative;
     z-index: 2;
 }
@@ -46,8 +57,13 @@
     list-style-type: disclosure-closed;
 }
 
-.dropdown:active > li:nth-of-type(1) {
-    list-style-type: disclosure-open;
+.dropdown > li {
+    list-style-type: none;
+    background-color: rgb(52 58 64);
+    width: 100%;
+    text-align: center;
+    padding: 2% 0;
+    font-size: 1rem;
 }
 
 .dropdown > li > button {
@@ -68,11 +84,6 @@
 .dropdown > li > a {
     text-decoration: none;
     color: white;
-    background-color: rgb(52 58 64);
-    width: 100%;
-    text-align: center;
-    padding: 5% 0;
-    font-size: 1rem;
 }
 
 .dropdown > li > a:hover {
