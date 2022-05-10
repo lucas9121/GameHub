@@ -33,7 +33,9 @@ export default function NavBar({ user, setUser, setActClk, actClk, setSearchClk,
 
     return(
         <nav className={styles.NavBar}>
-            <Link to={'/'} onClick={() => {setActClk(false); setSearchClk(false)}} ><h1>GameHub</h1></Link>
+            <div>
+                <Link to={'/'} onClick={() => {setActClk(false); setSearchClk(false)}} ><h1>GameHub</h1></Link>
+            </div>
             {
                 // if there is a user
                 user  ?
