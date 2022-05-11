@@ -3,7 +3,7 @@ import LoginForm from '../../components/LoginForm/LoginForm';
 import SignUpForm from '../../components/SignUpForm/SignUpForm';
 import styles from './AuthPage.module.css'
 
-export default function AuthPage({ setUser }) {
+export default function AuthPage({ setUser, setShowSignin }) {
   const [showLogin, setShowLogin] = useState(true);
 
 
@@ -15,7 +15,7 @@ export default function AuthPage({ setUser }) {
             <h3 style={!showLogin ? {border: 'solid rgb(0 123 255)'} : null} onClick={() => setShowLogin(false)}>SIGN UP</h3>
           </div>
           {/* changes the div display */}
-            {showLogin ? <LoginForm setUser={setUser} /> : <SignUpForm setUser={setUser} />}
+            {showLogin ? <LoginForm setUser={setUser} setShowSignin={setShowSignin} /> : <SignUpForm setUser={setUser} setShowSignin={setShowSignin} />}
         </div> 
     </main>
   )
