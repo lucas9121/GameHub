@@ -2,10 +2,16 @@
     color: white;
 }
 
+.Login > p {
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
 .Login > div > form {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    gap: 2px;
 }
 
 .Login > div > form > input {
@@ -15,5 +21,10 @@
     padding: 3px;
     border: none;
     border-radius: 5px;
-    outline: none;
+    outline: inset;
+    margin-bottom: 10px;
+}
+
+.Login > div > form > label {
+    padding: 4px 3px;
 }
