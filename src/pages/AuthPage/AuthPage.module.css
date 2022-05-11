@@ -12,9 +12,15 @@
 
 .AuthPage > div {
     width: 100%;
+    height: 220px;
 }
 
-.AuthPage > div > h3 {
+.AuthPage > div > div {
+    display: flex;  
+    gap: 15px;
+}
+
+.AuthPage > div > div >  h3 {
     margin: 8px 0;
     color: white;
     cursor: pointer
