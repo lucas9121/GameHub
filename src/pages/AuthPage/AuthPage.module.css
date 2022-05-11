@@ -13,13 +13,15 @@
 .AuthPage > div {
     width: 100%;
     height: 220px;
+    position: relative;
+    z-index: 2;
 }
 
-.AuthPage > div > div {
+.Signin {
     display: flex;  
 }
 
-.AuthPage > div > div >  h3 {
+.Signin >  h3 {
     margin: 8px 0;
     padding: 10px;
     color: white;
