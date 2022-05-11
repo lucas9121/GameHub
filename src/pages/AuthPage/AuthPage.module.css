@@ -17,11 +17,12 @@
 
 .AuthPage > div > div {
     display: flex;  
-    gap: 15px;
 }
 
 .AuthPage > div > div >  h3 {
     margin: 8px 0;
+    padding: 10px;
     color: white;
-    cursor: pointer
+    cursor: pointer;
+    border-bottom: solid white;
 }
