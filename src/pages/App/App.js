@@ -53,8 +53,9 @@ export default function App(){
         <main className={styles.App}>
             <NavBar user={user} setUser={setUser}  actClk={actClk} setActClk={setActClk} showSignin={showSignin} setShowSignin={setShowSignin} signClk={signClk} setSignClk={setSignClk} setSearchClk={setSearchClk}/>
             {
+                // if the hook is true display this div
                 showSignin &&
-                <AuthPage user={user} setUser={setUser} signClk={signClk} setSignClk={setSignClk} setActClk={setActClk} setSearchClk={setSearchClk}/>
+                <AuthPage user={user} setUser={setUser} signClk={signClk} setSignClk={setSignClk} setShowSignin={setShowSignin} setActClk={setActClk} setSearchClk={setSearchClk}/>
             }
             <SearchBar games={games} searchClk={searchClk} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk}/>
             <Routes>
