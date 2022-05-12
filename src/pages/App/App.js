@@ -54,7 +54,7 @@ export default function App(){
             <NavBar user={user} setUser={setUser}  actClk={actClk} setActClk={setActClk} showSignin={showSignin} setShowSignin={setShowSignin} signClk={signClk} setSignClk={setSignClk} setSearchClk={setSearchClk}/>
             {
                 // if there isn't a user logged in and the hook is true display this div
-                !user && showSignin &&
+                showSignin &&
                 <AuthPage user={user} setUser={setUser} signClk={signClk} setSignClk={setSignClk} setShowSignin={setShowSignin} setActClk={setActClk} setSearchClk={setSearchClk}/>
             }
             <SearchBar games={games} searchClk={searchClk} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk}/>
