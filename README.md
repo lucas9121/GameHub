@@ -1,4 +1,4 @@
-# Gamehub 2
+# [Gamehub 2](https://gamehub-react.herokuapp.com/)
 
 ## Description
 
@@ -23,10 +23,10 @@ As a Developer you get to create the games that will be displayed on the site. U
  - react
 
 
-### [Wireframe](https://miro.com/app/board/uXjVO2geB1U=/)
+## [Wireframe](https://miro.com/app/board/uXjVO2geB1U=/)
 
 
-### [ERD](https://miro.com/app/board/uXjVO3Q1pPU=/)
+## [ERD](https://miro.com/app/board/uXjVO3Q1pPU=/)
 
 
 
