@@ -53,7 +53,7 @@ export default function App(){
         <main className={styles.App}>
             <NavBar user={user} setUser={setUser}  actClk={actClk} setActClk={setActClk} showSignin={showSignin} setShowSignin={setShowSignin} signClk={signClk} setSignClk={setSignClk} setSearchClk={setSearchClk}/>
             {
-                // if there isn't a user logged in and the hook is true display this div
+                // if the hook is true display this div
                 showSignin &&
                 <AuthPage user={user} setUser={setUser} signClk={signClk} setSignClk={setSignClk} setShowSignin={setShowSignin} setActClk={setActClk} setSearchClk={setSearchClk}/>
             }
