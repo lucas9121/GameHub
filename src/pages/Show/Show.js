@@ -181,8 +181,8 @@ export default function Show({user}) {
                     }
                     <div className={styles.comments}>
                         {
-                            reviews.length &&
-                           reviews.map((review, idx) => {
+                            reviews.length ?
+                            reviews.map((review, idx) => {
                                 return( 
                                     // opens the edit form instead of element the matches it in the array
                                     editBtn && index === idx ?
@@ -211,7 +211,8 @@ export default function Show({user}) {
 
                                     </div> 
                                 )
-                            })
+                            }) :
+                            null
                             
                         }
                     </div>
