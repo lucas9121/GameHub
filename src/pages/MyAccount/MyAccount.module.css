@@ -10,10 +10,10 @@
     font-size: 1.5rem;
 }
 
-.MyAccount > div > h4 {
+.AccountInfo > h4 {
     margin-bottom: 0;
 }
 
-.MyAccount > div > p {
+.AccountInfo > p {
     margin-top: 10px;
 }
