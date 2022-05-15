@@ -16,4 +16,10 @@
 
 .AccountInfo > p {
     margin-top: 10px;
+    font-style: italic;
+}
+
+.AccountInfo > div {
+    display: flex;
+    gap: 15px;
 }
