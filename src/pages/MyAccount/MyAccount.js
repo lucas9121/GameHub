@@ -16,7 +16,7 @@ export default function MyAccount({user, setUser, setUserDlt, refresh, setRefres
     const handleDelete = (event) => {
         // making this an async await makes the code terminate after the fetch request
         try {
-            fetch(`http://localhost:3001/api/users/delete/${id}`, {method: 'DELETE'})
+            fetch(`/api/users/delete/${id}`, {method: 'DELETE'})
         } catch(e) {
             console.log(e)
         } finally {
@@ -34,7 +34,7 @@ export default function MyAccount({user, setUser, setUserDlt, refresh, setRefres
         evt.preventDefault()
         let data;
         try{
-            const res = await fetch(`http://localhost:3001/api/users/${id}`, {
+            const res = await fetch(`/api/users/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json',
