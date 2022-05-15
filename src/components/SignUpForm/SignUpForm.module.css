@@ -4,9 +4,33 @@
 
 .row {
     display: flex;
+    align-items: center;
+    gap: 5px;
+    padding-left: 5px;
+}
+
+.row > select {
+    background-color: rgb(52, 58, 64, .8);
+    outline: inset;
+    border-radius: 5px;
+    color: white;
+    margin-right: 10px;
 }
 
 .row > div {
     display: flex;
     flex-direction: column;
+    gap: 4px;
+    padding-right: 10px;
+}
+
+.row > div > input {
+    background-color: rgb(52, 58, 64, .8);
+    color: white;
+    font-size: 1rem;
+    padding: 3px;
+    border: none;
+    border-radius: 5px;
+    outline: inset;
+    margin-bottom: 15px;
 }
