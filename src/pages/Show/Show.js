@@ -134,7 +134,7 @@ export default function Show({user}) {
                 <p>Quantity: {game.qty} </p>
                 <div>
                     <p>Price: {game.price}</p>
-                    <button className="btn">Add to Cart</button>
+                    <button className="btn sec-btn">Add to Cart</button>
                 </div>
             </div>
             <div className={styles.about}>
@@ -150,7 +150,7 @@ export default function Show({user}) {
                         // if user is null
                         !user ?
                         <div>
-                            <button className="btn" disabled> Write a review</button>
+                            <button className="btn sec-btn" disabled> Write a review</button>
                             <small>sign in first</small>
                         </div> :
                         // if user account is admin or gamer
@@ -205,8 +205,8 @@ export default function Show({user}) {
                                         <p>{review.description} </p>
                                         <div>
                                             {/* gives the index number of the element to the ternary above and then tells it to open the form */}
-                                            { user && user.account === "gamer" && user.name === review.name ? <button className="btn" onClick={() => {setEditBtn(true); setIndex(idx)}} >Edit</button> : null } 
-                                            { user && user.account === "gamer" && user.name === review.name ? <button onClick={(evt) => {setDltBtn(true); setIndex(idx) }}> Delete </button> : null } 
+                                            { user && user.account === "gamer" && user.name === review.name ? <button className="btn main-btn" onClick={() => {setEditBtn(true); setIndex(idx)}} >Edit</button> : null } 
+                                            { user && user.account === "gamer" && user.name === review.name ? <button className="btn no-btn" onClick={(evt) => {setDltBtn(true); setIndex(idx) }}> Delete </button> : null } 
                                         </div>
 
                                     </div> 
