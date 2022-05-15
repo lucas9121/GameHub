@@ -35,7 +35,7 @@ export default function App(){
     useEffect(() => {
         (async () => {
             try {
-                const res = await fetch('http://localhost:3001/api/games')
+                const res = await fetch('/api/games')
                 const data = await res.json()
                 setGames(data)
                 // will log me out with the refresh hook if userDlt hook is set to true
