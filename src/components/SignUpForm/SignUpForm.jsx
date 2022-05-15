@@ -60,7 +60,7 @@ export default class SignUpForm extends Component {
                 </div>
                 <div>
                   <label>Username</label>
-                  <input type="text" name="username" value={this.state.username} onChange={this.handleChange} required />
+                  <input type="text" name="username" value={this.state.username} maxLength='10' onChange={this.handleChange} required />
                 </div>
               </div>
               <div className={styles.row}>
