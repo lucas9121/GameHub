@@ -85,7 +85,7 @@ export default class SignUpForm extends Component {
                 }}>
                     <option  value="gamer">Gamer</option>
                     <option value='developer'>Developer</option>
-                    <option value='admin'>Admin</option>
+                    {/* <option value='admin'>Admin</option> */}
                 </select>
                 <button className="btn main-btn" type="submit" disabled={disable}>SIGN UP</button>
               </div>
