@@ -1,0 +1,12 @@
+.SignUp {
+    color: white;
+}
+
+.row {
+    display: flex;
+}
+
+.row > div {
+    display: flex;
+    flex-direction: column;
+}
