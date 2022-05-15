@@ -9,3 +9,11 @@
     overflow: scroll;
     font-size: 1.5rem;
 }
+
+.MyAccount > div > h4 {
+    margin-bottom: 0;
+}
+
+.MyAccount > div > p {
+    margin-top: 10px;
+}
