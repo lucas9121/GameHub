@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { signUp } from '../../utilities/users-service';
+import styles from './SignUpForm.module.css'
 
 
 export default class SignUpForm extends Component {
@@ -46,9 +47,9 @@ export default class SignUpForm extends Component {
     render() {
       const disable = this.state.password !== this.state.confirm;
       return (
-        <div>
+        <div className={styles.SignUp}>
             <form autoComplete="off" onSubmit={this.handleSubmit}>
-              <div className="first-row">
+              <div className={styles.row}>
                 <div>
                   <label>First Name</label>
                   <input type="text" name="fName" value={this.state.fName} onChange={this.handleChange} required />
@@ -62,7 +63,7 @@ export default class SignUpForm extends Component {
                   <input type="text" name="username" value={this.state.username} onChange={this.handleChange} required />
                 </div>
               </div>
-              <div className="second-row">
+              <div className={styles.row}>
                 <div>
                   <label>Email</label>
                   <input type="email" name="email" value={this.state.email} onChange={this.handleChange} required />
@@ -76,7 +77,7 @@ export default class SignUpForm extends Component {
                   <input type="password" name="confirm" value={this.state.confirm} onChange={this.handleChange} required />
                 </div>
               </div>
-              <div className="third-row">
+              <div className={styles.row}>
                 <label>Account Type</label>
                 <select name="account" onChange={(evt) => {
                   // options are elements in the select array. account is equal to the value of the clicked option
@@ -86,7 +87,7 @@ export default class SignUpForm extends Component {
                     <option value='developer'>Developer</option>
                     <option value='admin'>Admin</option>
                 </select>
-                <button type="submit" disabled={disable}>SIGN UP</button>
+                <button className="btn main-btn" type="submit" disabled={disable}>SIGN UP</button>
               </div>
             </form>
           <p className="error-message">&nbsp;{this.state.error}</p>
