@@ -21,7 +21,7 @@ export default function Show({user}) {
         (async () => {
             console.log(dltBtn)
             try {
-                const response = await fetch(`http://localhost:3001/api/games/${id}`)
+                const response = await fetch(`/api/games/${id}`)
                 const data = await response.json()
                 setGame(data)
                 setReviews(data.reviews)
@@ -41,7 +41,7 @@ export default function Show({user}) {
     const handleSubmit = async (evt) => {
         evt.preventDefault()
         try{
-            const response = await fetch(`http://localhost:3001/api/games/${id}`, {
+            const response = await fetch(`/api/games/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json',
@@ -72,7 +72,7 @@ export default function Show({user}) {
         reviews.splice(index, 1, newReview)
         try {
             console.log('inside try')
-            fetch(`http://localhost:3001/api/games/${id}`, {
+            fetch(`/api/games/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json',
@@ -98,7 +98,7 @@ export default function Show({user}) {
             reviews.splice(index, 1)
             console.log(dltBtn)
             try {
-                fetch(`http://localhost:3001/api/games/${id}`, {
+                fetch(`/api/games/${id}`, {
                     method: 'PUT',
                     headers: {
                         'Accept': 'application/json',
