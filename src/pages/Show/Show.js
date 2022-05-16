@@ -6,7 +6,11 @@ export default function Show({user}) {
     const {id} = useParams()
     const [game, setGame] = useState({})
     const [reviews, setReviews] = useState([])
+
+    // reloads the page
     const [render, setRender] = useState(false)
+
+    //Review hooks
     const [newReview, setNewReview] = useState({
         name: '',
         description: ''
@@ -14,12 +18,17 @@ export default function Show({user}) {
     const [reviewBtn, setReviewBtn] = useState(false)
     const description = useRef(null)
     const [editBtn, setEditBtn] = useState(false)
+
+    // checks the index number of the review in the array
     const [index, setIndex] = useState(0)
+
+    // useEffect watches it to see if should run the delete function
     const [dltBtn, setDltBtn] = useState(false)
 
+
+    // When page mounts, fetch the individual game from database
     useEffect(() => {
         (async () => {
-            console.log(dltBtn)
             try {
                 const response = await fetch(`/api/games/${id}`)
                 const data = await response.json()
@@ -31,6 +40,7 @@ export default function Show({user}) {
         })() 
     }, [render, id])
 
+    // adds user name and comment to the review hook
     const handleChange = () => {
         setNewReview({
             name: user.name,
@@ -38,6 +48,7 @@ export default function Show({user}) {
         })
     }
 
+    // Makes a new review
     const handleSubmit = async (evt) => {
         evt.preventDefault()
         try{
@@ -67,11 +78,11 @@ export default function Show({user}) {
         }
     }
 
+    // Edit existing review
     const handleEditClick =  (event) => {
         event.preventDefault()
         reviews.splice(index, 1, newReview)
         try {
-            console.log('inside try')
             fetch(`/api/games/${id}`, {
                 method: 'PUT',
                 headers: {
@@ -92,11 +103,11 @@ export default function Show({user}) {
             console.log(e)
         }
     }
+
+    // Deletes existing review if hook is set to true
     useEffect(() => {
-        console.log(dltBtn)
         if(dltBtn){
             reviews.splice(index, 1)
-            console.log(dltBtn)
             try {
                 fetch(`/api/games/${id}`, {
                     method: 'PUT',
@@ -121,9 +132,8 @@ export default function Show({user}) {
     return(
         <main className={styles.show}>
             {
-                user && user.account === 'developer' ?
-                <Link to={`/${game._id}/edit`} > Edit
-                </Link> : null
+                // edit game button for developer user
+                user && user.account === 'developer' ? <Link to={`/${game._id}/edit`} >Edit</Link> : null
             }
             <h2>{game.name} </h2>
             <img src={game.img} alt={game.name} max-width="700" max-height="700" />
@@ -147,13 +157,13 @@ export default function Show({user}) {
                     <h3>Customer Reviews</h3>
                     <hr />
                     {
-                        // if user is null
+                        // if user is null disable the button
                         !user ?
                         <div>
                             <button className="btn sec-btn" disabled> Write a review</button>
                             <small>sign in first</small>
                         </div> :
-                        // if user account is admin or gamer
+                        // if there is a user and the account is admin or gamer and they pressed the write a review button
                         user.account !== 'developer' && reviewBtn ?
                             <form onSubmit={handleSubmit} method="POST">
                                 <fieldset className={styles.new}>
@@ -162,25 +172,27 @@ export default function Show({user}) {
                                     </label>
                                     <textarea name="description" ref={description} onChange={handleChange} maxLength={'300'} cols="40" rows="3"></textarea>
                                     <div>
-                                        <input className='submit btn btn-outline-success' type="submit" value="Submit" />
-                                        <button onClick={() => {setReviewBtn(false)}}>Cancel</button> 
+                                        <input className='submit btn yes-btn' type="submit" value="Submit" />
+                                        <button className="btn no-btn" onClick={() => {setReviewBtn(false)}}>Cancel</button> 
                                     </div>
                                 </fieldset>
                             </form> :
+                            // if there is a user and the user account is admin or gamer, but haven't pressed the button yet
                         user.account !== 'developer' && !reviewBtn ? 
-                        <button className="btn" 
+                        <button className="btn sec-btn" 
                             onClick={(evt) => {
                                 setReviewBtn(true)
                             }}>
                             Write a review
                         </button> :
-                        // if user account is developer
+                        // if user account is developer disable the button
                         <div>
-                            <button className="btn" disabled> Write a review</button>
+                            <button className="btn sec-btn" disabled> Write a review</button>
                         </div> 
                     }
                     <div className={styles.comments}>
                         {
+                            // checks to see if the array isn't empty first
                             reviews.length ?
                             reviews.map((review, idx) => {
                                 return( 
@@ -192,14 +204,14 @@ export default function Show({user}) {
                                             <fieldset className={styles.new}>
                                                 <textarea name="description" ref={description} defaultValue={review.description} onChange={handleChange} maxLength={'300'} cols="40" rows="3"></textarea>
                                                 <div>
-                                                    <input className='submit btn btn-outline-success' type="submit" value="Submit" />
+                                                    <input className='submit btn yes-btn' type="submit" value="Submit" />
                                                     {/* just closes the edit form */}
-                                                    <button onClick={() => {setEditBtn(false)}}>Cancel</button> 
+                                                    <button className="btn no-btn" onClick={() => {setEditBtn(false)}}>Cancel</button> 
                                                 </div>
                                             </fieldset>
                                         </form>
                                     </div> :
-                            
+                                    // shows all of the reviews
                                     <div key={idx} className="form-group">
                                         <small>{review.name}</small>
                                         <p>{review.description} </p>
