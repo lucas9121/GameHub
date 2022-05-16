@@ -55,18 +55,7 @@
 }
 
 .purchase > div:nth-of-type(2) > button {
-    background-color: rgb(23, 162, 184);
-    border: solid rgb(23, 162, 184);
     color: white;
-    border-width: 2px;
-    border-radius: 10px;
-    font-size: xx-small;
-}
-
-.purchase > div:nth-of-type(2) > button:hover {
-    color: #fff;
-    background-color: rgb(25 149 168);
-    border-color: #17a2b8;
 }
 
 .about {
@@ -94,14 +83,7 @@ hr {
     width: 100%;
 }
 .review > button {
-    color: #fff;
-    background-color: rgb(0 123 255);
-    border-width: 2px;
-    border-radius: 10px;
-}
-
-.review > button:hover{
-    background-color: rgb(0 86 179);
+    color: white;
 }
 
 .new  {
