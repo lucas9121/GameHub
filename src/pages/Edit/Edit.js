@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react"
 import { useParams, Link, useNavigate} from "react-router-dom"
-// import axios from "axios"
 
 
 export default function Edit({refresh ,setRefresh}) {
@@ -16,7 +15,7 @@ export default function Edit({refresh ,setRefresh}) {
     useEffect(() => {
         (async () => {
             try {
-                const response = await fetch(`http://localhost:3001/api/games/${id}/edit`)
+                const response = await fetch(`/api/games/${id}/edit`)
                 const data = await response.json()
                 setGame(data)
             } catch(e) {
@@ -28,7 +27,7 @@ export default function Edit({refresh ,setRefresh}) {
     const handleSubmit = async (event) => {
         event.preventDefault()
         try {
-            const response = await fetch(`http://localhost:3001/api/games/${id}`, {
+            const response = await fetch(`/api/games/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json',
@@ -56,20 +55,10 @@ export default function Edit({refresh ,setRefresh}) {
         console.log(refresh)
         navigate('/')
         try {
-            // console.log(refresh)
-            // setRefresh(!refresh)
-            // console.log(refresh)
-            // navigate('/')
-            const res = await fetch(`http://localhost:3001/api/games/${id}`, {method: 'DELETE'})
+            const res = await fetch(`/api/games/${id}`, {method: 'DELETE'})
         } catch(e) {
             console.log(e)
         } 
-        // finally {
-        //     console.log(refresh)
-        //     setRefresh(!refresh)
-        //     console.log(refresh)
-        //     navigate('/')
-        // }
     }
 
     return (
