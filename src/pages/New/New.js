@@ -12,7 +12,7 @@ export default function New({refresh, setRefresh, user}){
     const handleSubmit = async (event) => {
         event.preventDefault()
         try {
-            const response = await fetch(`http://localhost:3001/api/games`, {
+            const response = await fetch(`/api/games`, {
                 method: 'POST',
                 headers: {
                     'Content-Type':'application/json'
@@ -39,7 +39,7 @@ export default function New({refresh, setRefresh, user}){
     return (
         <main className="New">
             <h2>New Game</h2>
-            <form className='needs-validation' onSubmit={handleSubmit} method="POST">
+            <form className='needs-validation' onSubmit={handleSubmit}>
                     <div className='row'>
                         <div className='form-group col'>
                             <label htmlFor='name' className='text-light' >Name</label>
