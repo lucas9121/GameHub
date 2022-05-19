@@ -27,7 +27,7 @@ export default function Edit({refresh ,setRefresh}) {
     const handleSubmit = async (event) => {
         event.preventDefault()
         try {
-            const response = await fetch(`/api/games/${id}`, {
+            await fetch(`/api/games/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json',
