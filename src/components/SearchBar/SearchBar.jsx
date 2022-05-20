@@ -2,7 +2,7 @@ import { useRef, useState } from "react"
 import { useNavigate, Link } from "react-router-dom"
 import styles from './SearchBar.module.css'
 
-export default function SearchBar({games, user, searchClk, setSearchClk}) {
+export default function SearchBar({games, user}) {
     const searchInput = useRef(null)
     const [results, setResults] = useState([])
     const navigate = useNavigate()
