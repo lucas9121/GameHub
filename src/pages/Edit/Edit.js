@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react"
 import { useParams, Link, useNavigate} from "react-router-dom"
+import styles from './Edit.module.css'
 
 
 export default function Edit({refresh ,setRefresh}) {
@@ -59,33 +60,33 @@ export default function Edit({refresh ,setRefresh}) {
     }
 
     return (
-        <main className="Edit">
+        <main className={styles.Edit}>
             <h2>Edit {game.name} </h2>
             <Link className="sec" to={`/${id}`} >Back</Link>
             <br />
             <br />
-            <form className='edit-form' onSubmit={handleSubmit}  method="POST">
-                <div className='row'>
-                    <div className='form-group col'>
+            <form className='edit-form' onSubmit={handleSubmit} >
+                <div className={styles.FirstRow}>
+                    <div>
                         <label htmlFor='name' className='text-primary'>Name</label>
-                        <input name="name" type="text" ref={name} defaultValue={game.name} className='form-control form-control-sm' id='name'/>
+                        <input name="name" type="text" ref={name} defaultValue={game.name} id='name'/>
                     </div>
-                    <div className='form-group col'>
+                    <div>
                         <label htmlFor="price" className='text-primary'>Price</label>
-                        <input name="price" type="number" ref={price} defaultValue={game.price} className='form-control form-control-sm' id='price'/>
+                        <input name="price" type="number" ref={price} defaultValue={game.price} id='price'/>
                     </div>
-                    <div className='form-group col'>
+                    <div>
                         <label htmlFor="qty" className='text-primary'>Quantity</label>
-                        <input name="qty" type="number" ref={qty} defaultValue={game.qty} className='form-control form-control-sm' id='qty'/>
+                        <input name="qty" type="number" ref={qty} defaultValue={game.qty} id='qty'/>
                     </div>
-                    <div className='form-group col'>
+                    <div>
                         <label htmlFor="img" className='text-primary'>Image</label>
-                        <input name="img" type="url" ref={img} defaultValue={game.img} className='form-control form-control-sm' id='url'/>
+                        <input name="img" type="url" ref={img} defaultValue={game.img} id='url'/>
                     </div>
                 </div>
-                <div className='form-group'>
+                <div className={styles.SecondRow}>
                     <label htmlFor="description" className='text-primary'>  Description</label>
-                    <textarea name="description" ref={description} defaultValue={game.description} id="description description-box" maxLength={'500'} className='form-control' cols="40" rows="3"></textarea>
+                    <textarea name="description" ref={description} defaultValue={game.description} id="description description-box" maxLength={'500'} cols="40" rows="3"></textarea>
                 </div>
                 <input className='btn yes-btn' type="submit" value="Edit Game" />
             </form>
