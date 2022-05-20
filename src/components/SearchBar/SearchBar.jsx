@@ -21,6 +21,7 @@ export default function SearchBar({games}) {
         }
     }
     
+    // input will determine which games get pushed to the array once it is looped through
     const handleChange = () => {
         const arr = []
         games.forEach((game) => {
@@ -43,19 +44,27 @@ export default function SearchBar({games}) {
                     <input type='search' style={results.length > 0 ? {borderRadius: '15px 15px 0 0', borderBottom: '2px solid'} : null} name="Search" ref={searchInput} onChange={handleChange} placeholder="Search..."/>
                     <input type='submit' value='Search' />
                 </form>
+                <div>
                 {
                     results.map((result, idx) => {
                         return(
-                            idx === results.length - 1 ?
-                            <div key={idx} style={{borderRadius: '0 0 15px 15px'}}>
+                            // if the user account is developer
+                            user && user.account === 'developer' ?
+                            // and the game was made by developer
+                            result.dev === user.name ?
+                            <div key={idx}>
                                 <Link to={`/${result._id}`} >{result.name} </Link>
-                            </div> :
+                            </div>: 
+                            // else, don't show anything
+                            null :
+                            // else (no user, or user is not a developer), show everything
                             <div key={idx}>
                                 <Link to={`/${result._id}`} >{result.name} </Link>
                             </div>
                         )
                     })
                 }
+                </div>
             </div>
         </div>
     )
