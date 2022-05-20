@@ -22,12 +22,20 @@ body {
     height: fit-content;
 }
 
+.btn[disabled] {
+    cursor: auto;
+}
+
 .main-btn {
     background-color: rgb(0 123 255);
 }
 
 .main-btn:hover {
     background-color: rgb(0 86 179);
+}
+
+.main-btn[disabled]:hover{
+    background-color: rgb(0 123 255);
 }
 
 .sec-btn {
@@ -38,6 +46,10 @@ body {
     background-color: rgb(25 149 168);
 }
 
+.sec-btn[disabled]:hover {
+    background-color: rgb(23, 162, 184);
+}
+
 .yes-btn {
     background-color: rgb(40 167 69);
 }
@@ -46,12 +58,20 @@ body {
     background-color: rgb(43 161 70);
 }
 
+.yes-btn[disabled]:hover {
+    background-color: rgb(40 167 69);
+}
+
 .no-btn {
     background-color: rgb(220 53 69);
 }
 
 .no-btn:hover {
     background-color: rgb(200 35 51);
+}
+
+.no-btn[disabled]:hover {
+    background-color: rgb(220 53 69);
 }
 
 
