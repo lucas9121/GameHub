@@ -71,16 +71,6 @@ async function update(req, res) {
     }
 }
 
-async function edit(req, res) {
-    try{
-        const id = await req.params.id
-        const game = await Games.findById(id)
-        res.status(200).json(game)
-    } catch(e) {
-        res.status(400).json(e)
-    }
-}
-
 async function show(req, res) {
     try{
         const id = await req.params.id
