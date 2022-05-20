@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from "react"
-import { useParams, Link } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import styles from './Show.module.css'
 
 export default function Show({user}) {
     const {id} = useParams()
+    const navigate = useNavigate()
     const [game, setGame] = useState({})
     const [reviews, setReviews] = useState([])
 
@@ -131,11 +132,11 @@ export default function Show({user}) {
 
     return(
         <main className={styles.show}>
+            <h2>{game.name} </h2>
             {
                 // edit game button for developer user
-                user && user.account === 'developer' ? <Link to={`/${game._id}/edit`} >Edit</Link> : null
+                user && user.account === 'developer' ? <button className="btn yes-btn" onClick={() => navigate(`/${game._id}/edit`)} >Edit</button> : null
             }
-            <h2>{game.name} </h2>
             <img src={game.img} alt={game.name} max-width="700" max-height="700" />
             <div className={styles.purchase}>
                 <div className={styles.title}>
@@ -144,7 +145,12 @@ export default function Show({user}) {
                 <p>Quantity: {game.qty} </p>
                 <div>
                     <p>Price: {game.price}</p>
-                    <button className="btn sec-btn">Add to Cart</button>
+                    {
+                        // disables add to cart button for developer account
+                        user && user.account === 'developer' ?
+                        <button className="btn sec-btn" disabled>Add to Cart</button> :
+                        <button className="btn sec-btn">Add to Cart</button>
+                    }
                 </div>
             </div>
             <div className={styles.about}>
@@ -198,9 +204,9 @@ export default function Show({user}) {
                                 return( 
                                     // opens the edit form instead of element the matches it in the array
                                     editBtn && index === idx ?
-                                    <div key={idx} className="form-group">
+                                    <div key={idx}>
                                         <small>{review.name}</small>
-                                        <form onSubmit={handleEditClick} method="POST">
+                                        <form onSubmit={handleEditClick}>
                                             <fieldset className={styles.new}>
                                                 <textarea name="description" ref={description} defaultValue={review.description} onChange={handleChange} maxLength={'300'} cols="40" rows="3"></textarea>
                                                 <div>
@@ -212,7 +218,7 @@ export default function Show({user}) {
                                         </form>
                                     </div> :
                                     // shows all of the reviews
-                                    <div key={idx} className="form-group">
+                                    <div key={idx}>
                                         <small>{review.name}</small>
                                         <p>{review.description} </p>
                                         <div>
