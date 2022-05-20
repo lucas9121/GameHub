@@ -37,7 +37,8 @@
 }
 
 .SearchBar > div {
-    height: 200px;
+    max-height: 200px;
+    height: auto;
     overflow: scroll;
     border-radius: 0 0 15px 15px;
 }
