@@ -6,7 +6,6 @@ module.exports = {
     create,
     Delete,
     update,
-    edit,
     show
 }
 
