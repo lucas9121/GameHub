@@ -63,7 +63,8 @@ export default function New({refresh, setRefresh, user}){
                         <label htmlFor="description">  Description</label>
                         <textarea name="description" id="description description-box" ref={description} cols="40" rows="3" required></textarea>
                     </div>
-                    <input className='btn btn-yes' type="submit" value="Create Game" />
+                    <input className='btn yes-btn' type="submit" value="Create Game" />
+                    <button className="btn no-btn" onClick={() => navigate('/')}>Cancel</button>
                 </form>
         </main>
     )
