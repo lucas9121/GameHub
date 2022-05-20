@@ -16,7 +16,7 @@ export default function Edit({refresh ,setRefresh}) {
     useEffect(() => {
         (async () => {
             try {
-                const response = await fetch(`/api/games/${id}/edit`)
+                const response = await fetch(`/api/games/${id}`)
                 const data = await response.json()
                 setGame(data)
             } catch(e) {
