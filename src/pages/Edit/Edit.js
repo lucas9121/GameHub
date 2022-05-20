@@ -89,8 +89,8 @@ export default function Edit({refresh ,setRefresh}) {
                     <textarea name="description" ref={description} defaultValue={game.description} id="description description-box" maxLength={'500'} cols="40" rows="3"></textarea>
                 </div>
                 <input className='btn yes-btn' type="submit" value="Edit Game" />
+                <button className="btn no-btn" onClick={handleDelete} >Delete</button>
             </form>
-            <button className="btn no-btn" onClick={handleDelete} >Delete</button>
         </main>
         
     )
