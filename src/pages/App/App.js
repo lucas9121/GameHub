@@ -57,7 +57,7 @@ export default function App(){
                 showSignin &&
                 <AuthPage user={user} setUser={setUser} signClk={signClk} setSignClk={setSignClk} setShowSignin={setShowSignin} setActClk={setActClk} setSearchClk={setSearchClk}/>
             }
-            <SearchBar games={games} searchClk={searchClk} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk}/>
+            <SearchBar user={user} games={games} searchClk={searchClk} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk}/>
             <Routes>
                 <Route path='/' element={<Home games={games} user={user} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk}/>} />
                 <Route path='/new' element={<New user={user} refresh={refresh} setRefresh={setRefresh} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk}/>} />
