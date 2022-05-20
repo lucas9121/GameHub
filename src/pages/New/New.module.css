@@ -10,12 +10,12 @@
 .FirstRow {
     display: flex;
     gap: 6%;
+    padding-bottom: 10px;
 }
 
 .FirstRow > div {
     display: flex;
     flex-direction: column;
-    border: dotted;
     gap: 5px;
     width: 20%;
 }
@@ -34,6 +34,7 @@
 .SecondRow {
     display: flex;
     flex-direction: column;
+    gap: 5px;
 }
 
 .SecondRow > textarea {
