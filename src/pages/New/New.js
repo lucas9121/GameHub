@@ -1,5 +1,6 @@
 import { useRef} from "react"
 import { useNavigate } from "react-router-dom"
+import styles from './New.module.css'
 
 export default function New({refresh, setRefresh, user}){
     const name = useRef(null)
@@ -37,40 +38,32 @@ export default function New({refresh, setRefresh, user}){
     }
     
     return (
-        <main className="New">
+        <main className={styles.New}>
             <h2>New Game</h2>
-            <form className='needs-validation' onSubmit={handleSubmit}>
-                    <div className='row'>
-                        <div className='form-group col'>
-                            <label htmlFor='name' className='text-light' >Name</label>
-                            <input name="name" type="text" ref={name} className='form-control form-control-sm' id='name' required/>
+            <form onSubmit={handleSubmit}>
+                    <div className={styles.FirstRow}>
+                        <div>
+                            <label htmlFor='name' >Name</label>
+                            <input name="name" type="text" ref={name} id='name' required/>
                         </div>
-                        <div className='form-group col'>
-                            <label htmlFor="price" className='text-light'>Price</label>
-                            <input name="price" type="number" ref={price} className='form-control form-control-sm' id='price' required/>
-                            <div id='price' className="valid-feedback">Looks good!</div>
-                            <div id='price' className="invalid-feedback">Please provide price</div>
+                        <div>
+                            <label htmlFor="price">Price</label>
+                            <input name="price" type="number" ref={price} id='price' required/>
                         </div>
-                        <div className='form-group col'>
-                            <label htmlFor="qty" className='text-light'>Quantity</label>
-                            <input name="qty" type="number" ref={qty} defaultValue='100' className='form-control form-control-sm' id='qty' required/>
-                            <div id='qty' className="valid-feedback">Looks good!</div>
-                            <div id='qty' className="invalid-feedback">Please provide quantity</div>
+                        <div>
+                            <label htmlFor="qty">Quantity</label>
+                            <input name="qty" type="number" ref={qty} defaultValue='100' id='qty' required/>
                         </div>
-                        <div className='form-group col'>
-                            <label htmlFor="img" className='text-light'>Image</label>
-                            <input name="img" type="url" ref={img} className='form-control form-control-sm' id='url' required/>
-                            <div id='url' className="valid-feedback">Looks good!</div>
-                            <div id='url' className="invalid-feedback">Please provide url</div>
+                        <div>
+                            <label htmlFor="img">Image</label>
+                            <input name="img" type="url" ref={img} id='url' required/>
                         </div>
                     </div>
-                    <div className='form-group'>
-                        <label htmlFor="description" className='text-light'>  Description</label>
-                        <textarea name="description" id="description description-box" ref={description} className='form-control' cols="40" rows="3" required></textarea>
-                        <div id='description' className="valid-feedback">Looks good!</div>
-                        <div id='description' className="invalid-feedback">Please provide description</div>
+                    <div className={styles.SecondRow}>
+                        <label htmlFor="description">  Description</label>
+                        <textarea name="description" id="description description-box" ref={description} cols="40" rows="3" required></textarea>
                     </div>
-                    <input className='btn btn-outline-success' type="submit" value="Create Game" />
+                    <input className='btn btn-yes' type="submit" value="Create Game" />
                 </form>
         </main>
     )
