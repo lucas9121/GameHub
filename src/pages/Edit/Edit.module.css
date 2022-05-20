@@ -1,0 +1,62 @@
+button{
+    color: white;
+}
+
+.New {
+    flex: 13;
+    color: white;
+}
+
+.New > h2 {
+    text-align: center;
+}
+
+.New > form > input {
+    margin-right: 20px;
+    color: white;
+}
+
+.New > form > button {
+    color: white;
+}
+
+.FirstRow {
+    display: flex;
+    gap: 6%;
+    padding-bottom: 10px;
+}
+
+.FirstRow > div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 20%;
+}
+
+.FirstRow > div > input {
+    background-color: rgb(52, 58, 64, .8);
+    color: white;
+    font-size: 1rem;
+    padding: 3px;
+    border: none;
+    border-radius: 5px;
+    outline: inset;
+    margin-bottom: 10px;
+}
+
+.SecondRow {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.SecondRow > textarea {
+    background-color: rgb(52, 58, 64, .8);
+    color: white;
+    font-size: 1rem;
+    padding: 3px;
+    border: none;
+    border-radius: 5px;
+    outline: inset;
+    margin-bottom: 10px;
+}
