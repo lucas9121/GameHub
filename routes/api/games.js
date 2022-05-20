@@ -19,9 +19,6 @@ router.put('/:id', gamesCtrl.update)
 // DELETE /api/games/:id
 router.delete('/:id', gamesCtrl.Delete)
 
-//GET /api/games/:id/edit
-router.get('/:id/edit', gamesCtrl.edit)
-
 //Get /api/games/:id
 router.get('/:id', gamesCtrl.show)
 
