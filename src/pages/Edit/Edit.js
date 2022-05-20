@@ -61,7 +61,7 @@ export default function Edit({refresh ,setRefresh}) {
     return (
         <main className="Edit">
             <h2>Edit {game.name} </h2>
-            <Link to={`/${id}`} >Back</Link>
+            <Link className="sec" to={`/${id}`} >Back</Link>
             <br />
             <br />
             <form className='edit-form' onSubmit={handleSubmit}  method="POST">
@@ -87,9 +87,9 @@ export default function Edit({refresh ,setRefresh}) {
                     <label htmlFor="description" className='text-primary'>  Description</label>
                     <textarea name="description" ref={description} defaultValue={game.description} id="description description-box" maxLength={'500'} className='form-control' cols="40" rows="3"></textarea>
                 </div>
-                <input className='btn btn-outline-success' type="submit" value="Edit Game" />
+                <input className='btn yes-btn' type="submit" value="Edit Game" />
             </form>
-            <button onClick={handleDelete} >Delete</button>
+            <button className="btn no-btn" onClick={handleDelete} >Delete</button>
         </main>
         
     )
