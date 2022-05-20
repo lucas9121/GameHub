@@ -1,9 +1,8 @@
 import { useRef, useState } from "react"
-import { BsBorderBottom } from "react-icons/bs"
 import { useNavigate, Link } from "react-router-dom"
 import styles from './SearchBar.module.css'
 
-export default function SearchBar({games, user}) {
+export default function SearchBar({games, user, searchClk, setSearchClk}) {
     const searchInput = useRef(null)
     const [results, setResults] = useState([])
     const navigate = useNavigate()
@@ -13,6 +12,7 @@ export default function SearchBar({games, user}) {
         if(results.length === 1){
             // results is an array of objects
             navigate(`/${results[0]._id}`)
+            // empties the search result div
             setResults([])
             searchInput.current.value = ''
         } else {
@@ -53,13 +53,14 @@ export default function SearchBar({games, user}) {
                             // and the game was made by developer
                             result.dev === user.name ?
                             <div key={idx}>
-                                <Link to={`/${result._id}`} >{result.name} </Link>
+                                <Link onClick={() => setResults([])} to={`/${result._id}`} >{result.name} </Link>
                             </div>: 
                             // else, don't show anything
                             null :
                             // else (no user, or user is not a developer), show everything
                             <div key={idx}>
-                                <Link to={`/${result._id}`} >{result.name} </Link>
+                                {/* onClick will empty the div and erase any text inside search bar */}
+                                <Link onClick={() => {setResults([]); searchInput.current.value = ''}} to={`/${result._id}`} >{result.name} </Link>
                             </div>
                         )
                     })
