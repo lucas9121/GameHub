@@ -37,6 +37,12 @@
 }
 
 .SearchBar > div {
+    height: 200px;
+    overflow: scroll;
+    border-radius: 0 0 15px 15px;
+}
+
+.SearchBar > div > div {
     display: block;
     padding: 5px 10px;
     font-size: 1.3rem;
@@ -44,17 +50,17 @@
 
 }
 
-.SearchBar > div:hover {
+.SearchBar > div > div:hover {
     background-color: rgb(61, 69, 77, 0.8);
 }
 
-.SearchBar > div > a {
+.SearchBar > div > div > a {
     color: rgb(203 211 218);
     text-decoration: none;
     display: flex;
 }
 
-.SearchBar:focus-visible > div {
+.SearchBar:focus-visible > div > div {
     display: none;
 }
 
