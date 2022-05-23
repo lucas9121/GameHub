@@ -169,7 +169,7 @@ export default function Show({user}) {
                             <button className="btn sec-btn" disabled> Write a review</button>
                             <small>sign in first</small>
                         </div> :
-                        // if there is a user and the account is admin or gamer and they pressed the write a review button
+                        // if there is a user, and the account is admin or gamer and they pressed the write a review button
                         user.account !== 'developer' && reviewBtn ?
                             <form onSubmit={handleSubmit} method="POST">
                                 <fieldset className={styles.new}>
