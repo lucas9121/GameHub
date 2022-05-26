@@ -64,7 +64,7 @@ export default function App(){
                 <Route path='/account/:id' element={<MyAccount user={user} setUser={setUser} setUserDlt={setUserDlt} refresh={refresh} setRefresh={setRefresh} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk} />} />
                 <Route path='/cart' element={<Cart user={user} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk} />} />
                 <Route path='/:id/edit' element={<Edit refresh={refresh} setRefresh={setRefresh} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk} />} />
-                <Route path='/:id' element={<Show user={user} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk}/>} />
+                <Route path='/:id' element={<Show user={user} refresh={refresh} setRefresh={setRefresh} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk}/>} />
             </Routes>
             <Footer />
         </main>
