@@ -56,10 +56,10 @@ export default function Home({games, user}) {
         <main className={styles.main}>
         {
             newArr.sort((a, b) => {
-                if(a.name.toUpperCase() > b.name.toUpperCase()){
-                    return 1
-                }
-                if(a.name.toUpperCase() < b.name.toUpperCase()){
+                // if(a.approved === 'review'){
+                //     return 1
+                // }
+                if(b.approved === 'review'){
                     return -1
                 }
                 return 0
@@ -82,7 +82,15 @@ export default function Home({games, user}) {
     //gamer account
     <main className={styles.main}>
     {
-        games.map((game) => {
+        newArr.sort((a, b) => {
+            if(a.name.toUpperCase() > b.name.toUpperCase()){
+                return 1
+            }
+            if(a.name.toUpperCase() < b.name.toUpperCase()){
+                return -1
+            }
+            return 0
+        }).reverse().map((game) => {
             return(
                 // if admin approved the game display it
                 game.approved === 'yes' ?
