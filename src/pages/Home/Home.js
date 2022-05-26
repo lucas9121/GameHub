@@ -84,6 +84,8 @@ export default function Home({games, user}) {
     {
         games.map((game) => {
             return(
+                // if admin approved the game display it
+                game.approved === 'yes' ?
                 <div className={styles.sub} style={game.qty > 0 ? {border: 'solid green'} : {border: 'solid red'}}>
                     <Link style={{backgroundImage: `url(${game.img})`}} to={`/${game._id}`} alt={game.name} ></Link>
                     <div className={styles.banner}>
@@ -93,7 +95,7 @@ export default function Home({games, user}) {
                             {game.qty > 0 ? <p style={{color: 'green', fontSize: 'small'}}>Available</p> : <p style={{color: 'red', fontSize: 'small'}}>Sold Out</p> }
                         </div>
                     </div>
-                </div> 
+                </div> : null
             )
         })
     }
