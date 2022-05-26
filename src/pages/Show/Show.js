@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import styles from './Show.module.css'
 
-export default function Show({user}) {
+export default function Show({user, refresh, setRefresh}) {
     const {id} = useParams()
     const navigate = useNavigate()
     const [game, setGame] = useState({})
@@ -40,6 +40,29 @@ export default function Show({user}) {
             }
         })() 
     }, [render, id])
+
+
+    // changes the approved status of a game
+    const handleApproved = async (event, response) => {
+        event.preventDefault()
+        try {
+            await fetch(`/api/games/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type':'application/json'
+                },
+                body: JSON.stringify({
+                    approved: response
+                })
+            })
+        } catch(e) {
+            console.log(e)
+        } finally {
+            setRefresh(!refresh)
+            navigate('/')
+        }
+    }
 
     // adds user name and comment to the review hook
     const handleChange = () => {
@@ -135,7 +158,17 @@ export default function Show({user}) {
             <h2>{game.name} </h2>
             {
                 // edit game button for developer user
-                user && user.account === 'developer' ? <button className="btn yes-btn" onClick={() => navigate(`/${game._id}/edit`)} >Edit</button> : null
+                user && user.account === 'developer' ? <button className="btn yes-btn" onClick={() => navigate(`/${game._id}/edit`)} >Edit</button> : 
+                // review buttons for admin user
+                user && user.account === 'admin' ? 
+                <>
+                <h5 style={{marginBottom: '10px'}}>Approved?</h5>
+                <rndm style={{display: 'flex', marginBottom: '10px', gap: '5px'}}>
+                    <button className="btn yes-btn" onClick={(evt) => {handleApproved(evt, 'yes')}}>Yes</button>
+                    <button className="btn no-btn" onClick={(evt) => {handleApproved(evt, 'no')}}>No</button>
+                </rndm> 
+                </>:
+                null
             }
             <img src={game.img} alt={game.name} max-width="700" max-height="700" />
             <div className={styles.purchase}>
