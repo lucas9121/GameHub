@@ -27,6 +27,11 @@ export default function Show({user, refresh, setRefresh}) {
     const [dltBtn, setDltBtn] = useState(false)
 
 
+    //opens admin div box
+    const [noBtn, setNoBtn] = useState(false)
+    const noReason = useRef(null)
+
+
     // When page mounts, fetch the individual game from database
     useEffect(() => {
         (async () => {
@@ -46,19 +51,37 @@ export default function Show({user, refresh, setRefresh}) {
     const handleApproved = async (event, response) => {
         event.preventDefault()
         try {
-            await fetch(`/api/games/${id}`, {
-                method: 'PUT',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type':'application/json'
-                },
-                body: JSON.stringify({
-                    approved: response
+            if(response === 'yes'){
+                // if admin clicked yes
+                await fetch(`/api/games/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type':'application/json'
+                    },
+                    body: JSON.stringify({
+                        approved: response,
+                        reason: ''
+                    })
                 })
-            })
+            } else {
+                // if admin clicked no
+                await fetch(`/api/games/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type':'application/json'
+                    },
+                    body: JSON.stringify({
+                        approved: response,
+                        reason: noReason.current.value
+                    })
+                })
+            }
         } catch(e) {
             console.log(e)
         } finally {
+            setNoBtn(false)
             setRefresh(!refresh)
             navigate('/')
         }
@@ -157,18 +180,38 @@ export default function Show({user, refresh, setRefresh}) {
         <main className={styles.show}>
             <h2>{game.name} </h2>
             {
-                // edit game button for developer user
-                user && user.account === 'developer' ? <button className="btn yes-btn" onClick={() => navigate(`/${game._id}/edit`)} >Edit</button> : 
+                // Developer User and Admin user buttons and messages
+                // edit game button for developer user if game wasn't rejected
+                user && user.account === 'developer' && game.approved !== 'no' ? 
+                <button className="btn yes-btn" onClick={() => navigate(`/${game._id}/edit`)} >Edit</button> :
+                // Explanation for developer and edit button if game was rejected by admin
+                user && user.account === 'developer' && game.approved === 'no' ?
+                <div>
+                    <p>{game.reason}</p>
+                    <button className="btn yes-btn" onClick={() => navigate(`/${game._id}/edit`)} >Edit</button> 
+                </div> :
                 // review buttons for admin user
                 user && user.account === 'admin' ? 
                 <>
                 <h5 style={{marginBottom: '10px'}}>Approved?</h5>
                 <rndm style={{display: 'flex', marginBottom: '10px', gap: '5px'}}>
                     <button className="btn yes-btn" onClick={(evt) => {handleApproved(evt, 'yes')}}>Yes</button>
-                    <button className="btn no-btn" onClick={(evt) => {handleApproved(evt, 'no')}}>No</button>
+                    <button className="btn no-btn" onClick={(evt) => {setNoBtn(true)}}>No</button>
                 </rndm> 
                 </>:
                 null
+            }
+            {
+                // if admin didn't approbe the game show the text box to give reasons why
+                noBtn ?
+                <form onSubmit={(evt) => {handleApproved(evt, 'no')}}>
+                    <label>Explain what needs to be changed</label>
+                    <textarea cols="40" rows="3" ref={noReason} required></textarea>
+                    <div>
+                        <button type="submit" className="btn yes-btn">Submit</button>
+                        <button className="btn no-btn" onClick={() => {setNoBtn(false)}}>Cancel</button>
+                    </div>
+                </form> : null
             }
             <img src={game.img} alt={game.name} max-width="700" max-height="700" />
             <div className={styles.purchase}>
