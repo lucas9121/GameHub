@@ -8,7 +8,7 @@ export default function AuthPage({ setUser, setShowSignin, setActClk }) {
 
 
   return (
-    <main className={styles.AuthPage}>
+    <div className={styles.AuthPage}>
         <div>
           <div className={styles.Signin}>
             <h3 style={showLogin ? {border: 'solid rgb(0 123 255)'} : null} onClick={() => setShowLogin(true)}> LOG IN</h3>
@@ -17,6 +17,6 @@ export default function AuthPage({ setUser, setShowSignin, setActClk }) {
           {/* changes the div display */}
             {showLogin ? <LoginForm setUser={setUser} setShowSignin={setShowSignin} setActClk={setActClk} /> : <SignUpForm setUser={setUser} setShowSignin={setShowSignin} setActClk={setActClk}  />}
         </div> 
-    </main>
+    </div>
   )
 }
