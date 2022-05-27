@@ -9,11 +9,14 @@ export default function Home({games, user}) {
     console.log(newArr)
     return(
         // null error prevention
+        //if nobody is logged in
         !user ?
         <main className={styles.main}>
             {
                 games.map((game) => {
                     return(
+                        // if admin approved the game display it
+                        game.approved === 'yes' ?
                         <div className={styles.sub} style={game.qty > 0 ? {border: 'solid green'} : {border: 'solid red'}}>
                             <Link style={{backgroundImage: `url(${game.img})`}} to={`/${game._id}`} alt={game.name} ></Link>
                             <div className={styles.banner}>
@@ -23,7 +26,7 @@ export default function Home({games, user}) {
                                     {game.qty > 0 ? <p style={{color: 'green', fontSize: 'small'}}>Available</p> : <p style={{color: 'red', fontSize: 'small'}}>Sold Out</p> }
                                 </div>
                             </div>
-                        </div> 
+                        </div> : null
                     )
                 })
             }
@@ -36,7 +39,7 @@ export default function Home({games, user}) {
                     return(
                         // return only developer games
                         user.name === game.dev ?
-                        <div className={styles.sub} style={game.qty > 0 ? {border: 'solid green'} : {border: 'solid red'}}>
+                        <div className={styles.sub} style={game.approved === 'review' ? {border: 'solid gold'} : game.approved === 'yes' && game.qty > 0 ? {border: 'solid green'} : {border: 'solid red'}}>
                             <Link style={{backgroundImage: `url(${game.img})`}} to={`/${game._id}`} alt={game.name} ></Link>
                             <div className={styles.banner}>
                                 <h2>{game.name} </h2>
