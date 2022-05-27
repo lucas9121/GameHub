@@ -57,7 +57,16 @@ export default function SearchBar({games, user}) {
                             </div>: 
                             // else, don't show anything
                             null :
-                            // else (no user, or user is not a developer), show everything
+                            // if no user or user is gamer
+                            !user || user && user.account === 'gamer' ?
+                            // and game was approved by admin
+                            result.approved === 'yes' ?
+                            <div key={idx}>
+                                <Link onClick={() => setResults([])} to={`/${result._id}`} >{result.name} </Link>
+                            </div>: 
+                            // else, don't show anything
+                            null :
+                            // else (admin account), show everything
                             <div key={idx}>
                                 {/* onClick will empty the div and erase any text inside search bar */}
                                 <Link onClick={() => {setResults([]); searchInput.current.value = ''}} to={`/${result._id}`} >{result.name} </Link>
