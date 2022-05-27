@@ -32,7 +32,7 @@ async function login(req, res) {
 async function index(req, res) {
   try{
       const users = await User.find({})
-      res.status(200).json(users)
+      res.status(200).json(createJWT(users))
   } catch(e) {
       res.status(400).json(e)
   }
