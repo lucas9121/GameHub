@@ -1,4 +1,4 @@
-# [Gamehub 2](https://gamehub-react.herokuapp.com/)
+# [Gamehub](https://gamehub-react.herokuapp.com/)
 
 ## Description
 
