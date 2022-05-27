@@ -38,6 +38,7 @@ export default class SignUpForm extends Component {
         this.props.setUser(user);
         // closes sign in div
         this.props.setShowSignin(false)
+        this.props.setActClk(false)
       } catch {
         this.setState({ error: 'Sign Up Failed - Try Again' });
       }
