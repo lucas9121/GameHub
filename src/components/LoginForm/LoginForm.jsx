@@ -2,7 +2,7 @@ import { useState } from 'react';
 import * as usersService from '../../utilities/users-service';
 import styles from './LoginForm.module.css'
 
-export default function LoginForm({ setUser, setShowSignin }) {
+export default function LoginForm({ setUser, setShowSignin, setActClk }) {
     const [credentials, setCredentials] = useState({
       email: '',
       password: ''
@@ -21,6 +21,7 @@ export default function LoginForm({ setUser, setShowSignin }) {
         setUser(user);
         // close the sign in div
         setShowSignin(false)
+        setActClk(false)
       } catch {
         setError('Log In Failed - Try Again');
       }
