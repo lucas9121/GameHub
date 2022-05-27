@@ -2,11 +2,13 @@ import { logOut } from '../../utilities/users-service';
 import {useNavigate} from "react-router-dom"
 import styles from './UserLogOut.module.css'
 
-export default function UserLogOut({ setUser }) {
+export default function UserLogOut({ setUser, setActClk, setSearchClk }) {
   const navigate = useNavigate()
     function handleLogOut() {
       logOut();
       setUser(null);
+      setActClk(false)
+      setSearchClk(false)
       navigate('/')
     }
 
