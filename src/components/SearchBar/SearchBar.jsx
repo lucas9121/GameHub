@@ -1,11 +1,19 @@
-import { useRef, useState } from "react"
+import { useRef, useState, useEffect } from "react"
 import { useNavigate, Link } from "react-router-dom"
 import styles from './SearchBar.module.css'
 
-export default function SearchBar({games, user}) {
+export default function SearchBar({games, user, searchClk, setSearchClk}) {
     const searchInput = useRef(null)
     const [results, setResults] = useState([])
     const navigate = useNavigate()
+
+    useEffect(() => {
+        if(!searchClk){
+            setResults([])
+        } else {
+            handleChange()
+        }
+    }, [searchClk])
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -27,6 +35,7 @@ export default function SearchBar({games, user}) {
         games.forEach((game) => {
             if(game.name.toLowerCase().includes(searchInput.current.value)) {
                 arr.push(game)
+                setSearchClk(true)
                 setResults(arr)
             } 
             if(searchInput.current.value === ''){
@@ -41,7 +50,7 @@ export default function SearchBar({games, user}) {
             {/* this div needs to have absolute position for z-index to work. If margin/padding isn't set here it follows flexbox rule */}
             <div className={styles.SearchBar}>
                 <form onSubmit={handleSubmit} autoComplete="off">
-                    <input type='search' style={results.length > 0 ? {borderRadius: '15px 15px 0 0', borderBottom: '2px solid'} : null} name="Search" ref={searchInput} onChange={handleChange} placeholder="Search..."/>
+                    <input type='search' style={results.length > 0 ? {borderRadius: '15px 15px 0 0', borderBottom: '2px solid'} : null} name="Search" ref={searchInput} onClick={() => setSearchClk(true)} onChange={handleChange} placeholder="Search..."/>
                     <input type='submit' value='Search' />
                 </form>
                 <div>
