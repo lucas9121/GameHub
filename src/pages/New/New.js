@@ -24,7 +24,8 @@ export default function New({refresh, setRefresh, user}){
                     img: img.current.value,
                     qty: qty.current.value,
                     description: description.current.value,
-                    dev: user.name
+                    dev: user.name,
+                    approved: 'review'
                 })
             })
             const data = await response.json()
