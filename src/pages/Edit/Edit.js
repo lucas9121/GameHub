@@ -39,7 +39,8 @@ export default function Edit({refresh ,setRefresh}) {
                     price: price.current.value,
                     qty: qty.current.value,
                     img: img.current.value,
-                    description: description.current.value
+                    description: description.current.value,
+                    approved: 'review'
                 })
             })
         } catch(e) {
