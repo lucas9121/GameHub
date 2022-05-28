@@ -24,10 +24,6 @@ export default function Show({user, refresh, setRefresh}) {
     // checks the index number of the review in the array
     const [index, setIndex] = useState(0)
 
-    // useEffect watches it to see if should run the delete function
-    const [dltBtn, setDltBtn] = useState(false)
-
-
     //opens admin div box
     const [noBtn, setNoBtn] = useState(false)
     const noReason = useRef(null)
@@ -88,7 +84,7 @@ export default function Show({user, refresh, setRefresh}) {
         }
     }
 
-    // adds user name and comment to the review hook
+    // adds user info and comment to the review hook
     const handleChange = () => {
         if(user.acccount === 'admin'){
             setNewReview({
@@ -161,65 +157,19 @@ export default function Show({user, refresh, setRefresh}) {
         }
     }
 
-    // Deletes existing review if hook is set to true
-    useEffect(() => {
-        if(dltBtn){
-            // if(user.account === 'admin'){
-            //     console.log('delete')
-            //     console.log(reviews[index])
-            //     reviews.splice(index, 1, {
-            //         _id: -1,
-            //         name: "Admin",
-            //         description: "Message was removed by Admin"
-            //     })
-            //     setDltBtn(false)
-            // } else {
-            //     console.log('don not delete')
-            //     setDltBtn(false)
-            // }
-            if(user.account === 'admin'){
-                reviews.splice(index, 1, {
-                    _id: 0,
-                    username: "Admin",
-                    description: "Message was removed by Admin"
-                })
-                console.log('admin is logged in')
-            } else {
-                reviews.splice(index, 1)
-                console.log('not an admin')
-            }
-            try {
-                fetch(`/api/games/${id}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type':'application/json'
-                    },
-                    body: JSON.stringify({
-                        reviews: reviews
-                    })
-                })
-                setRender(!render)
-                setDltBtn(false)
-                console.log('comment deleted')
-            }catch(e){
-                console.log(e)
-            }
-        }
-    }, [dltBtn])
-
+    // Deletes existing review
     const handleDelete = (event, idx) => {
         event.preventDefault()
         if(user.account === 'admin'){
+            // replaces existing review with admin deleted message
             reviews.splice(idx, 1, {
                 _id: 0,
                 username: "Admin",
                 description: "Message was removed by Admin"
             })
-            console.log('admin is logged in')
+            // person who wrote the review is deleting the review
         } else {
             reviews.splice(idx, 1)
-            console.log('not an admin')
         }
         try {
             fetch(`/api/games/${id}`, {
@@ -233,8 +183,6 @@ export default function Show({user, refresh, setRefresh}) {
                 })
             })
             setRender(!render)
-            // setDltBtn(false)
-            console.log('comment deleted')
         }catch(e){
             console.log(e)
         }
@@ -379,7 +327,7 @@ export default function Show({user, refresh, setRefresh}) {
                                         <div>
                                             {/* gives the index number of the element to the ternary above and then tells it to open the form */}
                                             { user && user.account === "gamer" && user._id === review._id ? <button className="btn main-btn" onClick={() => {setEditBtn(true); setIndex(idx)}} >Edit</button> : null } 
-                                            { user && user.account === "gamer" && user._id === review._id ? <button className="btn no-btn" onClick={(evt) => {setDltBtn(true); setIndex(idx) }}> Delete </button> : null } 
+                                            { user && user.account === "gamer" && user._id === review._id ? <button className="btn no-btn" onClick={(evt) => {handleDelete(evt, idx)}}> Delete </button> : null } 
                                             { user && user.account === "admin" && review._id !== 0 ? <button className="btn no-btn" onClick={(evt) => {handleDelete(evt, idx)}}> Remove </button> : null } 
                                         </div>
 
