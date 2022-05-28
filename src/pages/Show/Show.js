@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import GameReviews from "../../components/GameReviews/GameReviews"
 import GameAbout from "../../components/GameAbout/GameAbout"
+import GamePurchase from "../../components/GamePurchase/GamePurchase"
 import styles from './Show.module.css'
 
 export default function Show({user, refresh, setRefresh}) {
@@ -127,21 +128,7 @@ export default function Show({user, refresh, setRefresh}) {
                 </form> : null
             }
             <img src={game.img} alt={game.name} max-width="700" max-height="700" />
-            <div className={styles.purchase}>
-                <div className={styles.title}>
-                    <h4>Buy {game.name} </h4>
-                </div>
-                <p>Quantity: {game.qty} </p>
-                <div>
-                    <p>Price: {game.price}</p>
-                    {
-                        // disables add to cart button for developer and admin account
-                        user && user.account !== 'gamer' ?
-                        <button className="btn sec-btn" disabled>Add to Cart</button> :
-                        <button className="btn sec-btn">Add to Cart</button>
-                    }
-                </div>
-            </div>
+            <GamePurchase game={game} user={user} />
             <GameAbout game={game} />
             <GameReviews user={user} reviews={reviews} render={render} setRender={setRender} id={id}/>
         </main>
