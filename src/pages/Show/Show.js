@@ -13,6 +13,7 @@ export default function Show({user, refresh, setRefresh}) {
 
     //Review hooks
     const [newReview, setNewReview] = useState({
+        _id: 0,
         name: '',
         description: ''
     })
@@ -89,10 +90,19 @@ export default function Show({user, refresh, setRefresh}) {
 
     // adds user name and comment to the review hook
     const handleChange = () => {
-        setNewReview({
-            name: user.name,
-            description: description.current.value
-        })
+        if(user.acccount === 'admin'){
+            setNewReview({
+                _id: user._id,
+                name: 'Admin',
+                description: description.current.value
+            })
+        } else {
+            setNewReview({
+                _id: user._id,
+                name: user.name,
+                description: description.current.value
+            })
+        }
     }
 
     // Makes a new review
@@ -192,17 +202,31 @@ export default function Show({user, refresh, setRefresh}) {
                 </div> :
                 // review buttons for admin user
                 user && user.account === 'admin' ? 
+                // if admin has already been rejected the game before
+                game.reason ?
                 <>
-                <h5 style={{marginBottom: '10px'}}>Approved?</h5>
-                <rndm style={{display: 'flex', marginBottom: '10px', gap: '5px'}}>
-                    <button className="btn yes-btn" onClick={(evt) => {handleApproved(evt, 'yes')}}>Yes</button>
-                    <button className="btn no-btn" onClick={(evt) => {setNoBtn(true)}}>No</button>
-                </rndm> 
+                    <h5>Previous comment</h5>
+                    <p>{game.reason}</p>
+                    <>
+                        <h5 style={{marginBottom: '10px'}}>Approved?</h5>
+                        <rndm style={{display: 'flex', marginBottom: '10px', gap: '5px'}}>
+                            <button className="btn yes-btn" onClick={(evt) => {handleApproved(evt, 'yes')}}>Yes</button>
+                            <button className="btn no-btn" onClick={(evt) => {setNoBtn(true)}}>No</button>
+                        </rndm> 
+                    </>
+                </> :
+                // if game hasn't been rejected before
+                <>
+                    <h5 style={{marginBottom: '10px'}}>Approved?</h5>
+                    <rndm style={{display: 'flex', marginBottom: '10px', gap: '5px'}}>
+                        <button className="btn yes-btn" onClick={(evt) => {handleApproved(evt, 'yes')}}>Yes</button>
+                        <button className="btn no-btn" onClick={(evt) => {setNoBtn(true)}}>No</button>
+                    </rndm> 
                 </>:
                 null
             }
             {
-                // if admin didn't approbe the game show the text box to give reasons why
+                // if admin didn't approve the game show the text box to give reasons why
                 noBtn ?
                 <form onSubmit={(evt) => {handleApproved(evt, 'no')}}>
                     <label>Explain what needs to be changed</label>
@@ -222,8 +246,8 @@ export default function Show({user, refresh, setRefresh}) {
                 <div>
                     <p>Price: {game.price}</p>
                     {
-                        // disables add to cart button for developer account
-                        user && user.account === 'developer' ?
+                        // disables add to cart button for developer and admin account
+                        user && user.account !== 'gamer' ?
                         <button className="btn sec-btn" disabled>Add to Cart</button> :
                         <button className="btn sec-btn">Add to Cart</button>
                     }
@@ -247,7 +271,7 @@ export default function Show({user, refresh, setRefresh}) {
                         </div> :
                         // if there is a user, and the account is admin or gamer and they pressed the write a review button
                         user.account !== 'developer' && reviewBtn ?
-                            <form onSubmit={handleSubmit} method="POST">
+                            <form onSubmit={handleSubmit}>
                                 <fieldset className={styles.new}>
                                     <label htmlFor="description">
                                         Write Review
@@ -278,7 +302,7 @@ export default function Show({user, refresh, setRefresh}) {
                             reviews.length ?
                             reviews.map((review, idx) => {
                                 return( 
-                                    // opens the edit form instead of element the matches it in the array
+                                    // opens the edit form of the review that matches the index in the array
                                     editBtn && index === idx ?
                                     <div key={idx}>
                                         <small>{review.name}</small>
