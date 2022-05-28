@@ -1,9 +1,13 @@
 .main{
     flex: 13;
-}
-/* .main > div {
     display: flex;
-} */
+    flex-direction: column;
+    overflow: hidden;
+}
+.main > div:nth-of-type(1) {
+    display: flex;
+    padding: 0 10px, 5px;
+}
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
