@@ -1,5 +1,5 @@
 import styles from './App.module.css'
-import {Routes, Route} from "react-router-dom"
+import {Routes, Route, Navigate} from "react-router-dom"
 import { useState, useEffect } from "react"
 import Home from '../Home/Home'
 import MyAccount from '../MyAccount/MyAccount'
@@ -65,6 +65,7 @@ export default function App(){
                 <Route path='/cart' element={<Cart user={user} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk} />} />
                 <Route path='/:id/edit' element={<Edit refresh={refresh} setRefresh={setRefresh} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk} />} />
                 <Route path='/:id' element={<Show user={user} refresh={refresh} setRefresh={setRefresh} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk}/>} />
+                <Route path='/*' element={<Navigate to='/' />} />
             </Routes>
             <Footer />
         </main>
