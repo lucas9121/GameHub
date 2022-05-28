@@ -7,7 +7,7 @@ export default function AdminHomePage({games, handleClick}) {
     return(
         <main className={styles.main}>
             <div>
-                <button className="btn main-btn" onClick={handleClick}>Users</button>
+                <button className="btn sec-btn" onClick={handleClick}>Users</button>
             </div>
             <div className={styles.grid}>
                 {
