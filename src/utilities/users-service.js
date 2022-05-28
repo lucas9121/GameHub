@@ -17,6 +17,12 @@ export async function login(credentials) {
   return getUser();
 }
 
+export async function getAll(){
+  const sessionToken = await usersAPI.getAll()
+  sessionStorage.setItem('sessionToken', sessionToken)
+  return getAllUsers()
+}
+
 export function getToken() {
   const token = localStorage.getItem('token');
   // getItem will return null if no key
@@ -29,6 +35,25 @@ export function getToken() {
     return null;
   }
   return token;
+}
+
+export function getSessionToken() {
+  const sessionToken = sessionStorage.getItem('sessionToken');
+  // getItem will return null if no key
+  if (!sessionToken) return null;
+  JSON.parse(atob(sessionToken.split('.')[1]));
+  // A JWT's expiration is expressed in seconds, not miliseconds
+  // if (payload.exp < Date.now() / 1000) {
+  //   // Token has expired
+  //   localStorage.removeItem('token');
+  //   return null;
+  // }
+  return sessionToken;
+}
+
+export function getAllUsers(){
+  const sessionToken = getSessionToken();
+  return sessionToken ? JSON.parse(atob(sessionToken.split('.')[1])).user : null;
 }
 
 export function getUser() {
