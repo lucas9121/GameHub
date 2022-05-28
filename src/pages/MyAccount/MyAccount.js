@@ -70,7 +70,7 @@ export default function MyAccount({user, setUser, setUserDlt, refresh, setRefres
                 // if true, display the edit form
                 editBtn ?
                 <div onSubmit={handleSubmit}>
-                    <form autoComplete="off">
+                    <form autoComplete="off" className={styles.form}>
                     <label>Name</label>
                     <input type="text" name="name" ref={name} defaultValue={user.name} />
                     <label>Username</label>
