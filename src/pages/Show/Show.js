@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import GameReviews from "../../components/GameReviews/GameReviews"
+import GameAbout from "../../components/GameAbout/GameAbout"
 import styles from './Show.module.css'
 
 export default function Show({user, refresh, setRefresh}) {
@@ -141,13 +142,7 @@ export default function Show({user, refresh, setRefresh}) {
                     }
                 </div>
             </div>
-            <div className={styles.about}>
-                <h3>About this Game:</h3>
-                <hr />
-                <div className={styles.description}>
-                    <p>{game.description} </p>
-                </div>
-            </div>
+            <GameAbout game={game} />
             <GameReviews user={user} reviews={reviews} render={render} setRender={setRender} id={id}/>
         </main>
     )
