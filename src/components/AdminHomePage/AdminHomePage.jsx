@@ -9,7 +9,7 @@ export default function AdminHomePage({games, handleClick}) {
             <div>
                 <button className="btn main-btn" onClick={handleClick}>Users</button>
             </div>
-            <div className={styles.gird}>
+            <div className={styles.grid}>
                 {
                     newArr.sort((a, b) => {
                         // if(a.approved === 'review'){
