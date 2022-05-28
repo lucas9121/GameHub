@@ -12,6 +12,9 @@ const gameSchema = new Schema({
     reviews: Array,
     approved: {type: String, default: 'review', enum: ['yes', 'review', 'no']},
     reason: String
+},
+{
+    timestamps: true
 })
 
 module.exports = model('Game', gameSchema)
