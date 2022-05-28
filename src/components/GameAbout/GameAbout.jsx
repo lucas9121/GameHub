@@ -1,6 +1,6 @@
 import styles from './GameAbout.module.css'
 
-export default function GameAbout() {
+export default function GameAbout({game}) {
     return(
         <div className={styles.about}>
             <h3>About this Game:</h3>
