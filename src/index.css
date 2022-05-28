@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient(45deg, black, rgb(0, 28, 58), rgb(0, 62, 129), rgb(0 123 255), rgb(0, 62, 129), rgb(0, 28, 58), black);
+    background: linear-gradient(45deg, black, rgb(0, 28, 58, 0.97), rgb(0, 62, 129, 0.97), rgb(0, 123, 255, 0.97), rgb(0, 62, 129, 0.97), rgb(0, 28, 58, 0.97), black);
     min-height: 100vh;
     max-height: max-content;
     margin: 0 auto;
