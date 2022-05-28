@@ -99,7 +99,7 @@ export default function Show({user, refresh, setRefresh}) {
         } else {
             setNewReview({
                 _id: user._id,
-                name: user.name,
+                name: user.username,
                 description: description.current.value
             })
         }
@@ -164,7 +164,30 @@ export default function Show({user, refresh, setRefresh}) {
     // Deletes existing review if hook is set to true
     useEffect(() => {
         if(dltBtn){
-            reviews.splice(index, 1)
+            // if(user.account === 'admin'){
+            //     console.log('delete')
+            //     console.log(reviews[index])
+            //     reviews.splice(index, 1, {
+            //         _id: -1,
+            //         name: "Admin",
+            //         description: "Message was removed by Admin"
+            //     })
+            //     setDltBtn(false)
+            // } else {
+            //     console.log('don not delete')
+            //     setDltBtn(false)
+            // }
+            if(user.account === 'admin'){
+                reviews.splice(index, 1, {
+                    _id: 0,
+                    username: "Admin",
+                    description: "Message was removed by Admin"
+                })
+                console.log('admin is logged in')
+            } else {
+                reviews.splice(index, 1)
+                console.log('not an admin')
+            }
             try {
                 fetch(`/api/games/${id}`, {
                     method: 'PUT',
@@ -184,6 +207,38 @@ export default function Show({user, refresh, setRefresh}) {
             }
         }
     }, [dltBtn])
+
+    const handleDelete = (event, idx) => {
+        event.preventDefault()
+        if(user.account === 'admin'){
+            reviews.splice(idx, 1, {
+                _id: 0,
+                username: "Admin",
+                description: "Message was removed by Admin"
+            })
+            console.log('admin is logged in')
+        } else {
+            reviews.splice(idx, 1)
+            console.log('not an admin')
+        }
+        try {
+            fetch(`/api/games/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type':'application/json'
+                },
+                body: JSON.stringify({
+                    reviews: reviews
+                })
+            })
+            setRender(!render)
+            // setDltBtn(false)
+            console.log('comment deleted')
+        }catch(e){
+            console.log(e)
+        }
+    }
 
 
     return(
@@ -323,8 +378,9 @@ export default function Show({user, refresh, setRefresh}) {
                                         <p>{review.description} </p>
                                         <div>
                                             {/* gives the index number of the element to the ternary above and then tells it to open the form */}
-                                            { user && user.account === "gamer" && user.name === review.name ? <button className="btn main-btn" onClick={() => {setEditBtn(true); setIndex(idx)}} >Edit</button> : null } 
-                                            { user && user.account === "gamer" && user.name === review.name ? <button className="btn no-btn" onClick={(evt) => {setDltBtn(true); setIndex(idx) }}> Delete </button> : null } 
+                                            { user && user.account === "gamer" && user._id === review._id ? <button className="btn main-btn" onClick={() => {setEditBtn(true); setIndex(idx)}} >Edit</button> : null } 
+                                            { user && user.account === "gamer" && user._id === review._id ? <button className="btn no-btn" onClick={(evt) => {setDltBtn(true); setIndex(idx) }}> Delete </button> : null } 
+                                            { user && user.account === "admin" && review._id !== 0 ? <button className="btn no-btn" onClick={(evt) => {handleDelete(evt, idx)}}> Remove </button> : null } 
                                         </div>
 
                                     </div> 
