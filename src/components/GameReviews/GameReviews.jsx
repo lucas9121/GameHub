@@ -1,6 +1,6 @@
 import { useState, useRef } from "react"
 
-export default function GameReviews({user, reviews, render, setRender }){
+export default function GameReviews({user, reviews, render, setRender, id }){
     //Review hooks
     const [newReview, setNewReview] = useState({
         _id: -1,
@@ -43,11 +43,6 @@ export default function GameReviews({user, reviews, render, setRender }){
                     'Content-Type':'application/json'
                 },
                 body: JSON.stringify({
-                    name: game.name,
-                    price: game.price,
-                    qty: game.qty,
-                    img: game.img,
-                    description: game.description,
                     reviews: [...reviews, newReview]
                 })
             })
