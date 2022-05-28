@@ -9,19 +9,6 @@ export default function Home({games, user}) {
     const newArr = [...games];
     const [allUsers, setAllUsers] = useState([])
 
-    // useEffect(() => {
-    //     (async () => {
-    //         try{
-    //             const res = await UsersAPI.getAll()
-    //             // setAllUsers(res)
-    //             sessionStorage.setItem('sessionToken', res)
-    //             setAllUsers(getAllUsers())
-    //         } catch(e){
-    //             console.log(e)
-    //         }
-    //     })()
-    // }, [])
-
     //Finds every user. Only admin can use this function
     const handleClick = async() => {
         try{
@@ -29,9 +16,6 @@ export default function Home({games, user}) {
             // setAllUsers(res)
             sessionStorage.setItem('sessionToken', res)
             setAllUsers(getAllUsers())
-            if(res.status === 200){
-                console.log(allUsers)
-            }
         } catch(e){
             console.log(e)
         } finally {
@@ -90,37 +74,37 @@ export default function Home({games, user}) {
             }
         </main> :
         user.account === 'admin' ?
-        // admin accounts
-        <AdminHomePage games={games} handleClick={handleClick} />
-    :
-    //gamer account
-    <main className={styles.main}>
-    {
-        newArr.sort((a, b) => {
-            if(a.name.toUpperCase() > b.name.toUpperCase()){
-                return 1
+            // admin accounts
+            <AdminHomePage games={games} handleClick={handleClick} />
+        :
+        //gamer account
+        <main className={styles.main}>
+            {
+                newArr.sort((a, b) => {
+                    if(a.name.toUpperCase() > b.name.toUpperCase()){
+                        return 1
+                    }
+                    if(a.name.toUpperCase() < b.name.toUpperCase()){
+                        return -1
+                    }
+                    return 0
+                }).reverse().map((game) => {
+                    return(
+                        // if admin approved the game display it
+                        game.approved === 'yes' ?
+                        <div className={styles.sub} style={game.qty > 0 ? {border: 'solid green'} : {border: 'solid red'}}>
+                            <Link style={{backgroundImage: `url(${game.img})`}} to={`/${game._id}`} alt={game.name} ></Link>
+                            <div className={styles.banner}>
+                                <h2>{game.name} </h2>
+                                <div> 
+                                    {game.price <= 0 ? <p>Free</p> : <p>${game.price}</p>}
+                                    {game.qty > 0 ? <p style={{color: 'green', fontSize: 'small'}}>Available</p> : <p style={{color: 'red', fontSize: 'small'}}>Sold Out</p> }
+                                </div>
+                            </div>
+                        </div> : null
+                    )
+                })
             }
-            if(a.name.toUpperCase() < b.name.toUpperCase()){
-                return -1
-            }
-            return 0
-        }).reverse().map((game) => {
-            return(
-                // if admin approved the game display it
-                game.approved === 'yes' ?
-                <div className={styles.sub} style={game.qty > 0 ? {border: 'solid green'} : {border: 'solid red'}}>
-                    <Link style={{backgroundImage: `url(${game.img})`}} to={`/${game._id}`} alt={game.name} ></Link>
-                    <div className={styles.banner}>
-                        <h2>{game.name} </h2>
-                        <div> 
-                            {game.price <= 0 ? <p>Free</p> : <p>${game.price}</p>}
-                            {game.qty > 0 ? <p style={{color: 'green', fontSize: 'small'}}>Available</p> : <p style={{color: 'red', fontSize: 'small'}}>Sold Out</p> }
-                        </div>
-                    </div>
-                </div> : null
-            )
-        })
-    }
-</main>
+        </main>
     )
 }
