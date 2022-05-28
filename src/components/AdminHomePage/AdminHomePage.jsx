@@ -5,9 +5,9 @@ export default function AdminHomePage({games, handleClick}) {
     const newArr = [...games];
 
     return(
-        <main>
+        <main className={styles.main}>
             <button className="btn main-btn" onClick={handleClick}>Users</button>
-            <div className={styles.main}>
+            <div>
                 {
                     newArr.sort((a, b) => {
                         // if(a.approved === 'review'){
