@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom"
 import GameReviews from "../../components/GameReviews/GameReviews"
 import GameAbout from "../../components/GameAbout/GameAbout"
 import GamePurchase from "../../components/GamePurchase/GamePurchase"
+import DevGameButton from "../../components/DevGameButton/DevGameButton"
 import styles from './Show.module.css'
 
 export default function Show({user, refresh, setRefresh}) {
@@ -82,14 +83,8 @@ export default function Show({user, refresh, setRefresh}) {
             {
                 // Developer User and Admin user buttons and messages
                 // edit game button for developer user if game wasn't rejected
-                user && user.account === 'developer' && game.approved !== 'no' ? 
-                <button className="btn yes-btn" onClick={() => navigate(`/${game._id}/edit`)} >Edit</button> :
-                // Explanation for developer and edit button if game was rejected by admin
-                user && user.account === 'developer' && game.approved === 'no' ?
-                <div>
-                    <p>{game.reason}</p>
-                    <button className="btn yes-btn" onClick={() => navigate(`/${game._id}/edit`)} >Edit</button> 
-                </div> :
+                user && user.account === 'developer' ? 
+                <DevGameButton game={game} />:
                 // review buttons for admin user
                 user && user.account === 'admin' ? 
                 // if admin has already been rejected the game before
