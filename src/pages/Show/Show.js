@@ -147,8 +147,8 @@ export default function Show({user, refresh, setRefresh}) {
                 <div className={styles.description}>
                     <p>{game.description} </p>
                 </div>
-               <GameReviews user={user} reviews={reviews} render={render} setRender={setRender} id={id}/>
             </div>
+            <GameReviews user={user} reviews={reviews} render={render} setRender={setRender} id={id}/>
         </main>
     )
 }
