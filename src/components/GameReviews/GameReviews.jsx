@@ -1,4 +1,5 @@
 import { useState, useRef } from "react"
+import styles from './GameReviews.module.css'
 
 export default function GameReviews({user, reviews, render, setRender, id }){
     //Review hooks
@@ -116,81 +117,83 @@ export default function GameReviews({user, reviews, render, setRender, id }){
         }
     }
 
-    <div className={styles.review}>
-        <h3>Customer Reviews</h3>
-        <hr />
-        {
-            // if user is null disable the button
-            !user ?
-            <div>
-                <button className="btn sec-btn" disabled> Write a review</button>
-                <small>sign in first</small>
-            </div> :
-            // if there is a user, and the account is admin or gamer and they pressed the write a review button
-            user.account !== 'developer' && reviewBtn ?
-                <form onSubmit={handleSubmit}>
-                    <fieldset className={styles.new}>
-                        <label htmlFor="description">
-                            Write Review
-                        </label>
-                        <textarea name="description" ref={description} onChange={handleChange} maxLength={'300'} cols="40" rows="3"></textarea>
-                        <div>
-                            <input className='submit btn yes-btn' type="submit" value="Submit" />
-                            <button className="btn no-btn" onClick={() => {setReviewBtn(false)}}>Cancel</button> 
-                        </div>
-                    </fieldset>
-                </form> :
-                // if there is a user and the user account is admin or gamer, but haven't pressed the button yet
-            user.account !== 'developer' && !reviewBtn ? 
-            <button className="btn sec-btn" 
-                onClick={(evt) => {
-                    setReviewBtn(true)
-                }}>
-                Write a review
-            </button> :
-            // if user account is developer disable the button
-            <div>
-                <button className="btn sec-btn" disabled> Write a review</button>
-            </div> 
-        }
-        <div className={styles.comments}>
+    return(
+        <div className={styles.review}>
+            <h3>Customer Reviews</h3>
+            <hr />
             {
-                // checks to see if the array isn't empty first
-                reviews.length ?
-                reviews.map((review, idx) => {
-                    return( 
-                        // opens the edit form of the review that matches the index in the array
-                        editBtn && index === idx ?
-                        <div key={idx}>
-                            <small>{review.name}</small>
-                            <form onSubmit={handleEditClick}>
-                                <fieldset className={styles.new}>
-                                    <textarea name="description" ref={description} defaultValue={review.description} onChange={handleChange} maxLength={'300'} cols="40" rows="3"></textarea>
-                                    <div>
-                                        <input className='submit btn yes-btn' type="submit" value="Submit" />
-                                        {/* just closes the edit form */}
-                                        <button className="btn no-btn" onClick={() => {setEditBtn(false)}}>Cancel</button> 
-                                    </div>
-                                </fieldset>
-                            </form>
-                        </div> :
-                        // shows all of the reviews
-                        <div key={idx}>
-                            <small>{review.name}</small>
-                            <p>{review.description} </p>
+                // if user is null disable the button
+                !user ?
+                <div>
+                    <button className="btn sec-btn" disabled> Write a review</button>
+                    <small>sign in first</small>
+                </div> :
+                // if there is a user, and the account is admin or gamer and they pressed the write a review button
+                user.account !== 'developer' && reviewBtn ?
+                    <form onSubmit={handleSubmit}>
+                        <fieldset className={styles.new}>
+                            <label htmlFor="description">
+                                Write Review
+                            </label>
+                            <textarea name="description" ref={description} onChange={handleChange} maxLength={'300'} cols="40" rows="3"></textarea>
                             <div>
-                                {/* gives the index number of the element to the ternary above and then tells it to open the form */}
-                                { user && user.account === "gamer" && user._id === review._id ? <button className="btn main-btn" onClick={() => {setEditBtn(true); setIndex(idx)}} >Edit</button> : null } 
-                                { user && user.account === "gamer" && user._id === review._id ? <button className="btn no-btn" onClick={(evt) => {handleDelete(evt, idx)}}> Delete </button> : null } 
-                                { user && user.account === "admin" && review._id !== 0 ? <button className="btn no-btn" onClick={(evt) => {handleDelete(evt, idx)}}> Remove </button> : null } 
+                                <input className='submit btn yes-btn' type="submit" value="Submit" />
+                                <button className="btn no-btn" onClick={() => {setReviewBtn(false)}}>Cancel</button> 
                             </div>
-
-                        </div> 
-                    )
-                }) :
-                null
-                
+                        </fieldset>
+                    </form> :
+                    // if there is a user and the user account is admin or gamer, but haven't pressed the button yet
+                user.account !== 'developer' && !reviewBtn ? 
+                <button className="btn sec-btn" 
+                    onClick={(evt) => {
+                        setReviewBtn(true)
+                    }}>
+                    Write a review
+                </button> :
+                // if user account is developer disable the button
+                <div>
+                    <button className="btn sec-btn" disabled> Write a review</button>
+                </div> 
             }
+            <div className={styles.comments}>
+                {
+                    // checks to see if the array isn't empty first
+                    reviews.length ?
+                    reviews.map((review, idx) => {
+                        return( 
+                            // opens the edit form of the review that matches the index in the array
+                            editBtn && index === idx ?
+                            <div key={idx}>
+                                <small>{review.name}</small>
+                                <form onSubmit={handleEditClick}>
+                                    <fieldset className={styles.new}>
+                                        <textarea name="description" ref={description} defaultValue={review.description} onChange={handleChange} maxLength={'300'} cols="40" rows="3"></textarea>
+                                        <div>
+                                            <input className='submit btn yes-btn' type="submit" value="Submit" />
+                                            {/* just closes the edit form */}
+                                            <button className="btn no-btn" onClick={() => {setEditBtn(false)}}>Cancel</button> 
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div> :
+                            // shows all of the reviews
+                            <div key={idx}>
+                                <small>{review.name}</small>
+                                <p>{review.description} </p>
+                                <div>
+                                    {/* gives the index number of the element to the ternary above and then tells it to open the form */}
+                                    { user && user.account === "gamer" && user._id === review._id ? <button className="btn main-btn" onClick={() => {setEditBtn(true); setIndex(idx)}} >Edit</button> : null } 
+                                    { user && user.account === "gamer" && user._id === review._id ? <button className="btn no-btn" onClick={(evt) => {handleDelete(evt, idx)}}> Delete </button> : null } 
+                                    { user && user.account === "admin" && review._id !== 0 ? <button className="btn no-btn" onClick={(evt) => {handleDelete(evt, idx)}}> Remove </button> : null } 
+                                </div>
+
+                            </div> 
+                        )
+                    }) :
+                    null
+                    
+                }
+            </div>
         </div>
-    </div>
+    )
 }
