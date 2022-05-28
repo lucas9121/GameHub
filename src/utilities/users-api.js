@@ -23,9 +23,9 @@ export async function signUp(userData) {
     }
 }
 
-// export async function checkToken() {
-
-// }
+export function getAll(){
+    return sendRequest(`${BASE_URL}/index`)
+}
 
 export function login(credentials) {
     return sendRequest(`${BASE_URL}/login`, 'POST', credentials);
