@@ -6,7 +6,7 @@
 }
 .main > div:nth-of-type(1) {
     display: flex;
-    padding: 0 10px, 5px;
+    padding: 0 10px 5px;
 }
 .grid {
     display: grid;
