@@ -1,4 +1,4 @@
-import { getToken } from './users-service';
+import { getToken, getSessionToken } from './users-service';
 
 export default async function sendRequest(url, method = 'GET', payload = null) {
   // Fetch takes an optional options object as the 2nd argument
@@ -16,6 +16,13 @@ export default async function sendRequest(url, method = 'GET', payload = null) {
     // Prefacing with 'Bearer' is recommended in the HTTP specification
     options.headers.Authorization = `Bearer ${token}`;
   }
+  const sessionToken = getSessionToken()
+  if(sessionToken){
+    console.log('Session Token Exists!!!!!!!!!')
+    options.headers = options.headers || {};
+    options.headers.Authorization = `Bearer ${sessionToken}`
+  }
+
   const res = await fetch(url, options);
   // res.ok will be false if the status code set to 4xx in the controller action
   if (res.ok) return res.json();
