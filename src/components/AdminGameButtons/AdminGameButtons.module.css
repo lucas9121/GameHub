@@ -13,6 +13,8 @@
 
 .Admin > div {
     overflow: auto;
+    height: fit-content;
+    max-height: 100px;
 }
 
 .Admin > div > p {
