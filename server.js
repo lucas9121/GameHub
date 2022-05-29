@@ -17,6 +17,7 @@ app.use(express.static(path.join(__dirname, 'build')));
 //API routes
 app.use('/api/users', require('./routes/api/users'))
 app.use('/api/games', require('./routes/api/games'))
+app.use('/api/carts', require('./routes/api/carts'))
 
 
 //Catch All route
