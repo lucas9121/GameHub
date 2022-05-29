@@ -1,5 +1,7 @@
+import { useNavigate } from "react-router-dom"
 
 export default function DevGameButton({game}) {
+    const navigate = useNavigate()
     return(
         <div>
             {
