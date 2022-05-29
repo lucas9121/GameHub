@@ -4,6 +4,7 @@ import GameReviews from "../../components/GameReviews/GameReviews"
 import GameAbout from "../../components/GameAbout/GameAbout"
 import GamePurchase from "../../components/GamePurchase/GamePurchase"
 import DevGameButton from "../../components/DevGameButton/DevGameButton"
+import AdminGameButtons from "../../components/AdminGameButtons/AdminGameButtons"
 import styles from './Show.module.css'
 
 export default function Show({user, refresh, setRefresh}) {
@@ -81,46 +82,13 @@ export default function Show({user, refresh, setRefresh}) {
         <main className={styles.show}>
             <h2>{game.name} </h2>
             {
-                // Developer User and Admin user buttons and messages
-                // edit game button for developer user if game wasn't rejected
+                // Developer user and Admin user buttons and messages
                 user && user.account === 'developer' ? 
                 <DevGameButton game={game} />:
                 // review buttons for admin user
                 user && user.account === 'admin' ? 
-                // if admin has already been rejected the game before
-                game.reason ?
-                <>
-                    <h5>Previous comment</h5>
-                    <p>{game.reason}</p>
-                    <>
-                        <h5 style={{marginBottom: '10px'}}>Approved?</h5>
-                        <rndm style={{display: 'flex', marginBottom: '10px', gap: '5px'}}>
-                            <button className="btn yes-btn" onClick={(evt) => {handleApproved(evt, 'yes')}}>Yes</button>
-                            <button className="btn no-btn" onClick={(evt) => {setNoBtn(true)}}>No</button>
-                        </rndm> 
-                    </>
-                </> :
-                // if game hasn't been rejected before
-                <>
-                    <h5 style={{marginBottom: '10px'}}>Approved?</h5>
-                    <rndm style={{display: 'flex', marginBottom: '10px', gap: '5px'}}>
-                        <button className="btn yes-btn" onClick={(evt) => {handleApproved(evt, 'yes')}}>Yes</button>
-                        <button className="btn no-btn" onClick={(evt) => {setNoBtn(true)}}>No</button>
-                    </rndm> 
-                </>:
+                <AdminGameButtons game={game} noBtn={noBtn} setNoBtn={setNoBtn} noReason={noReason} handleApproved={handleApproved} /> :
                 null
-            }
-            {
-                // if admin didn't approve the game show the text box to give reasons why
-                noBtn ?
-                <form onSubmit={(evt) => {handleApproved(evt, 'no')}}>
-                    <label>Explain what needs to be changed</label>
-                    <textarea cols="40" rows="3" ref={noReason} required></textarea>
-                    <div>
-                        <button type="submit" className="btn yes-btn">Submit</button>
-                        <button className="btn no-btn" onClick={() => {setNoBtn(false)}}>Cancel</button>
-                    </div>
-                </form> : null
             }
             <img src={game.img} alt={game.name} max-width="700" max-height="700" />
             <GamePurchase game={game} user={user} />
