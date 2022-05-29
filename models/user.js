@@ -9,7 +9,32 @@ const userSchema = new Schema({
     username: {type: String, unique: true, maxlength: 10, required: true},
     email: {type: String, unique: true, trim: true, lowercase: true, required: true},
     password: {type: String, trim: true, minLength: 5, required: true},
-    account: {type: String, require: true, default: "gamer", enum: ["gamer", 'developer', 'admin']}
+    account: {type: String, require: true, default: "gamer", enum: ['gamer', 'developer', 'admin']},
+    question1: {
+        type: String,
+        enum: [
+            "What is your mother's maiden name?",
+            "What is the name of your first pet?",
+            "What was your first car?",
+            "What elementary school did you attend?",
+            "What is the name of the town where you were born?",
+            "Where did you meet your spouse?"
+        ]
+    },
+    answer1: String,
+    question2: {
+        type: String,
+        enum: [
+            "What is your mother's maiden name?",
+            "What is the name of your first pet?",
+            "What was your first car?",
+            "What elementary school did you attend?",
+            "What is the name of the town where you were born?",
+            "Where did you meet your spouse?"
+        ]
+    },
+    answer2: String,
+    bought: Number
 }, 
 {
     timestamps: true,
