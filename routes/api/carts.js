@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router()
-const cartCtrl = require('../../controllers/api/cart')
+const cartsCtrl = require('../../controllers/api/cart')
 
 // Get /api/cart
-router.get('/', cartCtrl.getCart)
+router.get('/', cartsCtrl.getCart)
 
 
 module.exports = router
