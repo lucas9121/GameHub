@@ -3,26 +3,26 @@ export default function AdminGameButtons({game, noBtn, setNoBtn, noReason, handl
     return(
         <div>
             {
-            // if admin has already been rejected the game before
+            // if admin has already rejected the game before
                 game.reason ?
                 <>
-                    <h5>Previous comment</h5>
+                    <h4>Previous comment</h4>
                     <p>{game.reason}</p>
                     <>
                         <h5 style={{marginBottom: '10px'}}>Approved?</h5>
-                        <rndm style={{display: 'flex', marginBottom: '10px', gap: '5px'}}>
+                        <div style={{display: 'flex', marginBottom: '10px', gap: '5px'}}>
                             <button className="btn yes-btn" onClick={(evt) => {handleApproved(evt, 'yes')}}>Yes</button>
                             <button className="btn no-btn" onClick={() => {setNoBtn(true)}}>No</button>
-                        </rndm> 
+                        </div> 
                     </>
                 </> :
                 // if game hasn't been rejected before
                 <>
                     <h5 style={{marginBottom: '10px'}}>Approved?</h5>
-                    <rndm style={{display: 'flex', marginBottom: '10px', gap: '5px'}}>
+                    <div style={{display: 'flex', marginBottom: '10px', gap: '5px'}}>
                         <button className="btn yes-btn" onClick={(evt) => {handleApproved(evt, 'yes')}}>Yes</button>
                         <button className="btn no-btn" onClick={(evt) => {setNoBtn(true)}}>No</button>
-                    </rndm> 
+                    </div> 
                 </>
             }
             {
