@@ -1,6 +1,6 @@
 import styles from './GamePurchase.module.css'
 
-export default function GamePurchase({game, user}) {
+export default function GamePurchase({game, user, addToCart}) {
     return(
         <div className={styles.purchase}>
             <div className={styles.title}>
@@ -13,7 +13,7 @@ export default function GamePurchase({game, user}) {
                     // disables add to cart button for developer and admin account
                     user && user.account !== 'gamer' ?
                     <button className="btn sec-btn" disabled>Add to Cart</button> :
-                    <button className="btn sec-btn">Add to Cart</button>
+                    <button className="btn sec-btn" onClick={() => addToCart()}>Add to Cart</button>
                 }
             </div>
         </div>

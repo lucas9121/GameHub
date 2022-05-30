@@ -5,6 +5,7 @@ import GameAbout from "../../components/GameAbout/GameAbout"
 import GamePurchase from "../../components/GamePurchase/GamePurchase"
 import DevGameButton from "../../components/DevGameButton/DevGameButton"
 import AdminGameButtons from "../../components/AdminGameButtons/AdminGameButtons"
+import * as cartsAPI from "../../utilities/carts-api"
 import styles from './Show.module.css'
 
 export default function Show({user, refresh, setRefresh}) {
@@ -76,6 +77,16 @@ export default function Show({user, refresh, setRefresh}) {
         }
     }
 
+    const handleCartClicked = async (payload) => {
+        try {
+            if(user) payload.user = user._id
+            payload.game = game
+            await cartsAPI.addToCart(payload)
+        } catch(err){
+            console.log(err + ' Front end problem')
+        }
+    }
+
 
 
     return(
@@ -91,7 +102,7 @@ export default function Show({user, refresh, setRefresh}) {
                 null
             }
             <img src={game.img} alt={game.name} max-width="700" max-height="700" />
-            <GamePurchase game={game} user={user} />
+            <GamePurchase game={game} user={user} addToCart={handleCartClicked} />
             <GameAbout game={game} />
             <GameReviews user={user} reviews={reviews} render={render} setRender={setRender} id={id}/>
         </main>
