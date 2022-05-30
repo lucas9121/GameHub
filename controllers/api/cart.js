@@ -3,7 +3,8 @@ const Games = require('../../models/game')
 const User = require('../../models/user')
 
 module.exports ={
-    getCart
+    getCart,
+    addToCart
 }
 
 async function getCart(req, res) {
@@ -13,6 +14,15 @@ async function getCart(req, res) {
         res.status(200).json(cart)
     } catch(err){
         res.status(400).json(`Failed on back end ${err}`)
+    }
+}
+
+async function addToCart(req, res) {
+    try{
+        const newCartGame = await Cart.create(req.body)
+        res.status(200).json(newCartGame)
+    } catch(err){
+        res.status(400).json(err + ' Failed on back end')
     }
 }
 
