@@ -9,7 +9,7 @@ module.exports ={
 
 async function getCart(req, res) {
     try{
-        const cart = await Cart.find({user: req.query.user})
+        const cart = await Cart.find({user: req.query.user}).populate('game')
         res.status(200).json(cart)
     } catch(err){
         res.status(400).json(`Failed on back end ${err}`)
