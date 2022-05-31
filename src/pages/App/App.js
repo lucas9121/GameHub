@@ -38,6 +38,11 @@ export default function App(){
                 const res = await fetch('/api/games')
                 const data = await res.json()
                 setGames(data)
+                // when page mounts for the first time
+                if(!sessionStorage.getItem('cart')){
+                    const cart = []
+                    sessionStorage.setItem('cart', JSON.stringify(cart))
+                }
                 // will log me out with the refresh hook if userDlt hook is set to true
                 if(userDlt){
                     setUser(getUser())
