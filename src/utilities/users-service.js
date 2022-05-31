@@ -70,5 +70,6 @@ export function getUser() {
 
 export function logOut() {
   localStorage.removeItem('token');
-  sessionStorage.removeItem('sessionToken')
+  sessionStorage.clear()
+  sessionStorage.setItem('cart', JSON.stringify([]))
 }
