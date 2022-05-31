@@ -4,8 +4,14 @@ const BASE_URL = '/api/carts'
 
 export async function getCart(userId){
     sessionStorage.clear()
-    const cart = await sendRequest(BASE_URL)
-    return sessionStorage.setItem('cart', JSON.parse(cart))
+    let cart 
+    try{
+        cart = await sendRequest(`${BASE_URL}?user=${userId}`)
+        sessionStorage.setItem('cart', JSON.stringify(cart))
+        return cart
+    } catch(err) {
+        console.log(`${err} in utitilies`)
+    }
 }
 
 export function addToCart(payload){
@@ -22,9 +28,10 @@ export function addToCart(payload){
 
 export function checkCart(userId){
     const cart = JSON.parse(sessionStorage.getItem('cart'))
-    if(cart.length > 0){
+    if(cart && cart.length > 0){
         for(let i = 0; i < cart.length; i++){
             cart[i].user = userId
+            addToCart(cart[i])
         }
     }
     return getCart(userId)

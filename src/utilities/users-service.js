@@ -62,8 +62,7 @@ export function getUser() {
   const token = getToken();
   if(token){ 
     const user = JSON.parse(atob(token.split('.')[1])).user;
-    console.log(user._id)
-    // cartsAPI.checkCart(user._id)
+    cartsAPI.checkCart(user._id)
     return user
   }
   return null
