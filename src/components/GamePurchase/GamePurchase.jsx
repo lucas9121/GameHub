@@ -10,8 +10,8 @@ export default function GamePurchase({game, user, addToCart}) {
             <div>
                 <p>Price: {game.price}</p>
                 {
-                    // disables add to cart button for developer and admin account
-                    user && user.account !== 'gamer' ?
+                    // disables add to cart button for developer and admin account or if quantity is 0
+                    user && user.account !== 'gamer' || game.qty <= 0 ?
                     <button className="btn sec-btn" disabled>Add to Cart</button> :
                     <button className="btn sec-btn" onClick={() => addToCart(game)}>Add to Cart</button>
                 }
