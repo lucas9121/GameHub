@@ -5,7 +5,7 @@ const BASE_URL = '/api/carts'
 export async function getCart(userId){
     sessionStorage.clear()
     const cart = await sendRequest(BASE_URL)
-    return sessionStorage.setItem('cart', cart)
+    return sessionStorage.setItem('cart', JSON.parse(cart))
 }
 
 export function addToCart(payload){

@@ -60,7 +60,13 @@ export function getAllUsers(){
 
 export function getUser() {
   const token = getToken();
-  return token ? JSON.parse(atob(token.split('.')[1])).user : null;
+  if(token){ 
+    const user = JSON.parse(atob(token.split('.')[1])).user;
+    console.log(user._id)
+    // cartsAPI.checkCart(user._id)
+    return user
+  }
+  return null
 }
 
 export function logOut() {
