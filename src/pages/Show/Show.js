@@ -21,8 +21,7 @@ export default function Show({user, refresh, setRefresh}) {
     const [noBtn, setNoBtn] = useState(false)
     const noReason = useRef(null)
 
-    const [formData, setFormData] = useState({
-    });
+    const [cartData, setCartData] = useState({});
 
 
     // When page mounts, fetch the individual game from database
@@ -82,9 +81,10 @@ export default function Show({user, refresh, setRefresh}) {
 
     const handleCartClicked = async (payload) => {
         try {
-            if(user) formData.user = user._id
-            formData.game = payload
-            await cartsAPI.addToCart(formData)
+            if(user) cartData.user = user._id
+            cartData.game = payload
+            cartData.quantity = 1
+            await cartsAPI.addToCart(cartData)
         } catch(err){
             console.log(err + ' Front end problem')
         }

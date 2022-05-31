@@ -1,4 +1,5 @@
 import * as usersAPI  from './users-api';
+import * as cartsAPI from './carts-api'
 
 export async function signUp(userData) {
   // Delete the network request code to the
@@ -14,6 +15,7 @@ export async function login(credentials) {
   const token = await usersAPI.login(credentials);
   // Persist the token to localStorage
   localStorage.setItem('token', token);
+  // sessionStorage.setItem('cart')
   return getUser();
 }
 
@@ -63,4 +65,5 @@ export function getUser() {
 
 export function logOut() {
   localStorage.removeItem('token');
+  sessionStorage.removeItem('sessionToken')
 }
