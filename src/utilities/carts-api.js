@@ -2,8 +2,10 @@ import sendRequest from "./send-request";
 
 const BASE_URL = '/api/carts'
 
-export function getCart(){
-    return sendRequest(BASE_URL)
+export async function getCart(userId){
+    sessionStorage.clear()
+    const cart = await sendRequest(BASE_URL)
+    return sessionStorage.setItem('cart', cart)
 }
 
 export function addToCart(payload){
@@ -18,8 +20,12 @@ export function addToCart(payload){
     }
 }
 
-// export function addtoStorage(payload){
-//     if(payload){
-//         sessionStorage.setItem('cart', )
-//     }
-// }
+export function checkCart(userId){
+    const cart = JSON.parse(sessionStorage.getItem('cart'))
+    if(cart.length > 0){
+        for(let i = 0; i < cart.length; i++){
+            cart[i].user = userId
+        }
+    }
+    return getCart(userId)
+}
