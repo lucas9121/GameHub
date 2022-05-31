@@ -8,5 +8,8 @@ router.get('/', cartsCtrl.getCart)
 // Post 
 router.post('/', cartsCtrl.addToCart)
 
+// Put
+router.put('/', cartsCtrl.updateCart)
+
 
 module.exports = router

@@ -4,7 +4,8 @@ const User = require('../../models/user')
 
 module.exports ={
     getCart,
-    addToCart
+    addToCart,
+    updateCart
 }
 
 async function getCart(req, res) {
@@ -25,6 +26,11 @@ async function addToCart(req, res) {
     }
 }
 
-// async function deleteCartGame(req, res){
-//     const games = await Cart.find({user: req.params.id})
-// }
+async function updateCart(req, res){
+    try{
+        const updatedCart = await Cart.findOneAndUpdate({game: req.query.game}, req.body, {new: true})
+        res.status(200).json(updatedCart)
+    } catch(err){
+        res.status(400).json(err + ' Failed on back end')
+    }
+}
