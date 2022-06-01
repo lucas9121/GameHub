@@ -83,7 +83,6 @@ export default function Show({user, refresh, setRefresh}) {
         try {
             if(user) cartData.user = user._id
             cartData.game = payload
-            cartData.quantity = 1
             await cartsAPI.addToCart(cartData)
         } catch(err){
             console.log(err + ' Front end problem')
