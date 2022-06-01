@@ -79,7 +79,8 @@ export default function Show({user, refresh, setRefresh}) {
         }
     }
 
-    const handleCartClicked = async (payload) => {
+    const handleCartClicked = async (evt, payload) => {
+        evt.preventDefault()
         try {
             if(user) cartData.user = user._id
             cartData.game = payload
