@@ -28,7 +28,7 @@ async function addToCart(req, res) {
 
 async function updateCart(req, res){
     try{
-        const updatedCart = await Cart.findOneAndUpdate({game: req.query.game}, req.body, {new: true})
+        const updatedCart = await Cart.findByIdAndUpdate(req.body._id, req.body, {new: true})
         res.status(200).json(updatedCart)
     } catch(err){
         res.status(400).json(err + ' Failed on back end')
