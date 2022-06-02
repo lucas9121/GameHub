@@ -49,7 +49,7 @@ function compareCarts(dtbsCart, strgCart){
             // }
         }
     }
-    // return getCart(userId)
+    return updateSessionCart(strgCart)
 }
 
 
@@ -100,6 +100,11 @@ export async function updateCart(payload){
             console.log(`${err} in utitilies`)
         }
     }
+}
+
+function updateSessionCart(games){
+    const cart = sessionStorage.setItem('cart', games)
+    return cart
 }
 
 
