@@ -1,48 +1,62 @@
 import sendRequest from "./send-request";
+import { useMemo } from 'react'
 
 const BASE_URL = '/api/carts'
 
-
+// useMemo(() =>  compareCarts(userId, strgCart), [strgCart])
 // Gets cart from database
 export async function getCart(userId){
     console.log('Get Cart!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-    sessionStorage.clear()
     try{
-        const cart = await sendRequest(`${BASE_URL}?user=${userId}`)
-        sessionStorage.setItem('cart', JSON.stringify(cart))
+        return await sendRequest(`${BASE_URL}?user=${userId}`)
+        // return sessionStorage.setItem('cart', JSON.stringify(cart))
     } catch(err) {
         console.log(`${err} in utitilies`)
     }
 }
 
+function getSessionCart(){
+    return JSON.parse(sessionStorage.getItem('cart'))
+}
+
+function getLocalCart(){
+    return JSON.parse(localStorage.getItem('cart'))
+}
+
 
 // Compares cart in the database with storage cart for any repeated games
-export async function compareCarts(userId, strgCart){
+function compareCarts(dtbsCart, strgCart){
     console.log('Compare Carts!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-    const dataCart = await sendRequest(`${BASE_URL}?user=${userId}`)
-    console.log(dataCart)
-    console.log(strgCart)
-    for(let i = 0; i <dataCart.length; i++){
-        const foundCart = strgCart.find((obj) => obj.game._id === dataCart[i].game._id)
-        if(foundCart && foundCart.quantity !== dataCart[i].quantity){
+    console.log(dtbsCart)
+    for(let i = 0; i <dtbsCart.length; i++){
+        const foundCart = strgCart.find((obj) => obj.game._id === dtbsCart[i].game._id)
+        if(foundCart && foundCart.quantity !== dtbsCart[i].quantity){
+            const index = strgCart.indexOf(foundCart)
             console.log(foundCart)
-            console.log(await dataCart[i])
-            dataCart[i].quantity += 1
-            console.log(dataCart[i])
-            try{
-                await sendRequest(BASE_URL, 'PUT', dataCart[i])
-            }catch(err){
-                console.log(`${err} in utitilies`)
-            }
+            console.log(dtbsCart[i])
+            foundCart.quantity += dtbsCart[i].quantity
+            console.log(dtbsCart[i])
+            strgCart.splice(index, 1, foundCart)
+            console.log(strgCart)
+            // try{
+            //     await sendRequest(BASE_URL, 'PUT', dataCart[i])
+            // }catch(err){
+            //     console.log(`${err} in utitilies`)
+            // } finally {
+            //     console.log('Finally block console log')
+            //     strgCart.splice(index, 1)
+            //     console.log(strgCart)
+            // }
         }
     }
-    return getCart(userId)
+    // return getCart(userId)
 }
 
 
 // Creates cart schema (only if there's a user) and adds it to storage
 export function addToCart(payload){
     console.log('Add to Cart!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+    // if front end didn't define a quantity amount then leave it as 1
     payload.quantity = payload.quantity ? payload.quantity : 1
     const cart = JSON.parse(sessionStorage.getItem('cart'))
     let foundCart = cart.find((obj) => obj.game._id === payload.game._id )
@@ -74,6 +88,7 @@ export function addToCart(payload){
 }
 
 export async function updateCart(payload){
+    console.log('Update Cart!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
     if(payload.user){
         try{
             console.log(`Update console`)
@@ -89,11 +104,19 @@ export async function updateCart(payload){
 
 
 // Checks if cart in storage is empty when logging in
-export function checkCart(userId){
-    const cart = JSON.parse(sessionStorage.getItem('cart'))
-    if(cart && cart.length > 0){
-        console.log('checkCart found cart items')
-        return compareCarts(userId, cart)
-    }
-    return getCart(userId)
+export async function checkCart(userId){
+    console.log('Check Cart!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+    const lclCart = getLocalCart()
+    const ssnCart = getSessionCart()
+    const dtbsCart = await getCart(userId)
+    console.log(lclCart)
+    console.log(ssnCart)
+    console.log(dtbsCart)
+    // if there isn't a user signed in already (not a page refresh)
+    if(!lclCart) return compareCarts(dtbsCart, ssnCart)
+    // if(cart && cart.length > 0){
+    //     console.log('checkCart found cart items')
+    //     return compareCarts(userId, cart)
+    // }
+    // return getCart(userId)
 }
