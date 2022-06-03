@@ -62,10 +62,27 @@ function compareCarts(dtbsCart, strgCart){
 }
 
 
+// Creates Schema if there is a user or adds to storage if there isn't one
+async function createCart(payload){
+    if(!payload.user) return sessionStorage.setItem('cart', JSON.stringify(payload))
+    try{
+        return await sendRequest(`${BASE_URL}`, 'POST', payload)
+        // return sessionStorage.setItem('cart', JSON.stringify(cart))
+    } catch(err) {
+        console.log(`${err} in utitilies`)
+    }
+}
+
+// Checks if User already has a cart with a particular game
+async function findCart(payload){
+    const cart = getCart(payload.user)
+    const foundCart = cart.find((obj) => payload.games[0] === obj.games[0])
+    return foundCart ? foundCart : null
+}
+
 // Creates cart schema (only if there's a user) and adds it to storage
 export async function addToCart(payload){
     console.log('Add to Cart!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-    console.log(payload.games[0 ])
     try{
         return await sendRequest(`${BASE_URL}`, 'POST', payload)
         // return sessionStorage.setItem('cart', JSON.stringify(cart))
