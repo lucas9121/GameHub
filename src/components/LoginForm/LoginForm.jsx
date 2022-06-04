@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import * as usersService from '../../utilities/users-service';
+import * as cartsAPI from '../../utilities/carts-api'
 import styles from './LoginForm.module.css'
 
 export default function LoginForm({ setUser, setShowSignin, setActClk }) {
@@ -19,6 +20,7 @@ export default function LoginForm({ setUser, setShowSignin, setActClk }) {
       try {
         const user = await usersService.login(credentials);
         setUser(user);
+        if(user.account === 'gamer') cartsAPI.checkCart(user._id)
         // close the sign in div
         setShowSignin(false)
         setActClk(false)
