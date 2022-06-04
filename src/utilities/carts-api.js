@@ -64,7 +64,10 @@ function compareCarts(dtbsCart, strgCart){
 async function createCart(payload){
     if(!payload.user){
         payload.quantity = 1
+        payload._id = payload.games[0]._id
         const cart = getSessionCart()
+        console.log(payload)
+        console.log(cart)
         return sessionStorage.setItem('cart', JSON.stringify([...cart, payload]))  
     } 
     try{
@@ -77,6 +80,7 @@ async function createCart(payload){
 // Checks if cart of a particular game already exists
 async function findCart(payload){
     // if there's a user logged in
+    console.log(payload)
     console.log(payload.games[0])
     if(payload.user){
         const cart = await getCart(payload.user)
@@ -89,6 +93,8 @@ async function findCart(payload){
         const cart = getSessionCart()
         console.log(cart)
         const foundCart = cart.find((obj) => payload.games[0]._id === obj.games[0]._id)
+        const index = cart.indexOf(foundCart)
+        console.log(index)
         console.log(foundCart)
         return foundCart ? foundCart : null
     }
@@ -148,8 +154,11 @@ export async function updateCart(payload){
     } else {
         const cart = getSessionCart()
         const cartItem = cart.find((obj) => obj._id === payload._id)
+        const index = cart.indexOf(cartItem)
+        console.log(index)
         cartItem.games = payload.games
         cartItem.quantity = payload.quantity
+        console.log(cartItem.quantity)
         return sessionStorage.setItem('cart', JSON.stringify(cart))
     }
 }
