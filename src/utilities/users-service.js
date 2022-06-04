@@ -15,7 +15,6 @@ export async function login(credentials) {
   const token = await usersAPI.login(credentials);
   // Persist the token to localStorage
   localStorage.setItem('token', token);
-  // sessionStorage.setItem('cart')
   return getUser();
 }
 
@@ -41,15 +40,8 @@ export function getToken() {
 
 export function getSessionToken() {
   const sessionToken = sessionStorage.getItem('sessionToken');
-  // getItem will return null if no key
   if (!sessionToken) return null;
   JSON.parse(atob(sessionToken.split('.')[1]));
-  // A JWT's expiration is expressed in seconds, not miliseconds
-  // if (payload.exp < Date.now() / 1000) {
-  //   // Token has expired
-  //   localStorage.removeItem('token');
-  //   return null;
-  // }
   return sessionToken;
 }
 
@@ -62,7 +54,6 @@ export function getUser() {
   const token = getToken();
   if(token){ 
     const user = JSON.parse(atob(token.split('.')[1])).user;
-    cartsAPI.checkCart(user._id)
     return user
   }
   return null
