@@ -21,33 +21,21 @@ function getSessionCart(){
 // Compares cart in the database with storage cart for any repeated games
 function compareCarts(dtbsCart, strgCart){
     console.log('Compare Carts!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-    console.log(dtbsCart)
-    console.log(strgCart)
+    const userId = strgCart[0].user
     // user had a cart before logging in and also had a cart in the system
     if(dtbsCart.length > 0){
-        console.log('dtbs cart has games inside')
         for(let i = 0; i <dtbsCart.length; i++){
             const foundCart = strgCart.find((obj) => obj.games[0]._id === dtbsCart[i].games[0]._id)
             if(foundCart){
-                const index = strgCart.indexOf(foundCart)
-                console.log(index)
-                console.log(foundCart)
-                console.log(dtbsCart[i])
                 updateCart(dtbsCart[i], foundCart.games.length)
-                console.log(strgCart)
-                const cart = strgCart.splice(index, 1)
-                console.log(cart)
-                JSON.parse(sessionStorage.getItem('cart'))
+                delete foundCart.user
             }
         }
-        console.log('return cart')
-        console.log(dtbsCart.user)
-        // updateCart(strgCart)
     }
     for(let i = 0; i < strgCart.length; i++){
-        console.log('time to create new schemas')
         createCart(strgCart[i])
     }
+    return getCart(userId)
 }
 
 
@@ -106,7 +94,7 @@ export async function updateCart(payload, num){
     console.log('Update Cart!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
     // if there's a user logged in
     if(payload.user){
-        for(let i = 0; i <= num; i++){
+        for(let i = 1; i <= num; i++){
             payload.games = [...payload.games, payload.games[0]]
         }
         payload.quantity = payload.games.length
