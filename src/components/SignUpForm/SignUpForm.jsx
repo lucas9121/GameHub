@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { signUp } from '../../utilities/users-service';
+import * as cartsAPI from '../../utilities/carts-api'
 import styles from './SignUpForm.module.css'
 
 
@@ -36,6 +37,7 @@ export default class SignUpForm extends Component {
         delete formData.lName;
         const user = await signUp(formData);
         this.props.setUser(user);
+        if(user.account === 'gamer') cartsAPI.checkCart(user._id)
         // closes sign in div
         this.props.setShowSignin(false)
         this.props.setActClk(false)
