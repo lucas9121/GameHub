@@ -1,9 +1,7 @@
 import sendRequest from "./send-request";
-import { useMemo } from 'react'
 
 const BASE_URL = '/api/carts'
 
-// useMemo(() =>  compareCarts(userId, strgCart), [strgCart])
 // Gets cart from database
 export async function getCart(userId){
     console.log('Get Cart!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
@@ -67,28 +65,31 @@ async function createCart(payload){
     if(!payload.user) return sessionStorage.setItem('cart', JSON.stringify(payload))
     try{
         return await sendRequest(`${BASE_URL}`, 'POST', payload)
-        // return sessionStorage.setItem('cart', JSON.stringify(cart))
     } catch(err) {
         console.log(`${err} in utitilies`)
     }
 }
 
-// Checks if User already has a cart with a particular game
+// Checks if cart of a particular game already exists
 async function findCart(payload){
-    const cart = getCart(payload.user)
-    const foundCart = cart.find((obj) => payload.games[0] === obj.games[0])
-    return foundCart ? foundCart : null
+    // if there's a user logged in
+    if(payload.user){
+        const cart = await getCart(payload.user)
+        const foundCart = cart.find((obj) => payload.games[0] === obj.games[0])
+        return foundCart ? foundCart : null
+    // no user loged in
+    } else {
+        const cart = getSessionCart()
+        const foundCart = cart.find((obj) => payload.games[0] === obj.games[0])
+        return foundCart ? foundCart : null
+    }
 }
 
 // Creates cart schema (only if there's a user) and adds it to storage
 export async function addToCart(payload){
     console.log('Add to Cart!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-    try{
-        return await sendRequest(`${BASE_URL}`, 'POST', payload)
-        // return sessionStorage.setItem('cart', JSON.stringify(cart))
-    } catch(err) {
-        console.log(`${err} in utitilies`)
-    }
+    const cart = await findCart(payload)
+    if(!cart) return await createCart(payload)
 
     // // if front end didn't define a quantity amount then leave it as 1
     // payload.quantity = payload.quantity ? payload.quantity : 1
