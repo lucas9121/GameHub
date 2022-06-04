@@ -17,10 +17,6 @@ function getSessionCart(){
     return JSON.parse(sessionStorage.getItem('cart'))
 }
 
-function getLocalCart(){
-    return JSON.parse(localStorage.getItem('cart'))
-}
-
 
 // Compares cart in the database with storage cart for any repeated games
 function compareCarts(dtbsCart, strgCart){
@@ -28,7 +24,7 @@ function compareCarts(dtbsCart, strgCart){
     console.log(dtbsCart)
     const updateNeeded = []
     // user had a cart before logging in and also had a cart in the system
-    if(dtbsCart.length > 0 && strgCart.length > 0){
+    if(dtbsCart.length > 0){
         for(let i = 0; i <dtbsCart.length; i++){
             const foundCart = strgCart.find((obj) => obj.game._id === dtbsCart[i].game._id)
             if(foundCart && foundCart.quantity !== dtbsCart[i].quantity){
@@ -173,14 +169,18 @@ function updateSessionCart(games){
 // Checks if cart in storage is empty when logging in
 export async function checkCart(userId){
     console.log('Check Cart!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-    const lclCart = getLocalCart()
     const ssnCart = getSessionCart()
     const dtbsCart = await getCart(userId)
-    console.log(lclCart)
     console.log(ssnCart)
     console.log(dtbsCart)
     // if there isn't a user signed in already (not a page refresh)
-    // if(!lclCart) return compareCarts(dtbsCart, ssnCart)
+    if(ssnCart.length > 0){
+        ssnCart.forEach((cartItem) => {
+            cartItem.user = userId
+            delete cartItem._id
+        })
+        return compareCarts(dtbsCart, ssnCart)
+    } 
     // if(cart && cart.length > 0){
     //     console.log('checkCart found cart items')
     //     return compareCarts(userId, cart)
