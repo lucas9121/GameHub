@@ -25,6 +25,7 @@ function compareCarts(dtbsCart, strgCart){
     console.log(strgCart)
     // user had a cart before logging in and also had a cart in the system
     if(dtbsCart.length > 0){
+        console.log('dtbs cart has games inside')
         for(let i = 0; i <dtbsCart.length; i++){
             const foundCart = strgCart.find((obj) => obj.games[0]._id === dtbsCart[i].games[0]._id)
             if(foundCart){
@@ -33,13 +34,18 @@ function compareCarts(dtbsCart, strgCart){
                 console.log(foundCart)
                 console.log(dtbsCart[i])
                 updateCart(dtbsCart[i], foundCart.games.length)
-                strgCart.splice(index, 1)
                 console.log(strgCart)
+                const cart = strgCart.splice(index, 1)
+                console.log(cart)
+                JSON.parse(sessionStorage.getItem('cart'))
             }
         }
-        return getCart(dtbsCart.user)
+        console.log('return cart')
+        console.log(dtbsCart.user)
+        // updateCart(strgCart)
     }
     for(let i = 0; i < strgCart.length; i++){
+        console.log('time to create new schemas')
         createCart(strgCart[i])
     }
 }
@@ -92,50 +98,20 @@ export async function addToCart(payload){
     if(!cartItem) return await createCart(payload)
     console.log('cart item found')
     return await updateCart(cartItem, 1)
-
-    // // if front end didn't define a quantity amount then leave it as 1
-    // payload.quantity = payload.quantity ? payload.quantity : 1
-    // const cart = JSON.parse(sessionStorage.getItem('cart'))
-    // let foundCart = cart.find((obj) => obj.game._id === payload.game._id )
-    // const newCart = [...cart, payload]
-    // console.log(newCart)
-    // console.log(payload)
-    // // if game is already in a cart schema
-    // if(foundCart){
-    //     foundCart.quantity += payload.quantity
-    //     console.log(foundCart)
-    //     const index = cart.indexOf(foundCart)
-    //     cart.splice(index, 1, foundCart)
-    //     console.log(cart)
-    //     // if user is logged in
-    //     if(payload.user){
-    //         console.log('user found cart')
-    //         return updateCart(Array.from(foundCart))
-    //     } else {
-    //         return sessionStorage.setItem('cart', JSON.stringify(cart))
-    //     }
-    // // if game is not in a schema
-    // //if user is logged in
-    // } else if(payload.user){
-    //     console.log('User is logged in')
-    //     return sendRequest(BASE_URL, 'POST', payload)
-    // } else {
-    //     return sessionStorage.setItem('cart', JSON.stringify(newCart))
-    // }
 }
 
 
 // Updates cart in database
 export async function updateCart(payload, num){
     console.log('Update Cart!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-    for(let i = 0; i <= num; i++){
-        payload.games = [...payload.games, payload.games[0]]
-    }
-    payload.quantity = payload.games.length
-    console.log(payload.quantity)
-    console.log(payload.games.length)
     // if there's a user logged in
     if(payload.user){
+        for(let i = 0; i <= num; i++){
+            payload.games = [...payload.games, payload.games[0]]
+        }
+        payload.quantity = payload.games.length
+        console.log(payload.quantity)
+        console.log(payload.games.length)
         return await sendRequest(BASE_URL, 'PUT', payload)
     // no user loged in
     } else {
@@ -143,8 +119,8 @@ export async function updateCart(payload, num){
         const cartItem = cart.find((obj) => obj._id === payload._id)
         const index = cart.indexOf(cartItem)
         console.log(index)
-        cartItem.games = payload.games
-        cartItem.quantity = payload.quantity
+        cartItem.games = [...cartItem.games, payload.games[0]]
+        cartItem.quantity = cartItem.games.length
         console.log(cartItem.quantity)
         return sessionStorage.setItem('cart', JSON.stringify(cart))
     }
