@@ -62,7 +62,7 @@ export default function App(){
 
     return(
         <main className={styles.App}>
-            <NavBar user={user} setUser={setUser}  actClk={actClk} setActClk={setActClk} showSignin={showSignin} setShowSignin={setShowSignin} signClk={signClk} setSignClk={setSignClk} setSearchClk={setSearchClk}/>
+            <NavBar user={user} setUser={setUser} cart={cart} actClk={actClk} setActClk={setActClk} showSignin={showSignin} setShowSignin={setShowSignin} signClk={signClk} setSignClk={setSignClk} setSearchClk={setSearchClk}/>
             {
                 // if the hook is true display this div
                 showSignin &&
@@ -73,7 +73,7 @@ export default function App(){
                 <Route path='/' element={<Home games={games} user={user} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk}/>} />
                 <Route path='/new' element={<New user={user} refresh={refresh} setRefresh={setRefresh} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk}/>} />
                 <Route path='/account/:id' element={<MyAccount user={user} setUser={setUser} setUserDlt={setUserDlt} refresh={refresh} setRefresh={setRefresh} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk} />} />
-                <Route path='/cart' element={<Cart user={user} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk} />} />
+                <Route path='/cart' element={<Cart user={user} cart={cart} setCart={setCart} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk} />} />
                 <Route path='/:id/edit' element={<Edit refresh={refresh} setRefresh={setRefresh} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk} />} />
                 <Route path='/:id' element={<Show user={user} refresh={refresh} setRefresh={setRefresh} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk}/>} />
                 <Route path='/*' element={<Navigate to='/' />} />
