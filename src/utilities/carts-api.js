@@ -22,44 +22,33 @@ function getSessionCart(){
 function compareCarts(dtbsCart, strgCart){
     console.log('Compare Carts!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
     console.log(dtbsCart)
-    const updateNeeded = []
+    console.log(strgCart)
     // user had a cart before logging in and also had a cart in the system
     if(dtbsCart.length > 0){
         for(let i = 0; i <dtbsCart.length; i++){
-            const foundCart = strgCart.find((obj) => obj.game._id === dtbsCart[i].game._id)
-            if(foundCart && foundCart.quantity !== dtbsCart[i].quantity){
+            const foundCart = strgCart.find((obj) => obj.games[0]._id === dtbsCart[i].games[0]._id)
+            if(foundCart){
                 const index = strgCart.indexOf(foundCart)
+                console.log(index)
                 console.log(foundCart)
                 console.log(dtbsCart[i])
-                foundCart.quantity += dtbsCart[i].quantity
-                updateNeeded.push(foundCart)
-                console.log(dtbsCart[i])
-                strgCart.splice(index, 1, foundCart)
+                updateCart(dtbsCart[i], foundCart.games.length)
+                strgCart.splice(index, 1)
                 console.log(strgCart)
-                // try{
-                //     await sendRequest(BASE_URL, 'PUT', dataCart[i])
-                // }catch(err){
-                //     console.log(`${err} in utitilies`)
-                // } finally {
-                //     console.log('Finally block console log')
-                //     strgCart.splice(index, 1)
-                //     console.log(strgCart)
-                // }
             }
         }
-        return updateSessionCart(strgCart)
-    // user didn't have cart before logging in and also had a cart in the system
-    } else if(dtbsCart.length > 0 && strgCart.length <= 0){
-        return updateSessionCart(dtbsCart)
+        return getCart(dtbsCart.user)
     }
-    // if(updateNeeded.length > 0) updateCart(updateNeeded, updateNeeded[0].user)
+    for(let i = 0; i < strgCart.length; i++){
+        createCart(strgCart[i])
+    }
 }
 
 
 // Creates Schema if there is a user or adds to storage if there isn't one
 async function createCart(payload){
     if(!payload.user){
-        payload.quantity = 1
+        payload.quantity = payload.games.length
         payload._id = payload.games[0]._id
         const cart = getSessionCart()
         console.log(payload)
@@ -102,7 +91,7 @@ export async function addToCart(payload){
     const cartItem = await findCart(payload)
     if(!cartItem) return await createCart(payload)
     console.log('cart item found')
-    return await updateCart(cartItem)
+    return await updateCart(cartItem, 1)
 
     // // if front end didn't define a quantity amount then leave it as 1
     // payload.quantity = payload.quantity ? payload.quantity : 1
@@ -137,9 +126,11 @@ export async function addToCart(payload){
 
 
 // Updates cart in database
-export async function updateCart(payload){
+export async function updateCart(payload, num){
     console.log('Update Cart!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-    payload.games = [...payload.games, payload.games[0]]
+    for(let i = 0; i <= num; i++){
+        payload.games = [...payload.games, payload.games[0]]
+    }
     payload.quantity = payload.games.length
     console.log(payload.quantity)
     console.log(payload.games.length)
@@ -157,12 +148,6 @@ export async function updateCart(payload){
         console.log(cartItem.quantity)
         return sessionStorage.setItem('cart', JSON.stringify(cart))
     }
-}
-
-// Changes the cart in session storage
-function updateSessionCart(games){
-    const cart = sessionStorage.setItem('cart', JSON.stringify(games))
-    return cart
 }
 
 
