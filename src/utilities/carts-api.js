@@ -62,7 +62,11 @@ function compareCarts(dtbsCart, strgCart){
 
 // Creates Schema if there is a user or adds to storage if there isn't one
 async function createCart(payload){
-    if(!payload.user) return sessionStorage.setItem('cart', JSON.stringify([...payload, payload]))
+    if(!payload.user){
+        payload.quantity = 1
+        const cart = getSessionCart()
+        return sessionStorage.setItem('cart', JSON.stringify([...cart, payload]))  
+    } 
     try{
         return await sendRequest(`${BASE_URL}`, 'POST', payload)
     } catch(err) {
