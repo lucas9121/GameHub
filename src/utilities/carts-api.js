@@ -62,7 +62,7 @@ function compareCarts(dtbsCart, strgCart){
 
 // Creates Schema if there is a user or adds to storage if there isn't one
 async function createCart(payload){
-    if(!payload.user) return sessionStorage.setItem('cart', JSON.stringify(payload))
+    if(!payload.user) return sessionStorage.setItem('cart', JSON.stringify([...payload, payload]))
     try{
         return await sendRequest(`${BASE_URL}`, 'POST', payload)
     } catch(err) {
@@ -73,14 +73,19 @@ async function createCart(payload){
 // Checks if cart of a particular game already exists
 async function findCart(payload){
     // if there's a user logged in
+    console.log(payload.games[0])
     if(payload.user){
         const cart = await getCart(payload.user)
-        const foundCart = cart.find((obj) => payload.games[0] === obj.games[0])
+        const foundCart = cart.find((obj) => payload.games[0]._id === obj.games[0]._id)
+        console.log('Cart was found!!!!!!!!!!')
         return foundCart ? foundCart : null
     // no user loged in
     } else {
+        console.log("No user in find cart")
         const cart = getSessionCart()
-        const foundCart = cart.find((obj) => payload.games[0] === obj.games[0])
+        console.log(cart)
+        const foundCart = cart.find((obj) => payload.games[0]._id === obj.games[0]._id)
+        console.log(foundCart)
         return foundCart ? foundCart : null
     }
 }
@@ -88,8 +93,10 @@ async function findCart(payload){
 // Creates cart schema (only if there's a user) and adds it to storage
 export async function addToCart(payload){
     console.log('Add to Cart!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-    const cart = await findCart(payload)
-    if(!cart) return await createCart(payload)
+    const cartItem = await findCart(payload)
+    if(!cartItem) return await createCart(payload)
+    console.log('cart item found')
+    return await updateCart(cartItem)
 
     // // if front end didn't define a quantity amount then leave it as 1
     // payload.quantity = payload.quantity ? payload.quantity : 1
@@ -124,28 +131,22 @@ export async function addToCart(payload){
 
 
 // Updates cart in database
-export async function updateCart(payload, userId){
+export async function updateCart(payload){
     console.log('Update Cart!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-    if(payload.length === 1 && payload[0].user){
-        try{
-            console.log(`Update console`)
-            console.log(payload)
-            console.log(payload._id)
-            await sendRequest(BASE_URL, 'PUT', payload[0])
-            return await getCart(payload.user)
-        }catch(err){
-            console.log(`${err} in utitilies`)
-        }
-    } else if(payload.length > 1 && userId){
-        payload.forEach(async (cart) => {
-            cart.user = userId
-            console.log('update inside forEach')
-            try{
-                await sendRequest(`${BASE_URL}`, 'PUT', cart)
-            } catch(err){
-                console.log(`${err} in utitilies`)
-            }
-        })
+    payload.games = [...payload.games, payload.games[0]]
+    payload.quantity = payload.games.length
+    console.log(payload.quantity)
+    console.log(payload.games.length)
+    // if there's a user logged in
+    if(payload.user){
+        return await sendRequest(BASE_URL, 'PUT', payload)
+    // no user loged in
+    } else {
+        const cart = getSessionCart()
+        const cartItem = cart.find((obj) => obj._id === payload._id)
+        cartItem.games = payload.games
+        cartItem.quantity = payload.quantity
+        return sessionStorage.setItem('cart', JSON.stringify(cart))
     }
 }
 

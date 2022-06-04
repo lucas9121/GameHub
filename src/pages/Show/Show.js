@@ -83,7 +83,7 @@ export default function Show({user, refresh, setRefresh}) {
         evt.preventDefault()
         try {
             if(user) cartData.user = user._id
-            cartData.games = [payload._id]
+            cartData.games = [payload]
             console.log(cartData)
             await cartsAPI.addToCart(cartData)
         } catch(err){
