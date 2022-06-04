@@ -1,6 +1,7 @@
 import styles from './App.module.css'
 import {Routes, Route, Navigate} from "react-router-dom"
 import { useState, useEffect } from "react"
+import * as cartAPI from '../../utilities/carts-api'
 import Home from '../Home/Home'
 import MyAccount from '../MyAccount/MyAccount'
 import Cart from '../Cart/Cart'
@@ -20,6 +21,9 @@ export default function App(){
     const [refresh, setRefresh] = useState(false)
     const [user, setUser] = useState(getUser())
 
+    //Cart
+    const [cart, setCart] = useState([])
+
     // checks if the delete account button was pressed
     const [userDlt, setUserDlt] = useState(false)
 
@@ -38,6 +42,7 @@ export default function App(){
                 const res = await fetch('/api/games')
                 const data = await res.json()
                 setGames(data)
+                const cartItems = await cartAPI.getCart(user ? user._id : null)
                 // when page mounts for the first time
                 if(!sessionStorage.getItem('cart')){
                     const cart = []
@@ -53,6 +58,7 @@ export default function App(){
             }
         })()
     }, [refresh])
+    console.log(cart)
 
     return(
         <main className={styles.App}>

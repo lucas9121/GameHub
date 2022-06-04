@@ -5,6 +5,7 @@ const BASE_URL = '/api/carts'
 // Gets cart from database
 export async function getCart(userId){
     console.log('Get Cart!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+    if(!userId) return getSessionCart()
     try{
         return await sendRequest(`${BASE_URL}?user=${userId}`)
         // return sessionStorage.setItem('cart', JSON.stringify(cart))
