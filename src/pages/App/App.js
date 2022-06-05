@@ -1,6 +1,7 @@
 import styles from './App.module.css'
 import {Routes, Route, Navigate} from "react-router-dom"
 import { useState, useEffect } from "react"
+import * as gamesAPI from '../../utilities/games-api'
 import * as cartAPI from '../../utilities/carts-api'
 import Home from '../Home/Home'
 import MyAccount from '../MyAccount/MyAccount'
@@ -40,8 +41,7 @@ export default function App(){
     useEffect(() => {
         (async () => {
             try {
-                const res = await fetch('/api/games')
-                const data = await res.json()
+                const data = await gamesAPI.getGames()
                 setGames(data)
                 // when page mounts for the first time
                 if(!sessionStorage.getItem('cart')){
@@ -61,7 +61,6 @@ export default function App(){
             }
         })()
     }, [refresh])
-    console.log(cart)
     return(
         <main className={styles.App}>
             <NavBar user={user} setUser={setUser} newQty={newQty} cart={cart} setCart={setCart} refresh={refresh} setRefresh={setRefresh} actClk={actClk} setActClk={setActClk} showSignin={showSignin} setShowSignin={setShowSignin} signClk={signClk} setSignClk={setSignClk} setSearchClk={setSearchClk}/>
