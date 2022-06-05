@@ -10,6 +10,7 @@ const userSchema = new Schema({
     email: {type: String, unique: true, trim: true, lowercase: true, required: true},
     password: {type: String, trim: true, minLength: 5, required: true},
     account: {type: String, require: true, default: "gamer", enum: ['gamer', 'developer', 'admin']},
+    bought: [{type: Schema.Types.ObjectId, ref: 'Game' }],
     question1: {
         type: String,
         enum: [
