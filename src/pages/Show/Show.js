@@ -5,6 +5,7 @@ import GameAbout from "../../components/GameAbout/GameAbout"
 import GamePurchase from "../../components/GamePurchase/GamePurchase"
 import DevGameButton from "../../components/DevGameButton/DevGameButton"
 import AdminGameButtons from "../../components/AdminGameButtons/AdminGameButtons"
+import * as gamesAPI from '../../utilities/games-api'
 import * as cartsAPI from "../../utilities/carts-api"
 import styles from './Show.module.css'
 
@@ -28,8 +29,7 @@ export default function Show({user, refresh, setRefresh}) {
     useEffect(() => {
         (async () => {
             try {
-                const response = await fetch(`/api/games/${id}`)
-                const data = await response.json()
+                const data = await gamesAPI.getOneGame(id)
                 setGame(data)
                 setReviews(data.reviews)
             } catch(e) {
@@ -84,7 +84,6 @@ export default function Show({user, refresh, setRefresh}) {
         try {
             if(user) cartData.user = user._id
             cartData.games = [payload]
-            console.log(cartData)
             await cartsAPI.addToCart(cartData)
             setRefresh(!refresh)
         } catch(err){
