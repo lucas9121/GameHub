@@ -86,6 +86,7 @@ export default function Show({user, refresh, setRefresh}) {
             cartData.games = [payload]
             console.log(cartData)
             await cartsAPI.addToCart(cartData)
+            setRefresh(!refresh)
         } catch(err){
             console.log(err + ' Front end problem')
         }
