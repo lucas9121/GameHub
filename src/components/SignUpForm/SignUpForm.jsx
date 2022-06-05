@@ -37,10 +37,11 @@ export default class SignUpForm extends Component {
         delete formData.lName;
         const user = await signUp(formData);
         this.props.setUser(user);
-        if(user.account === 'gamer') cartsAPI.checkCart(user._id)
+        if(user.account === 'gamer') await cartsAPI.checkCart(user._id)
         // closes sign in div
         this.props.setShowSignin(false)
         this.props.setActClk(false)
+        this.props.setRefresh(!this.props.refresh)
       } catch {
         this.setState({ error: 'Sign Up Failed - Try Again' });
       }
