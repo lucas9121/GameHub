@@ -8,7 +8,6 @@ export async function getCart(userId){
     if(!userId) return getSessionCart()
     try{
         return await sendRequest(`${BASE_URL}?user=${userId}`)
-        // return sessionStorage.setItem('cart', JSON.stringify(cart))
     } catch(err) {
         console.log(`${err} in utitilies`)
     }
@@ -131,9 +130,21 @@ export async function checkCart(userId){
         })
         return compareCarts(dtbsCart, ssnCart)
     } 
-    // if(cart && cart.length > 0){
-    //     console.log('checkCart found cart items')
-    //     return compareCarts(userId, cart)
-    // }
-    // return getCart(userId)
+}
+
+export async function deleteCart(id, idx){
+    console.log('Delete Cart!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+    if(!idx){
+        try{
+            await sendRequest(`${BASE_URL}/${id}`, "DELETE")
+        } catch(err) {
+            console.log(`${err} in utitilies`)
+            return
+        } 
+    } else {
+        console.log('index was sent')
+        const cart = getSessionCart()
+        cart.splice(idx, 1)
+        return sessionStorage.setItem('cart', JSON.stringify(cart))
+    }
 }
