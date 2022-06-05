@@ -1,3 +1,68 @@
 .Cart {
     flex: 13;
+    color: whitesmoke;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 5px;
+    justify-content: center;
+    padding: 10px 5px;
+    overflow: auto;
+}
+
+.Game{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+
+}
+
+.Game > div:nth-child(1) {
+    flex: 3;
+    background-size: cover;
+    background-repeat: round;
+}
+
+.Game > div:nth-child(2){
+    background: linear-gradient(rgba(0, 123, 255, 0.37) ,rgba(0, 0, 0));
+}
+
+.Game > div:nth-child(2) > h2 {
+    margin: 0;
+    font-size: larger;
+}
+
+.GameInfo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.GameInfo > p {
+    margin: 0;
+}
+
+.Form{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 300px;
+}
+
+.Form > div {
+    display: flex;
+    gap: 3px;
+}
+
+.Form > p {
+    margin: 8px 0;
+}
+
+.stock {
+    font-size: small;
+}
+
+.input{
+width: 50px;
 }

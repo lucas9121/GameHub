@@ -1,4 +1,3 @@
-
 .footer {
         display: flex;
         flex-direction: column;
@@ -21,9 +20,15 @@
     list-style-type: none;
 }
 
+.ul > li {
+    display: flex;
+    align-items: center;
+}
+
 .ul > li > a {
     transition: .2s;
     color: black;
+    display: flex;
 }
 
 .ul > li:nth-of-type(1):hover > a {
