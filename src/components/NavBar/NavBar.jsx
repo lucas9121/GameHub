@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import styles from "./NavBar.module.css"
 import { useState, useEffect } from "react"
 
-export default function NavBar({ user, setUser, showSignin, setShowSignin, setActClk, actClk, setSearchClk, signClk, setSignClk}) {
+export default function NavBar({ user, setUser, cart, setCart, newQty, showSignin, setShowSignin, setActClk, actClk, setSearchClk, signClk, setSignClk, refresh, setRefresh}) {
     // dropdown hook
     const [options, setOptions] = useState([])
 
@@ -14,16 +14,16 @@ export default function NavBar({ user, setUser, showSignin, setShowSignin, setAc
         //removes focus from search bar
         setSearchClk(false)
     }
-    
+
     useEffect(() => {
         // if hook is true
         if(actClk){
             // dropdown options if user has a gamer account
             if(user.account ===  "gamer"){
-                setOptions([{url: `/account/${user._id}`, name: 'My Account' }, <UserLogOut setUser={setUser} actClk={actClk} setSignClk={setSignClk} setActClk={setActClk} setSearchClk={setSearchClk}/> ]);
+                setOptions([{url: `/account/${user._id}`, name: 'My Account' }, <UserLogOut setUser={setUser} cart={cart} setCart={setCart} refresh={refresh} setRefresh={setRefresh} actClk={actClk} setSignClk={setSignClk} setActClk={setActClk} setSearchClk={setSearchClk}/> ]);
             } else {
                 // dropdown options if user has a developer or admin account
-                setOptions([{url: `/account/${user._id}`, name: 'My Account' }, {url: '/new', name: 'New Game' }, <UserLogOut setUser={setUser} actClk={actClk} setSignClk={setSignClk} setActClk={setActClk} setSearchClk={setSearchClk}/>]);
+                setOptions([{url: `/account/${user._id}`, name: 'My Account' }, {url: '/new', name: 'New Game' }, <UserLogOut setUser={setUser} cart={cart} setCart={setCart} refresh={refresh} setRefresh={setRefresh} actClk={actClk} setSignClk={setSignClk} setActClk={setActClk} setSearchClk={setSearchClk}/>]);
             }
         } else {
             // closes dropdown if hook is false
@@ -57,12 +57,12 @@ export default function NavBar({ user, setUser, showSignin, setShowSignin, setAc
                                 }
 
                     </ul>
-                    <Link to='/cart'>Cart</Link>
+                    <Link to='/cart'>Cart({newQty})</Link>
                 </div> :
                 // if there isn't a user
                 <ul className={styles.noUser}>
                     <li><h3 onClick={() => setShowSignin(!showSignin)}>Sign in</h3></li>
-                    <li><Link to='/cart'>Cart</Link></li>
+                    <li><Link to='/cart'>Cart({newQty})</Link></li>
                     {/* <AuthPage user={user} setUser={setUser} signClk={signClk} setSignClk={setSignClk} setActClk={setActClk} setSearchClk={setSearchClk}/> */}
                 </ul>
             }
