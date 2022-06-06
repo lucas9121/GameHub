@@ -117,7 +117,7 @@ export async function checkCart(userId){
 
 export async function deleteCart(id, idx){
     console.log('Delete Cart!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-    if(!idx){
+    if(idx === undefined){
         try{
             return await sendRequest(`${BASE_URL}/${id}`, "DELETE")
         } catch(err) {
