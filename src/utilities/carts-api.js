@@ -1,4 +1,5 @@
 import sendRequest from "./send-request";
+import { updateGame } from "./games-api";
 
 const BASE_URL = '/api/carts'
 
@@ -45,8 +46,6 @@ async function createCart(payload){
         payload.quantity = payload.games.length
         payload._id = payload.games[0]._id
         const cart = getSessionCart()
-        console.log(payload)
-        console.log(cart)
         return sessionStorage.setItem('cart', JSON.stringify([...cart, payload]))  
     } 
     try{
@@ -59,22 +58,14 @@ async function createCart(payload){
 // Checks if cart of a particular game already exists
 async function findCart(payload){
     // if there's a user logged in
-    console.log(payload)
-    console.log(payload.games[0])
     if(payload.user){
         const cart = await getCart(payload.user)
         const foundCart = cart.find((obj) => payload.games[0]._id === obj.games[0]._id)
-        console.log('Cart was found!!!!!!!!!!')
         return foundCart ? foundCart : null
     // no user loged in
     } else {
-        console.log("No user in find cart")
         const cart = getSessionCart()
-        console.log(cart)
         const foundCart = cart.find((obj) => payload.games[0]._id === obj.games[0]._id)
-        const index = cart.indexOf(foundCart)
-        console.log(index)
-        console.log(foundCart)
         return foundCart ? foundCart : null
     }
 }
@@ -84,7 +75,6 @@ export async function addToCart(payload){
     console.log('Add to Cart!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
     const cartItem = await findCart(payload)
     if(!cartItem) return await createCart(payload)
-    console.log('cart item found')
     return await updateCart(cartItem, 1)
 }
 
@@ -98,18 +88,13 @@ export async function updateCart(payload, num){
             payload.games = [...payload.games, payload.games[0]]
         }
         payload.quantity = payload.games.length
-        console.log(payload.quantity)
-        console.log(payload.games.length)
         return await sendRequest(BASE_URL, 'PUT', payload)
     // no user loged in
     } else {
         const cart = getSessionCart()
         const cartItem = cart.find((obj) => obj._id === payload._id)
-        const index = cart.indexOf(cartItem)
-        console.log(index)
         cartItem.games = [...cartItem.games, payload.games[0]]
         cartItem.quantity = cartItem.games.length
-        console.log(cartItem.quantity)
         return sessionStorage.setItem('cart', JSON.stringify(cart))
     }
 }
@@ -120,8 +105,6 @@ export async function checkCart(userId){
     console.log('Check Cart!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
     const ssnCart = getSessionCart()
     const dtbsCart = await getCart(userId)
-    console.log(ssnCart)
-    console.log(dtbsCart)
     // if there isn't a user signed in already (not a page refresh)
     if(ssnCart.length > 0){
         ssnCart.forEach((cartItem) => {
@@ -136,13 +119,28 @@ export async function deleteCart(id, idx){
     console.log('Delete Cart!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
     if(!idx){
         try{
-            await sendRequest(`${BASE_URL}/${id}`, "DELETE")
+            return await sendRequest(`${BASE_URL}/${id}`, "DELETE")
         } catch(err) {
             console.log(`${err} in utitilies`)
             return
         } 
     } else {
-        console.log('index was sent')
+        const cart = getSessionCart()
+        cart.splice(idx, 1)
+        return sessionStorage.setItem('cart', JSON.stringify(cart))
+    }
+}
+
+export async function buyCart(payload, idx){
+    console.log('Buy Cart!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+    const gamePayload = payload.games[0]
+    gamePayload.qty -= payload.quantity
+    gamePayload.sold += payload.quantity
+    await updateGame(gamePayload._id, gamePayload)
+    if(payload.user){
+        await deleteCart(payload._id)
+        return
+    }else {
         const cart = getSessionCart()
         cart.splice(idx, 1)
         return sessionStorage.setItem('cart', JSON.stringify(cart))

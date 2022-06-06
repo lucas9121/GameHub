@@ -16,6 +16,18 @@ export default function Cart({user, cart, setCart, refresh, setRefresh, setSignI
         }
     }
 
+    const buyGame = async (evt, cartItem, idx) => {
+        console.log('Buy function')
+        // evt.preventDefault()
+        try {
+            return await cartAPI.buyCart(cartItem, idx)
+        } catch(err){
+            console.log(err + ' on Cart page')
+        }finally{
+            setRefresh(!refresh)
+        }
+    }
+
     return(
         <main className={styles.Cart}>
             {
@@ -29,15 +41,15 @@ export default function Cart({user, cart, setCart, refresh, setRefresh, setSignI
                                 <h2>{cartItem.games[0].name}</h2>
                                 <div className={styles.GameInfo}>
                                     {cartItem.games[0].price <= 0 ? <p>Free</p> : <p>${cartItem.games[0].price * cartItem.quantity} </p>}
-                                    <form className={styles.Form}>
+                                    <div className={styles.Form}>
                                         <div>
                                             <label>Quantity:</label>
                                             <input name="buyNumber" className={styles.input} type="number" defaultValue={cartItem.quantity}/>
                                         </div>
                                         {cartItem.games[0].qty > 0 ? <p className={styles.stock}>In Stock</p> : <p className={styles.stock} style={{color: 'red'}}>Out of Stock</p> }
-                                        <input type="submit" className='btn yes-btn' value='Buy' />
+                                        <button className='btn yes-btn' onClick={(evt) => {buyGame(evt, cartItem, idx)}} >Buy</button>
                                         <button className='btn no-btn' onClick={(evt) => {handleDelete(evt, cartItem._id, idx)}} >Remove</button>
-                                    </form>
+                                    </div>
                                 </div>
 
                             </div>
