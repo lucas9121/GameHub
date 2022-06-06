@@ -1,35 +1,26 @@
 import { useRef} from "react"
 import { useNavigate } from "react-router-dom"
+import * as gamesAPI from '../../utilities/games-api'
 import styles from './New.module.css'
 
 export default function New({refresh, setRefresh, user}){
-    const name = useRef(null)
-    const price = useRef(null)
-    const img = useRef(null)
-    const qty = useRef(null)
-    const description = useRef(null)
+    const {name, price, img, qty, description} = useRef(null)
     const navigate = useNavigate()
 
     const handleSubmit = async (event) => {
         event.preventDefault()
+        const payload = {}
+        payload.name =  name.current.value;
+        payload.price =  price.current.value;
+        payload.qty =  qty.current.value;
+        payload.img =  img.current.value;
+        payload.description = description.current.value;
+        payload.dev = user._id
+        payload.approved = 'review';
+        console.log('payload is ' + payload)
         try {
-            const response = await fetch(`/api/games`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type':'application/json'
-                },
-                body: JSON.stringify({
-                    name: name.current.value,
-                    price: price.current.value,
-                    img: img.current.value,
-                    qty: qty.current.value,
-                    description: description.current.value,
-                    dev: user.name,
-                    approved: 'review'
-                })
-            })
-            const data = await response.json()
-            if(response.status === 200){
+            const data = await gamesAPI.createGame(payload)
+            if(data.status === 200){
                 setRefresh(!refresh)
                 navigate(`/${data.createdGame._id}`)
             }

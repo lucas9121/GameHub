@@ -1,23 +1,19 @@
 import { useState, useEffect, useRef } from "react"
 import { useParams, Link, useNavigate} from "react-router-dom"
+import * as gamesAPI from '../../utilities/games-api'
 import styles from './Edit.module.css'
 
 
 export default function Edit({refresh ,setRefresh}) {
     const {id} = useParams()
     const [game, setGame] = useState({})
-    const name = useRef(null)
-    const price = useRef(null)
-    const qty = useRef(null)
-    const img = useRef(null)
-    const description = useRef(null)
+    const {name, price, img, qty, description} = useRef(null)
     const navigate = useNavigate()
 
     useEffect(() => {
         (async () => {
             try {
-                const response = await fetch(`/api/games/${id}`)
-                const data = await response.json()
+                const data = await gamesAPI.getOneGame(id)
                 setGame(data)
             } catch(e) {
                 console.log(e)
@@ -27,22 +23,16 @@ export default function Edit({refresh ,setRefresh}) {
 
     const handleSubmit = async (event) => {
         event.preventDefault()
+        const payload = {}
+        payload.name =  name.current.value;
+        payload.price =  price.current.value;
+        payload.qty =  qty.current.value;
+        payload.img =  img.current.value;
+        payload.description = description.current.value;
+        payload.approved = 'review';
+        console.log('payload is ' + payload)
         try {
-            await fetch(`/api/games/${id}`, {
-                method: 'PUT',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type':'application/json'
-                },
-                body: JSON.stringify({
-                    name: name.current.value,
-                    price: price.current.value,
-                    qty: qty.current.value,
-                    img: img.current.value,
-                    description: description.current.value,
-                    approved: 'review'
-                })
-            })
+            await gamesAPI.updateGame(id, payload)
         } catch(e) {
             console.log(e)
         } finally {
