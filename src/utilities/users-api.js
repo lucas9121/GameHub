@@ -30,3 +30,11 @@ export function getAll(){
 export function login(credentials) {
     return sendRequest(`${BASE_URL}/login`, 'POST', credentials);
 }
+
+export function update(userData){
+    return sendRequest(`${BASE_URL}/${userData._id}`, 'PUT', userData)
+}
+
+export function Delete(id){
+    return sendRequest(`${BASE_URL}/delete/${id}`, 'DELETE')
+}
