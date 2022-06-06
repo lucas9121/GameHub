@@ -12,7 +12,7 @@ const gameSchema = new Schema({
     reviews: Array,
     approved: {type: String, default: 'review', enum: ['yes', 'review', 'no']},
     reason: String,
-    sold: Number
+    sold: {type: Number, default: 0}
 },
 {
     timestamps: true
