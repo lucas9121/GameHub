@@ -20,7 +20,13 @@
 
 @media (min-width: 360px){
     .App{
-        max-width: 350px;
+        max-width: 340px;
+    }
+}
+
+@media (min-width: 665px){
+    .App{
+        max-width: 645px;
     }
 }
 
