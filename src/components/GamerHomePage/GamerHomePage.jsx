@@ -2,10 +2,11 @@ import { Link } from "react-router-dom"
 import styles from "./GamerHomePage.module.css"
 
 export default function GamerHomePage({games}){
+    const gamesArr = [...games];
     return(
         <div className={styles.main}>
             {
-                newArr.sort((a, b) => {
+                gamesArr.sort((a, b) => {
                     if(a.name.toUpperCase() > b.name.toUpperCase()){
                         return 1
                     }
