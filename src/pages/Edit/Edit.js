@@ -44,7 +44,7 @@ export default function Edit({refresh ,setRefresh}) {
     const handleDelete = async (event) => {
         navigate('/')
         try {
-            const res = await fetch(`/api/games/${id}`, {method: 'DELETE'})
+            await gamesAPI.deleteGame(id)
         } catch(e) {
             console.log(e)
         } 
