@@ -33,7 +33,7 @@ export default function Home({games, user}) {
             <InitialHomePage games={games}/> :
         // if developer account is logged in
         user.account === 'developer' ?
-            <DevHomePage games={games}/> :
+            <DevHomePage games={games} user={user}/> :
         // if admin account is logged in
         user.account === 'admin' ?
             <AdminHomePage games={games} handleClick={handleClick} /> :

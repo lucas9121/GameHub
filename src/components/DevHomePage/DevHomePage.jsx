@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import styles from "./DevHomePage.module.css"
 
-export default function DevHomePage({games}){
+export default function DevHomePage({games, user}){
     return(
         <div className={styles.main}>
             {
