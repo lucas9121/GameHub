@@ -59,6 +59,17 @@ export function getUser() {
   return null
 }
 
+export async function editUser(payload){
+  const token = await usersAPI.update(payload)
+  localStorage.setItem('token', token);
+  return getUser()
+}
+
+export async function deleteUser(id){
+  await usersAPI.Delete(id)
+  return logOut()
+}
+
 export function logOut() {
   localStorage.removeItem('token');
   sessionStorage.clear()
