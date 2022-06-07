@@ -35,7 +35,6 @@ const userSchema = new Schema({
         ]
     },
     answer2: String,
-    bought: Number
 }, 
 {
     timestamps: true,
