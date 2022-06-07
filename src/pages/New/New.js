@@ -4,7 +4,11 @@ import * as gamesAPI from '../../utilities/games-api'
 import styles from './New.module.css'
 
 export default function New({refresh, setRefresh, user}){
-    const {name, price, img, qty, description} = useRef(null)
+    const name = useRef(null)
+    const price = useRef(null)
+    const img = useRef(null)
+    const qty = useRef(null)
+    const description = useRef(null)
     const navigate = useNavigate()
 
     const handleSubmit = async (event) => {
@@ -18,14 +22,16 @@ export default function New({refresh, setRefresh, user}){
         payload.dev = user._id
         payload.approved = 'review';
         console.log('payload is ' + payload)
+        console.log(payload)
         try {
+            console.log('try block')
             const data = await gamesAPI.createGame(payload)
-            if(data.status === 200){
-                setRefresh(!refresh)
-                navigate(`/${data.createdGame._id}`)
-            }
+            navigate(`/${data.createdGame._id}`)
         } catch(e) {
             console.log(e)
+        } finally {
+            console.log('success')
+            setRefresh(!refresh)
         }
     }
     

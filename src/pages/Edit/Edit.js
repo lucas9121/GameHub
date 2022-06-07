@@ -7,7 +7,11 @@ import styles from './Edit.module.css'
 export default function Edit({refresh ,setRefresh}) {
     const {id} = useParams()
     const [game, setGame] = useState({})
-    const {name, price, img, qty, description} = useRef(null)
+    const name = useRef(null)
+    const price = useRef(null)
+    const img = useRef(null)
+    const qty = useRef(null)
+    const description = useRef(null)
     const navigate = useNavigate()
 
     useEffect(() => {
