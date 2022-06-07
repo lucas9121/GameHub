@@ -21,11 +21,9 @@ export default function MyAccount({user, setUser, setUserDlt, refresh, setRefres
         } finally {
             console.log('user deleted')
             // activates use effect on app page to refresh page
+            navigate('/')
             setUser(null)
             setRefresh(!refresh)
-            // activates conditional on app page to remove token, which will log user out after being deleted
-            // setUserDlt(true)
-            navigate('/')
         }
     }
 
