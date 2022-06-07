@@ -7,6 +7,7 @@ import DevGameButton from "../../components/DevGameButton/DevGameButton"
 import AdminGameButtons from "../../components/AdminGameButtons/AdminGameButtons"
 import * as gamesAPI from '../../utilities/games-api'
 import * as cartsAPI from "../../utilities/carts-api"
+import { editUser } from "../../utilities/users-service"
 import styles from './Show.module.css'
 
 export default function Show({user, refresh, setRefresh}) {
@@ -42,34 +43,17 @@ export default function Show({user, refresh, setRefresh}) {
     // changes the approved status of a game
     const handleApproved = async (event, response) => {
         event.preventDefault()
+        const newGame = game
+        newGame.approved = response
         try {
             if(response === 'yes'){
                 // if admin clicked yes
-                await fetch(`/api/games/${id}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type':'application/json'
-                    },
-                    body: JSON.stringify({
-                        approved: response,
-                        reason: ''
-                    })
-                })
+                newGame.reason = ''
             } else {
                 // if admin clicked no
-                await fetch(`/api/games/${id}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type':'application/json'
-                    },
-                    body: JSON.stringify({
-                        approved: response,
-                        reason: noReason.current.value
-                    })
-                })
+                newGame.reason = noReason.current.value
             }
+            await gamesAPI.updateGame(newGame._id, newGame)
         } catch(e) {
             console.log(e)
         } finally {
