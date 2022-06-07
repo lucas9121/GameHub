@@ -70,6 +70,24 @@ export async function deleteUser(id){
   return logOut()
 }
 
+export async function findUser(id){
+  const tempToken = await usersAPI.getUser()
+  sessionStorage.setItem('tempToken', tempToken)
+  return getTempUser()
+}
+
+export function getTempToken(){
+  const tempToken = sessionStorage.getItem('tempToken');
+  if(!tempToken) return null
+  JSON.parse(atob(tempToken.split('.')[1]));
+  return tempToken
+}
+
+export function getTempUser(){
+  const tempToken = getTempToken()
+  return tempToken ? JSON.parse(atob(tempToken.split('.')[1])).user : null;
+}
+
 export function logOut() {
   localStorage.removeItem('token');
   sessionStorage.clear()

@@ -38,3 +38,7 @@ export function update(userData){
 export function Delete(id){
     return sendRequest(`${BASE_URL}/delete/${id}`, 'DELETE')
 }
+
+export function getUser(id){
+    return sendRequest(`${BASE_URL}/${id}`)
+}
