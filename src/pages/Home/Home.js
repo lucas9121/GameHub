@@ -23,21 +23,19 @@ export default function Home({games, user}) {
         }
     }
 
-    console.log(allUsers)
-
 
     return(
         // null error prevention
         //if nobody is logged in
         !user ?
-            <InitialHomePage games={games}/> :
+            <InitialHomePage games={games.filter((game) => game.approved === 'yes')}/> :
         // if developer account is logged in
         user.account === 'developer' ?
-            <DevHomePage games={games} user={user}/> :
+            <DevHomePage games={games.filter((game) => game.dev === user._id)} user={user}/> :
         // if admin account is logged in
         user.account === 'admin' ?
             <AdminHomePage games={games} handleClick={handleClick} /> :
         // if gamer account is logged in
-        <GamerHomePage games={games}/>
+        <GamerHomePage games={games.filter((game) => game.approved === 'yes')}/>
     )
 }
