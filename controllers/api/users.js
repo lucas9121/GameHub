@@ -55,6 +55,7 @@ async function create(req, res) {
 async function Delete(req,res) {
   try{
       await User.findByIdAndDelete(req.params.id)
+      res.status(200).json('User Deleted')
   }catch(e){
       res.status(400).json(e)
   }

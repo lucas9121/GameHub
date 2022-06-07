@@ -46,11 +46,10 @@ async function create(req, res){
 
 async function Delete(req,res) {
     try{
-        await Games.findByIdAndDelete(req.params.id, (e) => {
-            if(e) res.status(400).json(e)
-        })
+        await Games.findByIdAndDelete(req.params.id)
+        res.status(200).json('Game Deleted')
     }catch(e){
-        res.status()
+        res.status(400).json(e)
     }
 }
 
