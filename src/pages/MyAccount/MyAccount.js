@@ -1,8 +1,7 @@
 import { useState, useRef } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import { logOut } from "../../utilities/users-service"
+import { editUser, deleteUser } from "../../utilities/users-service"
 import styles from './MyAccount.module.css'
-import { getUser} from '../../utilities/users-service'
 
 export default function MyAccount({user, setUser, setUserDlt, refresh, setRefresh}) {
     const {id} = useParams()
@@ -13,46 +12,31 @@ export default function MyAccount({user, setUser, setUserDlt, refresh, setRefres
     const username = useRef(null)
     const email = useRef(null)
 
-    const handleDelete = (event) => {
+    const handleDelete = async (event) => {
         // making this an async await makes the code terminate after the fetch request
         try {
-            fetch(`/api/users/delete/${id}`, {method: 'DELETE'})
+            await deleteUser(user._id)
         } catch(e) {
             console.log(e)
         } finally {
             console.log('user deleted')
             // activates use effect on app page to refresh page
+            setUser(null)
             setRefresh(!refresh)
             // activates conditional on app page to remove token, which will log user out after being deleted
-            setUserDlt(true)
+            // setUserDlt(true)
             navigate('/')
-            logOut()
         }
     }
 
     const handleSubmit = async (evt) => {
         evt.preventDefault()
-        let data;
+        const newUser = user
+        newUser.name = name.current.value
+        newUser.username = username.current.value
+        newUser.email = email.current.value
         try{
-            const res = await fetch(`/api/users/${id}`, {
-                method: 'PUT',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    name: name.current.value,
-                    username: username.current.value,
-                    email: email.current.value
-                })
-            })
-            // I need to turn data into json
-            ///////////////////////// ALWAYS PUT AWAIT //////////////////////////////
-            data = await res.json()
-            // makes new token
-            localStorage.setItem('token', data);
-            // takes token, decodes and sets user to it
-            setUser(getUser())
+            const res = await editUser(newUser)
             console.log('edit made')
             setEditBtn(false)
             // activates use effect on app page to refresh page
