@@ -1,14 +1,13 @@
-import { useEffect, useState } from 'react'
 import styles from './Cart.module.css'
 import * as cartAPI from '../../utilities/carts-api'
-export default function Cart({user, cart, setCart, refresh, setRefresh, setSignInClk, setSearchClk, setActClk}) {
+import { useNavigate } from 'react-router-dom'
+export default function Cart({cart, refresh, setRefresh}) {
+    const navigate = useNavigate()
 
     const handleDelete = async (evt, id, idx) => {
         evt.preventDefault()
         try {
-            // if there is no user, send the id and index in the parameter
-            if(user) return await cartAPI.deleteCart(id)
-            return cartAPI.deleteCart(id, idx)
+            await cartAPI.deleteCart(id, idx)
         } catch(err){
             console.log(err + ' on Cart page')
         }finally{
@@ -18,12 +17,14 @@ export default function Cart({user, cart, setCart, refresh, setRefresh, setSignI
 
     const buyGame = async (evt, cartItem, idx) => {
         console.log('Buy function')
-        // evt.preventDefault()
+        evt.preventDefault()
         try {
             return await cartAPI.buyCart(cartItem, idx)
         } catch(err){
             console.log(err + ' on Cart page')
         }finally{
+            // this runs before cart is updated, so when cart length is 1 it's actually 0
+            if(cart.length === 1) navigate('/')
             setRefresh(!refresh)
         }
     }
@@ -35,7 +36,6 @@ export default function Cart({user, cart, setCart, refresh, setRefresh, setSignI
                 cart.map((cartItem, idx) => {
                     return(
                         <div className={styles.Game} style={cartItem.quantity <= cartItem.games[0].qty ? {border: 'solid green'}: {border: 'solid red'}}>
-                            {/* <img src={cartItem.games[0].img} alt={cartItem.games[0].img} /> */}
                             <div style={{backgroundImage: `url(${cartItem.games[0].img})`}}></div>
                             <div>
                                 <h2>{cartItem.games[0].name}</h2>
