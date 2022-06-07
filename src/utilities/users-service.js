@@ -71,7 +71,7 @@ export async function deleteUser(id){
 }
 
 export async function findUser(id){
-  const tempToken = await usersAPI.getUser()
+  const tempToken = await usersAPI.getUser(id)
   sessionStorage.setItem('tempToken', tempToken)
   return getTempUser()
 }
