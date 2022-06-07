@@ -1,5 +1,6 @@
 import sendRequest from "./send-request";
 import { updateGame } from "./games-api";
+import * as usersService from "./users-service";
 
 const BASE_URL = '/api/carts'
 
@@ -14,6 +15,7 @@ export async function getCart(userId){
     }
 }
 
+// Gets cart from session storage
 function getSessionCart(){
     return JSON.parse(sessionStorage.getItem('cart'))
 }
@@ -115,6 +117,8 @@ export async function checkCart(userId){
     } 
 }
 
+
+// Deletes cart schema or item from session storage
 export async function deleteCart(id, idx){
     console.log('Delete Cart!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
     if(idx === undefined){
@@ -131,6 +135,8 @@ export async function deleteCart(id, idx){
     }
 }
 
+
+// Buys cart game
 export async function buyCart(payload, idx){
     console.log('Buy Cart!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
     const gamePayload = payload.games[0]
@@ -138,8 +144,11 @@ export async function buyCart(payload, idx){
     gamePayload.sold += payload.quantity
     await updateGame(gamePayload._id, gamePayload)
     if(payload.user){
+        // add current game to the user's bought array and deletes the game from cart
+        const userInfo = await usersService.getUser()
+        userInfo.bought = [...userInfo.bought, gamePayload._id]
+        await usersService.editUser(userInfo)
         await deleteCart(payload._id)
-        return
     }else {
         const cart = getSessionCart()
         cart.splice(idx, 1)
