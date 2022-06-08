@@ -1,22 +1,24 @@
 import styles from './Cart.module.css'
 import * as cartAPI from '../../utilities/carts-api'
 import { useNavigate } from 'react-router-dom'
-export default function Cart({cart, refresh, setRefresh}) {
+export default function Cart({user, cart, refresh, setRefresh}) {
     const navigate = useNavigate()
 
     const handleDelete = async (evt, id, idx) => {
         evt.preventDefault()
         try {
-            await cartAPI.deleteCart(id, idx)
+            // if there is no user, send the id and index in the parameter
+            if(user) return await cartAPI.deleteCart(id)
+            return cartAPI.deleteCart(id, idx)
         } catch(err){
             console.log(err + ' on Cart page')
         }finally{
+            if(cart.length === 1) navigate('/games')
             setRefresh(!refresh)
         }
     }
 
     const buyGame = async (evt, cartItem, idx) => {
-        console.log('Buy function')
         evt.preventDefault()
         try {
             return await cartAPI.buyCart(cartItem, idx)
@@ -24,7 +26,7 @@ export default function Cart({cart, refresh, setRefresh}) {
             console.log(err + ' on Cart page')
         }finally{
             // this runs before cart is updated, so when cart length is 1 it's actually 0
-            if(cart.length === 1) navigate('/')
+            if(cart.length === 1) navigate('/games')
             setRefresh(!refresh)
         }
     }
