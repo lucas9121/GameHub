@@ -46,18 +46,21 @@ export default function Edit({refresh ,setRefresh}) {
     }
 
     const handleDelete = async (event) => {
-        navigate('/')
+        navigate('/games')
         try {
             await gamesAPI.deleteGame(id)
         } catch(e) {
             console.log(e)
-        } 
+        } finally{
+            console.log('deleted game')
+            setRefresh(!refresh)
+        }
     }
 
     return (
         <main className={styles.Edit}>
             <h2>Edit {game.name} </h2>
-            <Link className="sec" to={`/${id}`} >Back</Link>
+            <Link className="sec" to={`/games/${id}`} >Back</Link>
             <br />
             <br />
             <form className='edit-form' onSubmit={handleSubmit} >
