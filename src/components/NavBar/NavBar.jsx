@@ -1,8 +1,9 @@
-import AuthPage from "../../pages/AuthPage/AuthPage"
 import UserLogOut from "../UserLogOut/UserLogOut"
 import { Link } from "react-router-dom"
 import styles from "./NavBar.module.css"
 import { useState, useEffect } from "react"
+import {BsCart, BsJoystick} from 'react-icons/bs'
+import {BiBarChart} from 'react-icons/bi'
 
 export default function NavBar({ user, setUser, cart, setCart, newQty, showSignin, setShowSignin, setActClk, actClk, setSearchClk, signClk, setSignClk, refresh, setRefresh}) {
     // dropdown hook
@@ -34,7 +35,7 @@ export default function NavBar({ user, setUser, cart, setCart, newQty, showSigni
     return(
         <nav className={styles.NavBar} style={showSignin ? {borderRadius: '0'} : null}>
             <div>
-                <Link to={'/'} onClick={() => {setActClk(false); setSearchClk(false)}} ><h1>GameHub</h1></Link>
+                <Link to={'/games'} onClick={() => {setActClk(false); setSearchClk(false)}}><BsJoystick /><h1>GameHub</h1></Link>
             </div>
             {
                 // if there is a user
@@ -57,13 +58,19 @@ export default function NavBar({ user, setUser, cart, setCart, newQty, showSigni
                                 }
 
                     </ul>
-                    <Link to='/cart'>Cart({newQty})</Link>
+                    {
+                        user.account === 'gamer' ?
+                            <Link to='/cart' className={styles.CartLink}><BsCart/><p>{newQty}</p></Link> :
+                        user.account === 'developer' ?
+                            <Link to='/data' className={styles.CartLink}><BiBarChart/></Link> 
+                        :
+                            <Link to='/data' className={styles.CartLink}><BiBarChart/></Link>
+                    }
                 </div> :
                 // if there isn't a user
                 <ul className={styles.noUser}>
                     <li><h3 onClick={() => setShowSignin(!showSignin)}>Sign in</h3></li>
-                    <li><Link to='/cart'>Cart({newQty})</Link></li>
-                    {/* <AuthPage user={user} setUser={setUser} signClk={signClk} setSignClk={setSignClk} setActClk={setActClk} setSearchClk={setSearchClk}/> */}
+                    <li><Link to='/cart' className={styles.CartLink}><BsCart/><p>{newQty}</p></Link></li>
                 </ul>
             }
         </nav>
