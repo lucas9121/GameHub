@@ -26,7 +26,7 @@
     padding-right: 10px;
 }
 
-Ul > li:hover {
+.Ul > li:hover {
     cursor: pointer;
     background: rgb(25, 149, 168, .7);
 }
@@ -52,6 +52,7 @@ Ul > li:hover {
     display: flex;
     flex-direction: column;
     height: 350px;
+    max-width: 320px;
     border-radius: 10px;
 }
 .sub > a {
