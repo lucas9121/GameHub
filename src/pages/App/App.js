@@ -14,6 +14,7 @@ import NavBar from '../../components/NavBar/NavBar'
 import AuthPage from '../AuthPage/AuthPage'
 import SearchBar from '../../components/SearchBar/SearchBar'
 import Footer from '../../components/Footer/Footer'
+import DataPage from '../Data/Data'
 
 
 
@@ -67,6 +68,7 @@ export default function App(){
                 <Route path='/new' element={<New user={user} refresh={refresh} setRefresh={setRefresh}/>} />
                 <Route path='/account/:id' element={<MyAccount user={user} setUser={setUser} refresh={refresh} setRefresh={setRefresh} />} />
                 <Route path='/cart' element={<Cart user={user} cart={cart} refresh={refresh} setRefresh={setRefresh} />} />
+                <Route path='/data' element={<DataPage user={user} games={games} />} />
                 <Route path='/games/:id/edit' element={<Edit refresh={refresh} setRefresh={setRefresh} />} />
                 <Route path='/games/:id' element={<Show user={user} refresh={refresh} setRefresh={setRefresh}/>} />
                 <Route path='/*' element={<Navigate to='/games' />} />
