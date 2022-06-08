@@ -8,7 +8,7 @@ export default function DevHomePage({games, user}){
                 games.map((game) => {
                     return(
                         <div className={styles.sub} style={game.approved === 'review' ? {border: 'solid gold'} : game.approved === 'yes' && game.qty > 0 ? {border: 'solid green'} : {border: 'solid red'}}>
-                            <Link style={{backgroundImage: `url(${game.img})`}} to={`/${game._id}`} alt={game.name} ></Link>
+                            <Link style={{backgroundImage: `url(${game.img})`}} to={`/games/${game._id}`} alt={game.name} ></Link>
                             <div className={styles.banner}>
                                 <h2>{game.name} </h2>
                                 <div> 

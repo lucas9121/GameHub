@@ -26,9 +26,6 @@ export default function App(){
     const [cart, setCart] = useState([])
     const [newQty, setNewQty] = useState(0)
 
-    // checks if the delete account button was pressed
-    const [userDlt, setUserDlt] = useState(false)
-
     // displays navbar dropdown options
     const [actClk, setActClk] = useState(false)
     const [searchClk, setSearchClk] = useState(false)
@@ -51,11 +48,6 @@ export default function App(){
                 const cartItems = await cartAPI.getCart(user ? user._id : null)
                 setCart(cartItems)
                 setNewQty(cartItems.reduce((total, acc) => total + acc.quantity, 0))
-                // will log me out with the refresh hook if userDlt hook is set to true
-                if(userDlt){
-                    setUser(getUser())
-                    setUserDlt(false)
-                }
             } catch (e) {
                 console.log(e)
             }
@@ -67,17 +59,17 @@ export default function App(){
             {
                 // if the hook is true display this div
                 showSignin &&
-                <AuthPage user={user} setUser={setUser} refresh={refresh} setRefresh={setRefresh} signClk={signClk} setSignClk={setSignClk} setShowSignin={setShowSignin} setActClk={setActClk} setSearchClk={setSearchClk}/>
+                <AuthPage setUser={setUser} refresh={refresh} setRefresh={setRefresh} signClk={signClk} setShowSignin={setShowSignin} setActClk={setActClk}/>
             }
             <SearchBar user={user} games={games} searchClk={searchClk} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk}/>
             <Routes>
-                <Route path='/' element={<Home games={games} user={user} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk}/>} />
-                <Route path='/new' element={<New user={user} refresh={refresh} setRefresh={setRefresh} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk}/>} />
-                <Route path='/account/:id' element={<MyAccount user={user} setUser={setUser} setUserDlt={setUserDlt} refresh={refresh} setRefresh={setRefresh} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk} />} />
-                <Route path='/cart' element={<Cart user={user} cart={cart} refresh={refresh} setRefresh={setRefresh} setCart={setCart} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk} />} />
-                <Route path='/:id/edit' element={<Edit refresh={refresh} setRefresh={setRefresh} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk} />} />
-                <Route path='/:id' element={<Show user={user} refresh={refresh} setRefresh={setRefresh} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk}/>} />
-                <Route path='/*' element={<Navigate to='/' />} />
+                <Route path='/games' element={<Home games={games} user={user}/>} />
+                <Route path='/new' element={<New user={user} refresh={refresh} setRefresh={setRefresh}/>} />
+                <Route path='/account/:id' element={<MyAccount user={user} setUser={setUser} refresh={refresh} setRefresh={setRefresh} />} />
+                <Route path='/cart' element={<Cart user={user} cart={cart} refresh={refresh} setRefresh={setRefresh} />} />
+                <Route path='/games/:id/edit' element={<Edit refresh={refresh} setRefresh={setRefresh} />} />
+                <Route path='/games/:id' element={<Show user={user} refresh={refresh} setRefresh={setRefresh}/>} />
+                <Route path='/*' element={<Navigate to='/games' />} />
             </Routes>
             <Footer />
         </main>

@@ -186,6 +186,8 @@ export default function GamerHomePage({games}){
                             <li onClick={() => {setpriceAmtAsd(true); setSort(true)} } >Ascending Price</li>
                             <li onClick={() => {setpriceAmtDsd(true); setSort(true)} } >Descending Price</li>
                             <li onClick={() => {setPop(true); setSort(true)} } >Most Popular</li>
+                            <li onClick={() => {setNewest(true); setSort(true)} } >Newest</li>
+                            <li onClick={() => {setChanged(true); setSort(true)} } >Recently Updated</li>
                         </ul>
                     }
                 </div>
@@ -197,7 +199,7 @@ export default function GamerHomePage({games}){
                             // if admin approved the game display it
                             game.approved === 'yes' ?
                             <div className={styles.sub} style={game.qty > 0 ? {border: 'solid green'} : {border: 'solid red'}}>
-                                <Link style={{backgroundImage: `url(${game.img})`}} to={`/${game._id}`} alt={game.name} ></Link>
+                                <Link style={{backgroundImage: `url(${game.img})`}} to={`/games/${game._id}`} alt={game.name} ></Link>
                                 <div className={styles.banner}>
                                     <h2>{game.name} </h2>
                                     <div> 

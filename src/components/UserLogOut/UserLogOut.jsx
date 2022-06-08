@@ -9,7 +9,7 @@ export default function UserLogOut({ setUser, setSearchClk, refresh, setRefresh 
       setUser(null);
       setSearchClk(false)
       setRefresh(!refresh)
-      navigate('/')
+      navigate('/games')
     }
 
     return (

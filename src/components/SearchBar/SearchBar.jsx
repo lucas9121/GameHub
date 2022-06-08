@@ -19,7 +19,7 @@ export default function SearchBar({games, user, searchClk, setSearchClk}) {
         event.preventDefault()
         if(results.length === 1){
             // results is an array of objects
-            navigate(`/${results[0]._id}`)
+            navigate(`/games/${results[0]._id}`)
             // empties the search result div
             setResults([])
             searchInput.current.value = ''
@@ -62,7 +62,7 @@ export default function SearchBar({games, user, searchClk, setSearchClk}) {
                             // and the game was made by developer
                             result.dev === user.name ?
                             <div key={idx}>
-                                <Link onClick={() => setResults([])} to={`/${result._id}`} >{result.name} </Link>
+                                <Link onClick={() => setResults([])} to={`/games/${result._id}`} >{result.name} </Link>
                             </div>: 
                             // else, don't show anything
                             null :
@@ -71,14 +71,14 @@ export default function SearchBar({games, user, searchClk, setSearchClk}) {
                             // and game was approved by admin
                             result.approved === 'yes' ?
                             <div key={idx}>
-                                <Link onClick={() => setResults([])} to={`/${result._id}`} >{result.name} </Link>
+                                <Link onClick={() => setResults([])} to={`/games/${result._id}`} >{result.name} </Link>
                             </div>: 
                             // else, don't show anything
                             null :
                             // else (admin account), show everything
                             <div key={idx}>
                                 {/* onClick will empty the div and erase any text inside search bar */}
-                                <Link onClick={() => {setResults([]); searchInput.current.value = ''}} to={`/${result._id}`} >{result.name} </Link>
+                                <Link onClick={() => {setResults([]); searchInput.current.value = ''}} to={`/games/${result._id}`} >{result.name} </Link>
                             </div>
                         )
                     })

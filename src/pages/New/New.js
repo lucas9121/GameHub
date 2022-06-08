@@ -21,16 +21,13 @@ export default function New({refresh, setRefresh, user}){
         payload.description = description.current.value;
         payload.dev = user._id
         payload.approved = 'review';
-        console.log('payload is ' + payload)
-        console.log(payload)
         try {
             console.log('try block')
             const data = await gamesAPI.createGame(payload)
-            navigate(`/${data.createdGame._id}`)
+            navigate(`/games/${data.createdGame._id}`)
         } catch(e) {
             console.log(e)
         } finally {
-            console.log('success')
             setRefresh(!refresh)
         }
     }
@@ -62,7 +59,7 @@ export default function New({refresh, setRefresh, user}){
                         <textarea name="description" id="description description-box" ref={description} cols="40" rows="3" required></textarea>
                     </div>
                     <input className='btn yes-btn' type="submit" value="Create Game" />
-                    <button className="btn no-btn" onClick={() => navigate('/')}>Cancel</button>
+                    <button className="btn no-btn" onClick={() => navigate('/games')}>Cancel</button>
                 </form>
         </main>
     )

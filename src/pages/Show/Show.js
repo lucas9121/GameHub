@@ -7,7 +7,6 @@ import DevGameButton from "../../components/DevGameButton/DevGameButton"
 import AdminGameButtons from "../../components/AdminGameButtons/AdminGameButtons"
 import * as gamesAPI from '../../utilities/games-api'
 import * as cartsAPI from "../../utilities/carts-api"
-import { editUser } from "../../utilities/users-service"
 import styles from './Show.module.css'
 
 export default function Show({user, refresh, setRefresh}) {
@@ -59,7 +58,7 @@ export default function Show({user, refresh, setRefresh}) {
         } finally {
             setNoBtn(false)
             setRefresh(!refresh)
-            navigate('/')
+            navigate('/games')
         }
     }
 

@@ -9,7 +9,7 @@ export default function DevGameButton({game}) {
                 // edit game button for developer user if game wasn't rejected
                 game.approved !== 'no' ? 
                     <div>
-                        <button className="btn sec-btn" onClick={() => navigate(`/${game._id}/edit`)} >Edit Game</button>
+                        <button className="btn sec-btn" onClick={() => navigate(`/games/${game._id}/edit`)} >Edit Game</button>
                     </div> :
                 // Explanation for developer and edit button if game was rejected by admin
                 game.approved === 'no' ?
@@ -18,7 +18,7 @@ export default function DevGameButton({game}) {
                     <div className={styles.Reason}>
                         <p>{game.reason}</p>
                     </div>
-                    <button className="btn sec-btn" onClick={() => navigate(`/${game._id}/edit`)} >Edit Game</button> 
+                    <button className="btn sec-btn" onClick={() => navigate(`/games/${game._id}/edit`)} >Edit Game</button> 
                 </div> : null
             }
         </div>

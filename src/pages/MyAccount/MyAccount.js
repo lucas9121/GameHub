@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { editUser, deleteUser } from "../../utilities/users-service"
 import styles from './MyAccount.module.css'
 
-export default function MyAccount({user, setUser, setUserDlt, refresh, setRefresh}) {
+export default function MyAccount({user, setUser, refresh, setRefresh}) {
     const {id} = useParams()
     const navigate = useNavigate()
     const [editBtn, setEditBtn] = useState(false)
@@ -19,9 +19,7 @@ export default function MyAccount({user, setUser, setUserDlt, refresh, setRefres
         } catch(e) {
             console.log(e)
         } finally {
-            console.log('user deleted')
-            // activates use effect on app page to refresh page
-            navigate('/')
+            navigate('/games')
             setUser(null)
             setRefresh(!refresh)
         }
@@ -35,9 +33,7 @@ export default function MyAccount({user, setUser, setUserDlt, refresh, setRefres
         newUser.email = email.current.value
         try{
             const res = await editUser(newUser)
-            console.log('edit made')
             setEditBtn(false)
-            // activates use effect on app page to refresh page
             setRefresh(!refresh)
         }catch(e){
             console.log(e)

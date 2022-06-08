@@ -34,7 +34,6 @@ export default function Edit({refresh ,setRefresh}) {
         payload.img =  img.current.value;
         payload.description = description.current.value;
         payload.approved = 'review';
-        console.log('payload is ' + payload)
         try {
             await gamesAPI.updateGame(id, payload)
         } catch(e) {
@@ -52,7 +51,6 @@ export default function Edit({refresh ,setRefresh}) {
         } catch(e) {
             console.log(e)
         } finally{
-            console.log('deleted game')
             setRefresh(!refresh)
         }
     }

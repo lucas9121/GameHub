@@ -22,9 +22,12 @@ export default function NavBar({ user, setUser, cart, setCart, newQty, showSigni
             // dropdown options if user has a gamer account
             if(user.account ===  "gamer"){
                 setOptions([{url: `/account/${user._id}`, name: 'My Account' }, <UserLogOut setUser={setUser} cart={cart} setCart={setCart} refresh={refresh} setRefresh={setRefresh} actClk={actClk} setSignClk={setSignClk} setActClk={setActClk} setSearchClk={setSearchClk}/> ]);
-            } else {
-                // dropdown options if user has a developer or admin account
+            } else if(user.account ===  "developer") {
+                // dropdown options if user has a developer account
                 setOptions([{url: `/account/${user._id}`, name: 'My Account' }, {url: '/new', name: 'New Game' }, <UserLogOut setUser={setUser} cart={cart} setCart={setCart} refresh={refresh} setRefresh={setRefresh} actClk={actClk} setSignClk={setSignClk} setActClk={setActClk} setSearchClk={setSearchClk}/>]);
+            } else {
+                //dropdown options if user has an admin account
+                setOptions([{url: `/account/${user._id}`, name: 'My Account' }, <UserLogOut setUser={setUser} cart={cart} setCart={setCart} refresh={refresh} setRefresh={setRefresh} actClk={actClk} setSignClk={setSignClk} setActClk={setActClk} setSearchClk={setSearchClk}/>]);
             }
         } else {
             // closes dropdown if hook is false
