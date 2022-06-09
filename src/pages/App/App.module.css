@@ -45,5 +45,10 @@
         max-width: 1140px;
     }
 }
+@media (min-width:1500px){
+    .App{
+        max-width: 1400px;
+    }
+}
 
 
