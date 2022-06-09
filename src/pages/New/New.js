@@ -56,7 +56,7 @@ export default function New({refresh, setRefresh, user}){
                     </div>
                     <div className={styles.SecondRow}>
                         <label htmlFor="description">  Description</label>
-                        <textarea name="description" id="description description-box" ref={description} cols="40" rows="3" required></textarea>
+                        <textarea name="description" id="description description-box" ref={description} cols="40" maxLength={'2500'} rows="30" required></textarea>
                     </div>
                     <input className='btn yes-btn' type="submit" value="Create Game" />
                     <button className="btn no-btn" onClick={() => navigate('/games')}>Cancel</button>
