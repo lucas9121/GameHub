@@ -32,8 +32,12 @@ body {
     background-color: rgb(0 86 179);
 }
 
+.main-btn[disabled]{
+    background-color: rgb(0 59 122);
+}
+
 .main-btn[disabled]:hover{
-    background-color: rgb(0 123 255);
+    background-color: rgb(0, 59, 122);
 }
 
 .sec-btn {
@@ -44,8 +48,12 @@ body {
     background-color: rgb(25 149 168);
 }
 
+.sec-btn[disabled] {
+    background-color: rgb(28, 118, 132);
+}
+
 .sec-btn[disabled]:hover {
-    background-color: rgb(23, 162, 184);
+    background-color: rgb(28, 118, 132);
 }
 
 .yes-btn {
@@ -56,8 +64,12 @@ body {
     background-color: rgb(43 161 70);
 }
 
+.yes-btn[disabled] {
+    background-color: rgb(33, 102, 49);
+}
+
 .yes-btn[disabled]:hover {
-    background-color: rgb(40 167 69);
+    background-color: rgb(33, 102, 49);
 }
 
 .no-btn {
@@ -68,8 +80,12 @@ body {
     background-color: rgb(200 35 51);
 }
 
+.no-btn[disabled] {
+    background-color: rgb(142, 36, 46);
+}
+
 .no-btn[disabled]:hover {
-    background-color: rgb(220 53 69);
+    background-color: rgb(142, 36, 46);
 }
 
 
@@ -84,12 +100,28 @@ body {
     color: rgb(0 86 179);
 }
 
+.main[disabled]{
+    background-color: rgb(0 59 122);
+}
+
+.main[disabled]:hover{
+    background-color: rgb(0, 59, 122);
+}
+
 .sec {
     color: rgb(23, 162, 184);
 }
 
 .sec:hover {
     color: rgb(25 149 168);
+}
+
+.sec[disabled] {
+    background-color: rgb(28, 118, 132);
+}
+
+.sec[disabled]:hover {
+    background-color: rgb(28, 118, 132);
 }
 
 .yes {
@@ -100,10 +132,26 @@ body {
     color: rgb(43 161 70);
 }
 
+.yes[disabled] {
+    background-color: rgb(33, 102, 49);
+}
+
+.yes[disabled]:hover {
+    background-color: rgb(33, 102, 49);
+}
+
 .no {
     color: rgb(220 53 69);
 }
 
 .no:hover {
     color: rgb(200 35 51);
+}
+
+.no[disabled] {
+    background-color: rgb(142, 36, 46);
+}
+
+.no[disabled]:hover {
+    background-color: rgb(142, 36, 46);
 }
