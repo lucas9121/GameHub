@@ -2,6 +2,11 @@
     color: white;
 }
 
+.SignUpForm{
+    display: flex;
+    gap: 50px;
+}
+
 .row {
     display: flex;
     align-items: center;
@@ -32,5 +37,15 @@
     border: none;
     border-radius: 5px;
     outline: inset;
+    margin-bottom: 15px;
+}
+
+.row > div > select {
+    background-color: rgb(52, 58, 64, .8);
+    outline: inset;
+    border-radius: 5px;
+    color: white;
+    margin-right: 10px;
+    font-size: 1rem;
     margin-bottom: 15px;
 }

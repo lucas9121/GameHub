@@ -13,9 +13,12 @@ hr {
 
 .description {
     background: linear-gradient(black, rgba(0, 123, 255, .37), rgba(0, 123, 255, .90), rgba(0, 123, 255, .37), black);
-    padding-bottom: 1%;
+    padding: 1%;
+    max-height: 275px;
+    overflow: auto;
 }
 
 .description > p {
     margin: 0;
+    font-size: 1.5rem;
 }
