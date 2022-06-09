@@ -6,7 +6,6 @@ const BASE_URL = '/api/carts'
 
 // Gets cart from database
 export async function getCart(userId){
-    console.log('Get Cart!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
     if(!userId) return getSessionCart()
     try{
         return await sendRequest(`${BASE_URL}?user=${userId}`)
@@ -23,7 +22,6 @@ function getSessionCart(){
 
 // Compares cart in the database with storage cart for any repeated games
 function compareCarts(dtbsCart, strgCart){
-    console.log('Compare Carts!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
     const userId = strgCart[0].user
     // user had a cart before logging in and also had a cart in the system
     if(dtbsCart.length > 0){
@@ -74,7 +72,6 @@ async function findCart(payload){
 
 // Creates cart schema (only if there's a user) and adds it to storage
 export async function addToCart(payload){
-    console.log('Add to Cart!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
     const cartItem = await findCart(payload)
     if(!cartItem) return await createCart(payload)
     return await updateCart(cartItem, 1)
@@ -83,7 +80,6 @@ export async function addToCart(payload){
 
 // Updates cart in database
 export async function updateCart(payload, num){
-    console.log('Update Cart!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
     // if there's a user logged in
     if(payload.user){
         for(let i = 1; i <= num; i++){
@@ -104,7 +100,6 @@ export async function updateCart(payload, num){
 
 // Checks if cart in storage is empty when logging in
 export async function checkCart(userId){
-    console.log('Check Cart!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
     const ssnCart = getSessionCart()
     const dtbsCart = await getCart(userId)
     // if there isn't a user signed in already (not a page refresh)
@@ -120,7 +115,6 @@ export async function checkCart(userId){
 
 // Deletes cart schema or item from session storage
 export async function deleteCart(id, idx){
-    console.log('Delete Cart!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
     if(idx === undefined){
         try{
             return await sendRequest(`${BASE_URL}/${id}`, "DELETE")
@@ -138,7 +132,6 @@ export async function deleteCart(id, idx){
 
 // Buys cart game
 export async function buyCart(payload, idx){
-    console.log('Buy Cart!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
     const gamePayload = payload.games[0]
     gamePayload.qty -= payload.quantity
     gamePayload.sold += payload.quantity
@@ -152,6 +145,28 @@ export async function buyCart(payload, idx){
     }else {
         const cart = getSessionCart()
         cart.splice(idx, 1)
+        return sessionStorage.setItem('cart', JSON.stringify(cart))
+    }
+}
+
+
+export async function changeCart(payload, idx, num){
+    const newArr = []
+    for (let i = 1; i <= num; i++){
+        newArr.push(payload.games[0])
+    }
+    payload.games = newArr
+    payload.quantity = newArr.length
+    if(payload.user){
+        try{
+            return await sendRequest(BASE_URL, 'PUT', payload)
+        } catch(err) {
+            console.log(`${err} in utitilies`)
+            return
+        } 
+    } else {
+        const cart = getSessionCart()
+        cart.splice(idx, 1, payload)
         return sessionStorage.setItem('cart', JSON.stringify(cart))
     }
 }
