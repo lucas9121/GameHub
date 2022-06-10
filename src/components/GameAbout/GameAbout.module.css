@@ -16,6 +16,12 @@ hr {
     padding: 1%;
     max-height: 275px;
     overflow: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.description::-webkit-scrollbar {
+    display: none;
 }
 
 .description > p {
