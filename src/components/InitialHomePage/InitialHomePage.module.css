@@ -7,6 +7,12 @@
     border-top: solid 3px black;
     border-radius: 10px;
     overflow: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.main::-webkit-scrollbar {
+    display: none;
 }
 .sub {
     display: flex;

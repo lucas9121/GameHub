@@ -2,4 +2,11 @@
     flex: 13;
     text-align: center;
     color: white;
+    overflow: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.Data::-webkit-scrollbar {
+    display: none;
 }

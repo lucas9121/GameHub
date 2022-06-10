@@ -5,8 +5,14 @@
     color: white;
     padding: 5px;
     align-items: center;
-    overflow: auto;
     font-size: 1.5rem;
+    overflow: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.MyAccount::-webkit-scrollbar {
+    display: none;
 }
 
 .AccountInfo > h4 {

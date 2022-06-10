@@ -4,6 +4,7 @@
     flex-direction: column;
     overflow: hidden;
 }
+
 .main > div:nth-of-type(1) {
     display: flex;
     flex-direction: column;
@@ -47,7 +48,14 @@
     border-top: solid 3px black;
     border-radius: 10px;
     overflow: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
+
+.grid::-webkit-scrollbar {
+    display: none;
+}
+
 .sub {
     display: flex;
     flex-direction: column;
@@ -55,6 +63,7 @@
     max-width: 320px;
     border-radius: 10px;
 }
+
 .sub > a {
     flex: 12;
     background-size: cover;
@@ -67,6 +76,7 @@
     height: 370px;
     border-radius: 10px;
 }
+
 .sub:hover > a {
     border-radius: 9px 9px 0 0;
 }

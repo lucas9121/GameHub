@@ -39,8 +39,14 @@
 .SearchBar > div {
     max-height: 200px;
     height: auto;
-    overflow: scroll;
     border-radius: 0 0 15px 15px;
+    overflow: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.SearchBar > div::-webkit-scrollbar {
+    display: none;
 }
 
 .SearchBar > div > div {

@@ -12,10 +12,10 @@ export default class SignUpForm extends Component {
       password: '',
       confirm: '',
       account: 'gamer',
-      // question1: "What is your mother's maiden name?",
-      // answer1: '',
-      // question2: "What is the name of your first pet?",
-      // answer2: '',
+      question1: "What is your mother's maiden name?",
+      answer1: '',
+      question2: "What is the name of your first pet?",
+      answer2: '',
       error: '',
       fName: "",
       lName: ''
@@ -110,7 +110,7 @@ export default class SignUpForm extends Component {
                   <p className="error-message">&nbsp;{this.state.error}</p>
                 </div>
               </div>
-              {/* <div className={styles.column}>
+              <div className={styles.column}>
                 <div className={styles.row}>
                   <div>
                     <label>Security Question 1</label>
@@ -149,7 +149,7 @@ export default class SignUpForm extends Component {
                     <input type="text" name="answer2" value={this.state.answer2} onChange={this.handleChange} required />
                   </div>
                 </div>
-              </div> */}
+              </div>
             </form>
         </div>
       );

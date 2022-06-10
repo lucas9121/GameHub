@@ -12,6 +12,12 @@ button {
     font-family: serif;
     border-top: solid 2px black;
     overflow: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.show::-webkit-scrollbar {
+    display: none;
 }
 
 .show > h2 {

@@ -6,9 +6,15 @@
     border-radius: 0 0 10px 10px;
     padding: 0 10px;
     height: 22%;
-    overflow: scroll;
     margin-bottom: -100px;
     z-index: 2;
+    overflow: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.AuthPage::-webkit-scrollbar {
+    display: none;
 }
 
 .AuthPage > div {

@@ -7,6 +7,12 @@
     justify-items: center;
     padding: 10px 5px;
     overflow: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.Cart::-webkit-scrollbar {
+    display: none;
 }
 
 .Game{
