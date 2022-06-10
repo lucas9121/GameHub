@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import * as usersService from '../../utilities/users-service';
 import * as cartsAPI from '../../utilities/carts-api'
 import styles from './LoginForm.module.css'
@@ -9,6 +9,13 @@ export default function LoginForm({ setUser, setShowSignin, setActClk, refresh, 
       password: ''
     });
     const [error, setError] = useState('');
+    const [disable, setDisable] = useState(true)
+
+    useEffect(() => {
+      if(credentials.email !== '' && credentials.password !== '') return setDisable(false)
+      setDisable(true)
+
+    }, [credentials])
 
     function handleChange(evt) {
       setCredentials({ ...credentials, [evt.target.name]: evt.target.value });
@@ -38,10 +45,12 @@ export default function LoginForm({ setUser, setShowSignin, setActClk, refresh, 
             <input type="text" name="email" value={credentials.email} onChange={handleChange} required />
             <label>Password</label>
             <input type="password" name="password" value={credentials.password} onChange={handleChange} required />
-            <button className='btn main-btn' type="submit">LOG IN</button>
+            <div className={styles.message}>
+              <button className='btn main-btn' type="submit" disabled={disable}>LOG IN</button>
+              <p className="error-message">&nbsp;{error}</p>
+            </div>
           </form>
         </div>
-        <p className="error-message">&nbsp;{error}</p>
       </div>
     );
 }
