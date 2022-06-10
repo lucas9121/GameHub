@@ -12,6 +12,7 @@
 .Developer > div > h4 {
     margin: 0;
     text-decoration: underline;
+    font-size: xx-large;
 }
 
 .Reason {
@@ -19,4 +20,5 @@
     width: 530px;
     text-align: center;
     font-style: italic;
+    font-size: x-large;
 }
