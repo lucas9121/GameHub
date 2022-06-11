@@ -10,7 +10,7 @@
     border: none;
 }
 
-.new > fieldset {
+.new > textarea {
     outline: none;
     background-color: rgba(61, 69, 77, 0.8);
     color: white;
