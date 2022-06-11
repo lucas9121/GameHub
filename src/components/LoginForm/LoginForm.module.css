@@ -28,3 +28,8 @@
 .Login > div > form > label {
     padding: 4px 3px;
 }
+
+.message{
+    display: flex;
+    align-items: center;
+}
