@@ -12,10 +12,6 @@ export default class SignUpForm extends Component {
       password: '',
       confirm: '',
       account: 'gamer',
-      question1: "What is your mother's maiden name?",
-      answer1: '',
-      question2: "What is the name of your first pet?",
-      answer2: '',
       error: '',
       fName: "",
       lName: ''
@@ -27,13 +23,6 @@ export default class SignUpForm extends Component {
         [evt.target.name]: evt.target.value,
         error: ''
       });
-      // console.log(this.state.answer1)
-      // console.log(this.state.answer2)
-      // console.log(this.state.fName)
-      // console.log(this.state.email)
-      // console.log(evt.target.value)
-      // console.log(this.state.question1)
-      // console.log(this.state.question2)
     };
 
     
@@ -108,46 +97,6 @@ export default class SignUpForm extends Component {
                   </select>
                   <button className="btn main-btn" type="submit" disabled={disable}>SIGN UP</button>
                   <p className="error-message">&nbsp;{this.state.error}</p>
-                </div>
-              </div>
-              <div className={styles.column}>
-                <div className={styles.row}>
-                  <div>
-                    <label>Security Question 1</label>
-                      <select name="question1" onChange={(evt) => {
-                        this.setState({...this.state, question1: evt.target[evt.target.selectedIndex].value} )
-                      }}>
-                          <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
-                          <option value="What is the name of your first pet?">What is the name of your first pet?</option>
-                          <option value="What was your first car?">What was your first car?</option>
-                          <option value="What elementary school did you attend?">What elementary school did you attend?</option>
-                          <option value="What is the name of the town where you were born?">What is the name of the town where you were born?</option>
-                          <option value="Where did you meet your spouse?">Where did you meet your spouse?</option>
-                      </select>
-                  </div>
-                  <div>
-                    <label>Answer 1</label>
-                    <input type="text" name="answer1" value={this.state.answer1} onChange={this.handleChange} required />
-                  </div>
-                </div>
-                <div className={styles.row}>
-                  <div>
-                    <label>Security Question 2</label>
-                      <select name="question2" onChange={(evt) => {
-                        this.setState({...this.state, question2: evt.target[evt.target.selectedIndex].value} )
-                      }}>
-                          <option value="What is the name of your first pet?">What is the name of your first pet?</option>
-                          <option value="What was your first car?">What was your first car?</option>
-                          <option value="What elementary school did you attend?">What elementary school did you attend?</option>
-                          <option value="What is the name of the town where you were born?">What is the name of the town where you were born?</option>
-                          <option value="Where did you meet your spouse?">Where did you meet your spouse?</option>
-                          <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
-                      </select>
-                  </div>
-                  <div>
-                    <label>Answer 2</label>
-                    <input type="text" name="answer2" value={this.state.answer2} onChange={this.handleChange} required />
-                  </div>
                 </div>
               </div>
             </form>
