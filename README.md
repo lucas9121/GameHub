@@ -66,10 +66,10 @@ As an admin you can also <ins>***remove***</ins> any review from any game. Delet
  - NodeJS
 
 
-## [Wireframe](https://miro.com/app/board/uXjVO2geB1U=/)
+## [Wireframe](https://miro.com/app/board/uXjVO2geB1U=/?share_link_id=425323438014)
 
 
-## [ERD](https://miro.com/app/board/uXjVO3Q1pPU=/)
+## [ERD](https://miro.com/app/board/uXjVO3Q1pPU=/?share_link_id=970518147628)
 
 
 
