@@ -2,6 +2,7 @@
     flex: 13;
     text-align: center;
     color: white;
+    height: calc(100vh - 269px);
     overflow: auto;
     -ms-overflow-style: none;
     scrollbar-width: none;
