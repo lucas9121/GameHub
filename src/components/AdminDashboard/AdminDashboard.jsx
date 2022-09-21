@@ -7,6 +7,7 @@ import { DataGrid } from '@mui/x-data-grid';
 
 export default function AdminDashboard({user, games}){
     const [allUsers, setAllUsers] = useState([])
+    const [date, setDate] = useState(new Date())
     
 
     useEffect(() => {
@@ -26,19 +27,23 @@ export default function AdminDashboard({user, games}){
     }, [])
 
     const columns = [
-        {field: 'id', headerName: 'ID', width: 90, renderCell: (index) => index.api.getRowIndex(index.row._id) + 1, },
-        {field: 'username', headerName: 'Username', width: 120 },
-        {field: 'email', headerName: 'Email', width: 200 },
-        {field: 'account', headerName: 'Account Type', width: 120},
-        {field: 'createdAt', headerName: 'Account Created', width: 150, renderCell: (params) => {
+        {field: 'id', headerName: 'ID', headerAlign: 'center', width: 90, renderCell: (index) => index.api.getRowIndex(index.row._id) + 1, },
+        {field: 'username', headerName: 'Username', headerAlign: 'center', width: 120 },
+        {field: 'email', headerName: 'Email', headerAlign: 'center', width: 200 },
+        {field: 'account', headerName: 'Account Type', headerAlign: 'center', width: 120},
+        {field: 'createdAt', headerName: 'Account Created', headerAlign: 'center', width: 180, renderCell: (params) => {
+            let date = new Date(params.row.createdAt)
+            let year = date.getFullYear()
+            let month = date.toLocaleString('default', {month: 'long'})
+            let day = date.getDay()
             return(
                 <>
-                    <p>{params.row.createdAt}</p>
+                    <p>{`${month} ${day}, ${year}`}</p>
                 </>
 
             )
         }} ,
-        {field: 'bought', headerName: 'Games Bought', width: 100, renderCell: (params) => {
+        {field: 'bought', headerName: 'Games Bought', width: 120, renderCell: (params) => {
             return(
                 <>
                     <p>{params.row.bought.length}</p>
@@ -49,7 +54,6 @@ export default function AdminDashboard({user, games}){
 
     return(
         <>
-            {/* {console.log(allUsers[0].createdAt)} */}
             <h1>Dashboard</h1>
             {/* <Chart data={allUsers.length} title="Users" grid dataKey="username" /> */}
             <DataGrid className={styles.Table}
