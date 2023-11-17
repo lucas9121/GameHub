@@ -1,5 +1,4 @@
 .NavBar {
-    flex: 1;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -7,6 +6,7 @@
     background-color: rgb(52 58 64);
     color: white;
     border-radius: 0 0 10px 10px;
+    height: 10vh;
 }
 
 .NavBar > div:nth-of-type(1) {

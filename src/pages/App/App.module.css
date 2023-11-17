@@ -1,12 +1,21 @@
+.mainDiv {
+    height: 90vh;
+    overflow: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+}
+
+.mainDiv::-webkit-scrollbar {
+    display: none;
+}
+
 .App{
     width: 100%;
     padding-right: 15px;
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
 }
 
 .noUser{

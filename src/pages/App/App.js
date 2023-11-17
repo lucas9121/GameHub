@@ -55,25 +55,29 @@ export default function App(){
         })()
     }, [refresh])
     return(
-        <main className={styles.App}>
+        <main>
             <NavBar user={user} setUser={setUser} newQty={newQty} cart={cart} setCart={setCart} refresh={refresh} setRefresh={setRefresh} actClk={actClk} setActClk={setActClk} showSignin={showSignin} setShowSignin={setShowSignin} signClk={signClk} setSignClk={setSignClk} setSearchClk={setSearchClk}/>
             {
                 // if the hook is true display this div
                 showSignin &&
                 <AuthPage setUser={setUser} refresh={refresh} setRefresh={setRefresh} signClk={signClk} setShowSignin={setShowSignin} setActClk={setActClk}/>
             }
-            <SearchBar user={user} games={games} searchClk={searchClk} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk}/>
-            <Routes>
-                <Route path='/games' element={<Home games={games} user={user}/>} />
-                <Route path='/new' element={<New user={user} refresh={refresh} setRefresh={setRefresh}/>} />
-                <Route path='/account/:id' element={<MyAccount user={user} setUser={setUser} refresh={refresh} setRefresh={setRefresh} />} />
-                <Route path='/cart' element={<Cart user={user} cart={cart} refresh={refresh} setRefresh={setRefresh} />} />
-                <Route path='/data' element={<DataPage user={user} games={games} />} />
-                <Route path='/games/:id/edit' element={<Edit refresh={refresh} setRefresh={setRefresh} />} />
-                <Route path='/games/:id' element={<Show user={user} refresh={refresh} setRefresh={setRefresh}/>} />
-                <Route path='/*' element={<Navigate to='/games' />} />
-            </Routes>
-            <Footer />
+            <div className={styles.mainDiv}>
+                <div className={styles.App}>
+                    <SearchBar user={user} games={games} searchClk={searchClk} setSearchClk={setSearchClk} setActClk={setActClk} setSignClk={setSignClk}/>
+                    <Routes>
+                        <Route path='/games' element={<Home games={games} user={user}/>} />
+                        <Route path='/new' element={<New user={user} refresh={refresh} setRefresh={setRefresh}/>} />
+                        <Route path='/account/:id' element={<MyAccount user={user} setUser={setUser} refresh={refresh} setRefresh={setRefresh} />} />
+                        <Route path='/cart' element={<Cart user={user} cart={cart} refresh={refresh} setRefresh={setRefresh} />} />
+                        <Route path='/data' element={<DataPage user={user} games={games} />} />
+                        <Route path='/games/:id/edit' element={<Edit refresh={refresh} setRefresh={setRefresh} />} />
+                        <Route path='/games/:id' element={<Show user={user} refresh={refresh} setRefresh={setRefresh}/>} />
+                        <Route path='/*' element={<Navigate to='/games' />} />
+                    </Routes>
+                </div>
+                <Footer />
+            </div>
         </main>
     )
 }
