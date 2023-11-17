@@ -22,6 +22,7 @@ export default function App(){
     const [games, setGames] = useState([])
     const [refresh, setRefresh] = useState(false)
     const [user, setUser] = useState(getUser())
+    const[loading, setLoading] = useState(true)
 
     //Cart
     const [cart, setCart] = useState([])
@@ -52,6 +53,7 @@ export default function App(){
             } catch (e) {
                 console.log(e)
             }
+            setLoading(false)
         })()
     }, [refresh])
     return(
@@ -61,6 +63,10 @@ export default function App(){
                 // if the hook is true display this div
                 showSignin &&
                 <AuthPage setUser={setUser} refresh={refresh} setRefresh={setRefresh} signClk={signClk} setShowSignin={setShowSignin} setActClk={setActClk}/>
+            }
+            {
+                loading && 
+                <h2>Loading....</h2>
             }
             <div className={styles.mainDiv}>
                 <div className={styles.App}>
