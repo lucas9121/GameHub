@@ -18,7 +18,7 @@ export default function LoginForm({ setUser, setShowSignin, setActClk, refresh, 
     }, [credentials])
 
     function handleChange(evt) {
-      setCredentials({ ...credentials, [evt.target.name]: evt.target.value });
+      setCredentials(currData => {return { ...currData, [evt.target.name]: evt.target.value }});
       setError('');
     }
 
