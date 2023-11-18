@@ -27,11 +27,10 @@ export default function AdminDashboard({user, games}){
     }, [])
 
     const columns = [
-        {field: 'id', headerName: 'ID', headerAlign: 'center', width: 90, renderCell: (index) => index.api.getRowIndex(index.row._id) + 1, },
-        {field: 'username', headerName: 'Username', headerAlign: 'center', width: 120 },
-        {field: 'email', headerName: 'Email', headerAlign: 'center', width: 200 },
-        {field: 'account', headerName: 'Account Type', headerAlign: 'center', width: 120},
-        {field: 'createdAt', headerName: 'Account Created', headerAlign: 'center', width: 180, renderCell: (params) => {
+        {field: 'username', headerName: 'Username', headerAlign: 'center', align: 'center', width: 120 },
+        {field: 'email', headerName: 'Email', headerAlign: 'center', align: 'center', width: 200 },
+        {field: 'account', headerName: 'Account Type', headerAlign: 'center', align: 'center', width: 120},
+        {field: 'createdAt', headerName: 'Account Created', headerAlign: 'center', align: 'center', width: 180, renderCell: (params) => {
             let date = new Date(params.row.createdAt)
             let year = date.getFullYear()
             let month = date.toLocaleString('default', {month: 'long'})
@@ -43,25 +42,61 @@ export default function AdminDashboard({user, games}){
 
             )
         }} ,
-        {field: 'bought', headerName: 'Games Bought', width: 120, renderCell: (params) => {
+        {field: 'bought', headerName: 'Games Bought', align: 'center', width: 120, renderCell: (params) => {
+            const acc = params.row.account;
             return(
+                
                 <>
-                    <p>{params.row.bought.length}</p>
+                    <p>{acc === 'gamer' ? params.row.bought.length : 'N/A'}</p>
                 </>
             )
         } }
     ]
+
+    const gridStyle = {
+        color: 'white', // Set the background color of the DataGrid
+        // ... other styles
+      };
 
     return(
         <>
             <h1>Dashboard</h1>
             {/* <Chart data={allUsers.length} title="Users" grid dataKey="username" /> */}
             <DataGrid className={styles.Table}
+            autoHeight
             rows={allUsers.filter((user) => user.account !== 'admin')}
             getRowId={(row) => row._id}
             disableSelectionOnClick
             columns={columns}
+            initialState={{
+                // ...data.initialState,
+                pagination: { paginationModel: { pageSize: 10 } },
+              }}
+            pageSizeOptions={[10, 25, 50]}
             checkboxSelection
+            sx={{
+                // boxShadow: 2,
+                // border: 2,
+                color: 'white',
+                // borderColor: 'white',
+                '.MuiDataGrid-row:hover': {
+                    backgroundColor: 'rgb(28, 118, 132)',
+                    color: '#e1dfdf',
+                    cursor: 'pointer',
+                    '.MuiCheckbox-root': {
+                        color: '#e1dfdf'
+                    },
+                },
+                '.MuiCheckbox-root': {
+                    color: 'white',
+                },
+                '.MuiDataGrid-withBorderColor > div':{
+                    color: 'white' // Set color for the toolbar
+                }, 
+                '.MuiDataGrid-withBorderColor > div > div > div > svg': {
+                    color: 'white', // Set color for the toolbar input arrow
+                },
+              }}
             />
         </>
     )
