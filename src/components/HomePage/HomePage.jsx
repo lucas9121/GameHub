@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import styles from './HomePage.module.css'
 import sortFn from '../../utilities/sort';
 import { useState, useEffect, useMemo } from 'react';
+import SortButton from '../SortButton/SortButton';
 
 export default function HomePage({games, user='none'}) {
     const [sortOptions, setSortOptions] = useState('')
@@ -26,32 +27,12 @@ export default function HomePage({games, user='none'}) {
     return(
         <main className={styles.main}>
             {
-                user === 'admin' &&
+                user === 'admin' ?
                 <div className='userDiv btn'>
                     <Link style={{color: 'white', textDecoration: 'none'}} className="btn sec-btn" to={'/data'}>Users</Link>
-                </div>
-            }
-            {
+                </div> :
                 user === 'gamer' &&
-                <div className='userDiv'>
-                    <div className={styles.Button}>
-                        <button style={sortBtn ? {borderRadius: '10px 10px 0 0'} : null} className="btn sec-btn" onClick={() => setSortBtn(!sortBtn)}>Sort</button>
-                    </div>
-                    <div>
-                        {
-                            sortBtn &&
-                            <ul className={styles.Ul}>
-                                <li onClick={() => {handleSort('name up')}} >Alphabetical A - Z</li>
-                                <li onClick={() => {handleSort('name down')}} >Alphabetical Z - A</li>
-                                <li onClick={() => {handleSort('price up')}} >Ascending Price</li>
-                                <li onClick={() => {handleSort('price down')}} >Descending Price</li>
-                                <li onClick={() => {handleSort('most sold')}} >Most Popular</li>
-                                <li onClick={() => {handleSort('newest')}} >Newest</li>
-                                <li onClick={() => {handleSort('updated')}} >Recently Updated</li>
-                            </ul>
-                        }
-                    </div>
-                </div>
+                <SortButton handleSort={handleSort} sortBtn={sortBtn} setSortBtn={setSortBtn} />
             }
             <div className={styles.grid}>
                 {
