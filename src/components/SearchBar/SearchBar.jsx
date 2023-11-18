@@ -62,7 +62,7 @@ export default function SearchBar({games, user, searchClk, setSearchClk}) {
                             // and the game was made by developer
                             result.dev === user.name ?
                             <div key={idx}>
-                                <Link onClick={() => setResults([])} to={`/games/${result._id}`} >{result.name} </Link>
+                                <Link onClick={() => {setResults([]); searchInput.current.value = ''}} to={`/games/${result._id}`} >{result.name} </Link>
                             </div>: 
                             // else, don't show anything
                             null :
@@ -71,7 +71,7 @@ export default function SearchBar({games, user, searchClk, setSearchClk}) {
                             // and game was approved by admin
                             result.approved === 'yes' ?
                             <div key={idx}>
-                                <Link onClick={() => setResults([])} to={`/games/${result._id}`} >{result.name} </Link>
+                                <Link onClick={() => {setResults([]); searchInput.current.value = ''}} to={`/games/${result._id}`} >{result.name} </Link>
                             </div>: 
                             // else, don't show anything
                             null :
