@@ -15,20 +15,20 @@ export default function AdminGameButtons({game, noBtn, setNoBtn, noReason, handl
                             </div>
                             <>
                                 <h5>Approved?</h5>
-                                <btns className={styles.Buttons}>
+                                <div className={styles.Buttons}>
                                     <button className="btn yes-btn" onClick={(evt) => {handleApproved(evt, 'yes')}}>Yes</button>
                                     <button className="btn no-btn" onClick={() => {setNoBtn(true)}}>No</button>
-                                </btns> 
+                                </div> 
                             </>
                         </> :
                     // if game hasn't been rejected before
                     !game.reason && !noBtn ?
                         <>
                             <h5 style={{marginBottom: '10px'}}>Approved?</h5>
-                            <btns className={styles.Buttons}>
+                            <div className={styles.Buttons}>
                                 <button className="btn yes-btn" onClick={(evt) => {handleApproved(evt, 'yes')}}>Yes</button>
                                 <button className="btn no-btn" onClick={(evt) => {setNoBtn(true)}}>No</button>
-                            </btns> 
+                            </div> 
                         </> :
                     // if admin didn't approve the game show the text box to give reasons why
                     noBtn &&
