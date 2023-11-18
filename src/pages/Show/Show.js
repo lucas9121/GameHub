@@ -81,12 +81,13 @@ export default function Show({user, refresh, setRefresh}) {
             <h2>{game.name} </h2>
             {
                 // Developer user and Admin user buttons and messages
-                user && user.account === 'developer' ? 
-                <DevGameButton game={game} />:
+                user?.account === 'developer' && 
+                <DevGameButton game={game} />
+            }
+            {
                 // review buttons for admin user
-                user && user.account === 'admin' ? 
-                <AdminGameButtons game={game} noBtn={noBtn} setNoBtn={setNoBtn} noReason={noReason} handleApproved={handleApproved} /> :
-                null
+                user?.account === 'admin' && 
+                <AdminGameButtons game={game} noBtn={noBtn} setNoBtn={setNoBtn} noReason={noReason} handleApproved={handleApproved} /> 
             }
             <img src={game.img} alt={game.name} max-width="700" max-height="700" />
             <GamePurchase game={game} user={user} addToCart={handleCartClicked} />
