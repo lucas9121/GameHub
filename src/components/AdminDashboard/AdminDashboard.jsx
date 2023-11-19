@@ -20,21 +20,19 @@ export default function AdminDashboard({user, games}){
                 setAllUsers(getAllUsers())
             } catch(e){
                 console.log(e)
-            } finally {
-                console.log('function is working')
             }
         })()
     }, [])
-
+    
     const columns = [
         {field: 'username', headerName: 'Username', headerAlign: 'center', align: 'center', width: 120 },
         {field: 'email', headerName: 'Email', headerAlign: 'center', align: 'center', width: 200 },
         {field: 'account', headerName: 'Account Type', headerAlign: 'center', align: 'center', width: 120},
         {field: 'createdAt', headerName: 'Account Created', headerAlign: 'center', align: 'center', width: 180, renderCell: (params) => {
-            let date = new Date(params.row.createdAt)
-            let year = date.getFullYear()
-            let month = date.toLocaleString('default', {month: 'long'})
-            let day = date.getDay()
+            const date = new Date(params.row.createdAt)
+            const year = date.getFullYear()
+            const month = date.toLocaleString('default', {month: 'long'})
+            const day = date.getDate()
             return(
                 <>
                     <p>{`${month} ${day}, ${year}`}</p>
