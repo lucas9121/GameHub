@@ -48,6 +48,7 @@ async function create(req, res) {
     // in the client
     res.status(200).json(token);
   } catch (e) {
+    console.error('Sign up error', e)
     res.status(400).json({msg: e.message});
   }
 }
@@ -63,17 +64,16 @@ async function Delete(req,res) {
 
 async function update(req, res) {
   try{
-      const {body} = await req
-      await User.findByIdAndUpdate(req.params.id, body, {new: true}, (err, updatedUser) => {
-          if(!err){
-              res.status(200).json(createJWT(updatedUser))
-          } else {
-              res.status(400).json(err)
-          }
-
-      })
+      const {body} = req
+      const updatedUser = await User.findByIdAndUpdate(req.params.id, body, {new: true})
+      if(updatedUser) {
+        res.status(200).json(createJWT(updatedUser));
+      } else {
+        res.status(404).json({ error: 'User not found' });
+      }
   }catch(e){
-      console.log(e)
+      console.error('Catch block error', e)
+      res.status(500).json({error: 'Internal server error', details: e.message})
   }
 }
 
