@@ -1,5 +1,5 @@
 import * as usersAPI  from './users-api';
-import * as cartsAPI from './carts-api'
+import { jwtDecode } from "jwt-decode"
 
 export async function signUp(userData) {
   // Delete the network request code to the
@@ -28,38 +28,50 @@ export function getToken() {
   const token = localStorage.getItem('token');
   // getItem will return null if no key
   if (!token) return null;
-  const payload = JSON.parse(atob(token.split('.')[1]));
-  // A JWT's expiration is expressed in seconds, not miliseconds
-  if (payload.exp < Date.now() / 1000) {
-    // Token has expired
+  try {
+    const payload = decodeToken(token);
+    // Check if securityQuestions field exists
+    if (payload && 'securityQuestions' in payload) {
+      // Handle the new structure with security questions
+      console.log("Security Questions:", payload.securityQuestions);
+    }
+    // A JWT's expiration is expressed in seconds, not miliseconds
+    if (payload.exp < Date.now() / 1000) {
+      // Token has expired
+      localStorage.removeItem('token');
+      return null;
+    }
+    return token;
+  } catch (error) {
+    console.error("Error decoding token:", error);
     localStorage.removeItem('token');
     return null;
   }
-  return token;
 }
 
 export function getSessionToken() {
   const sessionToken = sessionStorage.getItem('sessionToken');
   if (!sessionToken) return null;
-  JSON.parse(atob(sessionToken.split('.')[1]));
+  decodeToken(sessionToken);
   return sessionToken;
 }
 
 export function getAllUsers(){
   const sessionToken = getSessionToken();
-  return sessionToken ? JSON.parse(atob(sessionToken.split('.')[1])).user : null;
+  return sessionToken ? decodeToken(sessionToken).user : null;
 }
 
 export function getUser() {
   const token = getToken();
   if(token){ 
-    const user = JSON.parse(atob(token.split('.')[1])).user;
+    const user = decodeToken(token).user;
     return user
   }
   return null
 }
 
 export async function editUser(payload){
+  localStorage.removeItem('token')
   const token = await usersAPI.update(payload)
   localStorage.setItem('token', token);
   return getUser()
@@ -79,17 +91,39 @@ export async function findUser(id){
 export function getTempToken(){
   const tempToken = sessionStorage.getItem('tempToken');
   if(!tempToken) return null
-  JSON.parse(atob(tempToken.split('.')[1]));
-  return tempToken
+  try {
+    const payload = decodeToken(tempToken)
+    // Check if the securityQuestions field exists
+    if (payload && 'securityQuestions' in payload) {
+      // Handle the new structure with security questions
+      console.log("Security Questions:", payload.securityQuestions);
+    }
+    return tempToken;
+  } catch (error) {
+    
+  }
 }
 
 export function getTempUser(){
   const tempToken = getTempToken()
-  return tempToken ? JSON.parse(atob(tempToken.split('.')[1])).user : null;
+  return tempToken ? decodeToken(tempToken).user : null;
 }
 
 export function logOut() {
   localStorage.removeItem('token');
   sessionStorage.clear()
   sessionStorage.setItem('cart', JSON.stringify([]))
+}
+
+// Add a helper function to decode the token
+function decodeToken(token) {
+  const test = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1NTlhYjZkNzQ1ZjYwNmRjNWM3NjhmNyIsIm5hbWUiOiJ0ZXN0IHVzZXIiLCJ1c2VybmFtZSI6InRlc3RVc2VyMSIsImVtYWlsIjoidGVzdEB1c2VyLmNvbSIsImFjY291bnQiOiJnYW1lciIsImJvdWdodCI6W10sInF1ZXN0aW9uMSI6IldoYXQgaXMgdGhlIG5hbWUgb2YgeW91ciBmaXJzdCBwZXQ_IiwiYW5zd2VyMSI6InRlc3QiLCJxdWVzdGlvbjIiOiJXaGF0IGlzIHRoZSBuYW1lIG9mIHRoZSB0b3duIHdoZXJlIHlvdSB3ZXJlIGJvcm4_IiwiYW5zd2VyMiI6InRlcyIsImNyZWF0ZWRBdCI6IjIwMjMtMTEtMTlUMDY6MzA6MDUuNzQ5WiIsInVwZGF0ZWRBdCI6IjIwMjMtMTEtMTlUMDY6MzI6MjAuMDQ4WiIsIl9fdiI6MH0sImlhdCI6MTcwMDM3OTMwMSwiZXhwIjoxNzAwNDY1NzAxfQ.LvwwpeV7lZ-ps-DnQpNJCKDTf8nErj9lC4S6h9Sajgs'
+  // console.log(jwtDecode(test))
+  try {
+    return jwtDecode(token);
+  } catch (error) {
+    console.error("Error decoding token:", error);
+    console.log("Token to decode:", token);
+    return null;
+  }
 }
