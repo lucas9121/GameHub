@@ -22,6 +22,7 @@ export default function App(){
     const [games, setGames] = useState([])
     const [refresh, setRefresh] = useState(false)
     const [user, setUser] = useState(getUser())
+    const [isUpdated, setIsUpdated] = useState(false)
     const[loading, setLoading] = useState(true)
 
     //Cart
@@ -47,6 +48,11 @@ export default function App(){
                     const cart = []
                     sessionStorage.setItem('cart', JSON.stringify(cart))
                 }
+                // user info updated or deleted
+                if(isUpdated){
+                     setUser(getUser())
+                     setIsUpdated(false)
+                    }
                 const cartItems = await cartAPI.getCart(user ? user._id : null)
                 setCart(cartItems)
                 setNewQty(cartItems.reduce((total, acc) => total + acc.quantity, 0))
@@ -74,7 +80,7 @@ export default function App(){
                     <Routes>
                         <Route path='/games' element={<Home games={games} user={user}/>} />
                         <Route path='/new' element={<New user={user} refresh={refresh} setRefresh={setRefresh}/>} />
-                        <Route path='/account/:id' element={<MyAccount user={user} setUser={setUser} refresh={refresh} setRefresh={setRefresh} />} />
+                        <Route path='/account/:id' element={<MyAccount user={user} setIsUpdated={setIsUpdated} setUser={setUser} refresh={refresh} setRefresh={setRefresh} />} />
                         <Route path='/cart' element={<Cart user={user} cart={cart} refresh={refresh} setRefresh={setRefresh} />} />
                         <Route path='/data' element={<DataPage user={user} games={games} />} />
                         <Route path='/games/:id/edit' element={<Edit refresh={refresh} setRefresh={setRefresh} />} />
