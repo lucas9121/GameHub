@@ -1,13 +1,11 @@
 import { useState, useRef } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { editUser, deleteUser } from "../../utilities/users-service"
 import styles from './MyAccount.module.css'
 
-export default function MyAccount({user, setUser, refresh, setRefresh}) {
-    const {id} = useParams()
+export default function MyAccount({user, refresh, setRefresh, setIsUpdated}) {
     const navigate = useNavigate()
     const [editBtn, setEditBtn] = useState(false)
-    const [confirm, setConfirm] = useState(false)
     const name = useRef(null)
     const username = useRef(null)
     const email = useRef(null)
@@ -17,26 +15,29 @@ export default function MyAccount({user, setUser, refresh, setRefresh}) {
         try {
             await deleteUser(user._id)
         } catch(e) {
-            console.log(e)
+            console.log('error with delete ', e)
         } finally {
             navigate('/games')
-            setUser(null)
+            setIsUpdated(true)
             setRefresh(!refresh)
         }
     }
 
     const handleSubmit = async (evt) => {
         evt.preventDefault()
-        const newUser = user
-        newUser.name = name.current.value
-        newUser.username = username.current.value
-        newUser.email = email.current.value
+        const newUser = {
+            ...user,
+            name: name.current.value,
+            username: username.current.value,
+            email: email.current.value,
+          };
         try{
-            const res = await editUser(newUser)
+            await editUser(newUser)
             setEditBtn(false)
+            setIsUpdated(true)
             setRefresh(!refresh)
         }catch(e){
-            console.log(e)
+            console.log('error with submit ', e)
         }
     }
 
@@ -85,5 +86,5 @@ export default function MyAccount({user, setUser, refresh, setRefresh}) {
                 </div>
             }
         </div>
-)
+    )
 }
