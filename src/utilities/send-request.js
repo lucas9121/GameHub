@@ -18,13 +18,23 @@ export default async function sendRequest(url, method = 'GET', payload = null) {
   }
   const sessionToken = getSessionToken()
   if(sessionToken){
-    console.log('Session Token Exists!!!!!!!!!')
     options.headers = options.headers || {};
     options.headers.Authorization = `Bearer ${sessionToken}`
   }
-
-  const res = await fetch(url, options);
-  // res.ok will be false if the status code set to 4xx in the controller action
-  if (res.ok) return res.json();
-  throw new Error('Bad Request');
+  try {
+    const res = await fetch(url, options);
+    // res.ok will be false if the status code set to 4xx in the controller action
+    if (res.ok) {
+      return res.json();
+    } else {
+      const errorResponse = await res.json();
+      console.error('Error Response:', errorResponse);
+      throw new Error(`Request failed with status ${res.status}`);
+    }
+    
+  } catch (error) {
+    console.error('Request Error ', error)
+    throw new Error('Request failed. Please check your network connection and try again.');
+    
+  }
 }
