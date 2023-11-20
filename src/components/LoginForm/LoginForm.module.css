@@ -27,7 +27,7 @@
     gap: 2px;
 }
 
-.row > input {
+/* .row > input {
     background-color: rgb(52, 58, 64, .8);
     color: white;
     font-size: 1rem;
@@ -37,7 +37,7 @@
     outline: inset;
     margin-right: 10px;
     width: 250px;
-}
+} */
 
 .row > label {
     padding: 4px 3px;

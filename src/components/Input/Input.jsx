@@ -1,7 +1,9 @@
 import styles from './Input.module.css'
 
-export default function Input({type='text', inlineStyle={}, name='', value='', defaultValue='', id='', ref='', isRequired=false, isDisabled=false, onChange=() => {} }) {
+export default function Input({type='text', style={}, name='', value=null, defaultValue=null, id=null, inputRef=null, isRequired=false, isDisabled=false, onChange=() => {} }) {
+    // Check if the input is controlled or uncontrolled
+    const isControlled = value !== null;
     return(
-        <input style={inlineStyle} type={type} name={name} value={value} defaultValue={defaultValue} id={id} className={styles.input} ref={ref} onChange={onChange} required={isRequired} disabled={isDisabled}/>
+        <input style={style} type={type} name={name} value={isControlled ? value : undefined} defaultValue={!isControlled ? defaultValue : undefined} id={id ? id : null} className={styles.input} ref={inputRef} onChange={onChange} required={isRequired} disabled={isDisabled}/>
     )
 }

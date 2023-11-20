@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import * as usersService from '../../utilities/users-service';
 import * as cartsAPI from '../../utilities/carts-api'
 import styles from './LoginForm.module.css'
+import Input from '../Input/Input';
 
 export default function LoginForm({ setUser, setShowSignin, setActClk, refresh, setRefresh }) {
     const [credentials, setCredentials] = useState({
@@ -44,11 +45,13 @@ export default function LoginForm({ setUser, setShowSignin, setActClk, refresh, 
             <div className={styles.column}>
               <div className={styles.row}>
                 <label>Email</label>
-                <input type="text" name="email" value={credentials.email} onChange={handleChange} required />
+                <Input type="text" name="email" value={credentials.email} onChange={handleChange} required={true} style={{width: '250px'}} />
+                {/* <input type="text" name="email" value={credentials.email} onChange={handleChange} required /> */}
               </div>
               <div className={styles.row}>
                 <label>Password</label>
-                <input type="password" name="password" value={credentials.password} onChange={handleChange} required />
+                <Input type="password" name="password" value={credentials.password} onChange={handleChange} required={true} style={{width: '250px'}} />
+                {/* <input type="password" name="password" value={credentials.password} onChange={handleChange} required /> */}
               </div>
             </div>
             <div className={styles.message}>
