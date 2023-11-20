@@ -53,10 +53,26 @@ export default class SignUpForm extends Component {
         console.log(err)
       }
     };
+
+    isStateEmpty = () => {
+      // Create array of keys
+      const fields = Object.keys(this.state);
+
+      // Exclude 'error' and 'name' from the check
+      const fieldsToCheck = fields.filter(field => field !== 'error' && field !== 'name');
+
+      // Check if at least one field is empty or equal to an empty string
+      const validator = fieldsToCheck.some(field => this.state[field] === '' || this.state[field].trim() === '');
+      
+      // If none of the fields are empty, check if password and confirm are the same
+      if(!validator) return this.state.password !== this.state.confirm
+      
+      // Empty field, return tuthy
+      return validator
+    }
     
     
     render() {
-      const disable = this.state.password !== this.state.confirm;
       return (
         <div className={styles.SignUp}>
             <form autoComplete="off" className={styles.SignUpForm} onSubmit={this.handleSubmit}>
@@ -89,25 +105,12 @@ export default class SignUpForm extends Component {
                     <input type="password" name="confirm" value={this.state.confirm} onChange={this.handleChange} required />
                   </div>
                 </div>
-                <div className={styles.row}>
-                  <label>Account Type</label>
-                  <select name="account" onChange={(evt) => {
-                    // options are elements in the select array. account is equal to the value of the clicked option
-                      this.setState({...this.state, account: evt.target[evt.target.selectedIndex].value} )
-                  }}>
-                      <option  value="gamer">Gamer</option>
-                      <option value='developer'>Developer</option>
-                      {/* <option value='admin'>Admin</option> */}
-                  </select>
-                  <button className="btn main-btn" type="submit" disabled={disable}>SIGN UP</button>
-                  <p className="error-message">&nbsp;{this.state.error}</p>
-                </div>
               </div>
               <div className={styles.column}>
                 <div className={styles.row}>
                   <div>
                     <label>Security Question 1</label>
-                      <select name="question1" onChange={(evt) => {
+                      <select className={styles.questionSelect} name="question1" onChange={(evt) => {
                         this.setState({...this.state, question1: evt.target[evt.target.selectedIndex].value} )
                       }}>
                           <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
@@ -126,7 +129,7 @@ export default class SignUpForm extends Component {
                 <div className={styles.row}>
                   <div>
                     <label>Security Question 2</label>
-                      <select name="question2" onChange={(evt) => {
+                      <select className={styles.questionSelect} name="question2" onChange={(evt) => {
                         this.setState({...this.state, question2: evt.target[evt.target.selectedIndex].value} )
                       }}>
                           <option value="What is the name of your first pet?">What is the name of your first pet?</option>
@@ -141,6 +144,19 @@ export default class SignUpForm extends Component {
                     <label>Answer 2</label>
                     <input type="text" name="answer2" value={this.state.answer2} onChange={this.handleChange} required />
                   </div>
+                </div>
+                <div className={styles.row}>
+                  <label>Account Type</label>
+                  <select name="account" onChange={(evt) => {
+                    // options are elements in the select array. account is equal to the value of the clicked option
+                      this.setState({...this.state, account: evt.target[evt.target.selectedIndex].value} )
+                  }}>
+                      <option  value="gamer">Gamer</option>
+                      <option value='developer'>Developer</option>
+                      {/* <option value='admin'>Admin</option> */}
+                  </select>
+                  <button className="btn main-btn" type="submit" disabled={this.isStateEmpty()}>SIGN UP</button>
+                  <p className="error-message">&nbsp;{this.state.error}</p>
                 </div>
               </div>
             </form>
