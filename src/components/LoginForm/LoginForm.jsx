@@ -41,10 +41,16 @@ export default function LoginForm({ setUser, setShowSignin, setActClk, refresh, 
       <div className={styles.Login}>
         <div className="form-container">
           <form autoComplete="off" onSubmit={handleSubmit}>
-            <label>Email</label>
-            <input type="text" name="email" value={credentials.email} onChange={handleChange} required />
-            <label>Password</label>
-            <input type="password" name="password" value={credentials.password} onChange={handleChange} required />
+            <div className={styles.column}>
+              <div className={styles.row}>
+                <label>Email</label>
+                <input type="text" name="email" value={credentials.email} onChange={handleChange} required />
+              </div>
+              <div className={styles.row}>
+                <label>Password</label>
+                <input type="password" name="password" value={credentials.password} onChange={handleChange} required />
+              </div>
+            </div>
             <div className={styles.message}>
               <button className='btn main-btn' type="submit" disabled={disable}>LOG IN</button>
               <p className="error-message">&nbsp;{error}</p>
