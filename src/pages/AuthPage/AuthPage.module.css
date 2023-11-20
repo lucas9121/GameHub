@@ -38,3 +38,10 @@
     cursor: pointer;
     border-bottom: solid white;
 }
+
+@media (max-width: 760px) {
+    .AuthPage > div{
+        overflow: auto;
+        scroll-behavior: smooth;
+    }
+}

@@ -48,3 +48,16 @@
     transition: .2s;
     color: cornflowerblue;
 }
+
+@media (max-width: 950px){
+    .unordered{
+        width: 40%;
+    }
+}
+
+
+@media (max-width: 530px){
+    .unordered{
+        width: 60%;
+    }
+}

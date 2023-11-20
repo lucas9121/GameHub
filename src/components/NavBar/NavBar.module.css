@@ -154,3 +154,9 @@
     color: white;
     text-decoration: none;
 }
+
+@media (max-width: 760px){
+    .NavBar > div:nth-of-type(1) {
+        flex: 3;
+    }
+}
