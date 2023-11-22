@@ -45,6 +45,7 @@ export default function SearchBar({games, user, searchClk, setSearchClk}) {
         })
     }
 
+
     return (
         // this div needs to have margin/padding to set the position of the bottom div
         <div className={styles.positioning}>
@@ -61,7 +62,7 @@ export default function SearchBar({games, user, searchClk, setSearchClk}) {
                             // if the user account is developer
                             user && user.account === 'developer' ?
                                 // and the game was made by developer
-                                result.dev === user.name ?
+                                result.dev === user._id ?
                                 <div key={idx}>
                                     <Link onClick={() => {setResults([]); searchInput.current.value = ''}} to={`/games/${result._id}`} >{result.name} </Link>
                                 </div>: 

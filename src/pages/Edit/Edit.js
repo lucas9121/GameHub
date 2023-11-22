@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react"
 import { useParams, Link, useNavigate} from "react-router-dom"
 import * as gamesAPI from '../../utilities/games-api'
 import styles from './Edit.module.css'
+import Input from "../../components/Input/Input"
 
 
 export default function Edit({refresh ,setRefresh}) {
@@ -65,19 +66,19 @@ export default function Edit({refresh ,setRefresh}) {
                 <div className={styles.FirstRow}>
                     <div>
                         <label htmlFor='name' className='text-primary'>Name</label>
-                        <input name="name" type="text" ref={name} defaultValue={game.name} id='name'/>
+                        <Input name="name" type="text" inputRef={name} defaultValue={game.name} id='name' />
                     </div>
                     <div>
                         <label htmlFor="price" className='text-primary'>Price</label>
-                        <input name="price" type="number" ref={price} defaultValue={game.price} id='price'/>
+                        <Input name="price" type="number" inputRef={price} defaultValue={game.price} id='price'/>
                     </div>
                     <div>
                         <label htmlFor="qty" className='text-primary'>Quantity</label>
-                        <input name="qty" type="number" ref={qty} defaultValue={game.qty} id='qty'/>
+                        <Input name="qty" type="number" inputRef={qty} defaultValue={game.qty} id='qty'/>
                     </div>
                     <div>
                         <label htmlFor="img" className='text-primary'>Image</label>
-                        <input name="img" type="url" ref={img} defaultValue={game.img} id='url'/>
+                        <Input name="img" type="url" inputRef={img} defaultValue={game.img} id='url'/>
                     </div>
                 </div>
                 <div className={styles.SecondRow}>
