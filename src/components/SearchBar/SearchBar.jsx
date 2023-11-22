@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from "react"
 import { useNavigate, Link } from "react-router-dom"
 import styles from './SearchBar.module.css'
+import Input from "../Input/Input"
 
 export default function SearchBar({games, user, searchClk, setSearchClk}) {
     const searchInput = useRef(null)
@@ -50,8 +51,8 @@ export default function SearchBar({games, user, searchClk, setSearchClk}) {
             {/* this div needs to have absolute position for z-index to work. If margin/padding isn't set here it follows flexbox rule */}
             <div className={styles.SearchBar}>
                 <form onSubmit={handleSubmit} autoComplete="off">
-                    <input type='search' style={results.length > 0 ? {borderRadius: '15px 15px 0 0', borderBottom: '2px solid'} : null} name="Search" ref={searchInput} onClick={() => setSearchClk(true)} onChange={handleChange} placeholder="Search..."/>
-                    <input type='submit' value='Search' />
+                    <Input type='search' style={results.length > 0 ? {borderRadius: '15px 15px 0 0', borderBottom: '2px solid'} : null} name="Search" inputRef={searchInput} onClick={() => setSearchClk(true)} onChange={handleChange} placeholder="Search..."  />
+                    <Input type="submit" value='Search' />
                 </form>
                 <div>
                 {
@@ -59,22 +60,24 @@ export default function SearchBar({games, user, searchClk, setSearchClk}) {
                         return(
                             // if the user account is developer
                             user && user.account === 'developer' ?
-                            // and the game was made by developer
-                            result.dev === user.name ?
-                            <div key={idx}>
-                                <Link onClick={() => {setResults([]); searchInput.current.value = ''}} to={`/games/${result._id}`} >{result.name} </Link>
-                            </div>: 
-                            // else, don't show anything
-                            null :
+                                // and the game was made by developer
+                                result.dev === user.name ?
+                                <div key={idx}>
+                                    <Link onClick={() => {setResults([]); searchInput.current.value = ''}} to={`/games/${result._id}`} >{result.name} </Link>
+                                </div>: 
+                                // else, don't show anything
+                                null 
+                            :
                             // if no user or user is gamer
                             !user || user && user.account === 'gamer' ?
-                            // and game was approved by admin
-                            result.approved === 'yes' ?
-                            <div key={idx}>
-                                <Link onClick={() => {setResults([]); searchInput.current.value = ''}} to={`/games/${result._id}`} >{result.name} </Link>
-                            </div>: 
-                            // else, don't show anything
-                            null :
+                                // and game was approved by admin
+                                result.approved === 'yes' ?
+                                <div key={idx}>
+                                    <Link onClick={() => {setResults([]); searchInput.current.value = ''}} to={`/games/${result._id}`} >{result.name} </Link>
+                                </div>: 
+                                // else, don't show anything
+                                null 
+                            :
                             // else (admin account), show everything
                             <div key={idx}>
                                 {/* onClick will empty the div and erase any text inside search bar */}
