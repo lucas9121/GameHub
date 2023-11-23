@@ -5,24 +5,24 @@ import { getAllUsers } from "../../utilities/users-service";
 import Chart from '../chart/Chart';
 import { DataGrid } from '@mui/x-data-grid';
 
-export default function AdminDashboard({user, games}){
-    const [allUsers, setAllUsers] = useState([])
-    const [date, setDate] = useState(new Date())
+export default function AdminDashboard({allUsers}){
+    // const [allUsers, setAllUsers] = useState([])
+    // const [date, setDate] = useState(new Date())
     
 
-    useEffect(() => {
-        (async() => {
-            //Finds every user. Only admin can use this function
-            try{
-                const res = await UsersAPI.getAll()
-                // setAllUsers(res)
-                sessionStorage.setItem('sessionToken', res)
-                setAllUsers(getAllUsers())
-            } catch(e){
-                console.log(e)
-            }
-        })()
-    }, [])
+    // useEffect(() => {
+    //     (async() => {
+    //         //Finds every user. Only admin can use this function
+    //         try{
+    //             const res = await UsersAPI.getAll()
+    //             // setAllUsers(res)
+    //             sessionStorage.setItem('sessionToken', res)
+    //             setAllUsers(getAllUsers())
+    //         } catch(e){
+    //             console.log(e)
+    //         }
+    //     })()
+    // }, [])
     
     const columns = [
         {field: 'username', headerName: 'Username', headerAlign: 'center', align: 'center', width: 120 },
