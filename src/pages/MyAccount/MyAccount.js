@@ -2,6 +2,7 @@ import { useState, useRef } from "react"
 import { useNavigate } from "react-router-dom"
 import { editUser, deleteUser } from "../../utilities/users-service"
 import styles from './MyAccount.module.css'
+import Input from "../../components/Input/Input"
 
 export default function MyAccount({user, refresh, setRefresh, setIsUpdated}) {
     const navigate = useNavigate()
@@ -51,11 +52,14 @@ export default function MyAccount({user, refresh, setRefresh, setIsUpdated}) {
                 <div onSubmit={handleSubmit}>
                     <form autoComplete="off" className={styles.form}>
                     <label>Name</label>
-                    <input type="text" name="name" ref={name} defaultValue={user.name} />
+                    <Input type="text" name="name" inputRef={name} defaultValue={user.name}/>
+                    {/* <input type="text" name="name" ref={name} defaultValue={user.name} /> */}
                     <label>Username</label>
-                    <input type="text" name="username" ref={username} defaultValue={user.username} />
+                    <Input type="text" name="username" inputRef={username} defaultValue={user.username}/>
+                    {/* <input type="text" name="username" ref={username} defaultValue={user.username} /> */}
                     <label>Email</label>
-                    <input type="email" name="email" ref={email} defaultValue={user.email} />
+                    <Input type="email" name="email" inputRef={email} defaultValue={user.email}/>
+                    {/* <input type="email" name="email" ref={email} defaultValue={user.email} /> */}
                     <label>Account Type</label>
                     <select name="account" defaultValue={user.account} disabled>
                         <option  value="gamer">Gamer</option>

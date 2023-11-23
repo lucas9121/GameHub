@@ -36,17 +36,6 @@
     font-size: 1.5rem;
 }
 
-.form > input {
-    background-color: rgb(52, 58, 64, .8);
-    color: white;
-    font-size: 1rem;
-    font-style: italic;
-    padding: 3px;
-    border: none;
-    border-radius: 5px;
-    outline: inset;
-    margin-bottom: 10px;
-}
 
 .form > select {
     background-color: rgb(52, 58, 64, .8);

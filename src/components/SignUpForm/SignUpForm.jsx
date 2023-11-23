@@ -2,6 +2,7 @@ import { Component } from "react";
 import { signUp } from '../../utilities/users-service';
 import * as cartsAPI from '../../utilities/carts-api'
 import styles from './SignUpForm.module.css'
+import Input from "../Input/Input";
 
 
 export default class SignUpForm extends Component {
@@ -39,10 +40,8 @@ export default class SignUpForm extends Component {
         delete formData.error;
         delete formData.fName;
         delete formData.lName;
-        console.log(formData)
         const user = await signUp(formData);
         this.props.setUser(user);
-        console.log(user)
         if(user.account === 'gamer') await cartsAPI.checkCart(user._id)
         // closes sign in div
         this.props.setShowSignin(false)
@@ -80,29 +79,35 @@ export default class SignUpForm extends Component {
                 <div className={styles.row}>
                   <div>
                     <label>First Name</label>
-                    <input type="text" name="fName" value={this.state.fName} onChange={this.handleChange} required />
+                    <Input type="text" name="fName" value={this.state.fName} onChange={this.handleChange} isRequired={true} />
+                    {/* <input type="text" name="fName" value={this.state.fName} onChange={this.handleChange} required /> */}
                   </div>
                   <div>
                     <label>Last Name</label>
-                    <input type="text" name="lName" value={this.state.lName} onChange={this.handleChange} required />
+                    <Input type="text" name="lName" value={this.state.lName} onChange={this.handleChange} isRequired={true} />
+                    {/* <input type="text" name="lName" value={this.state.lName} onChange={this.handleChange} required /> */}
                   </div>
                   <div>
                     <label>Username</label>
-                    <input type="text" name="username" value={this.state.username} maxLength='10' onChange={this.handleChange} required />
+                     <Input type="text" name="username" value={this.state.username} maxLength='10' onChange={this.handleChange} isRequired={true}/>
+                    {/* <input type="text" name="username" value={this.state.username} maxLength='10' onChange={this.handleChange} required /> */}
                   </div>
                 </div>
                 <div className={styles.row}>
                   <div>
                     <label>Email</label>
-                    <input type="email" name="email" value={this.state.email} onChange={this.handleChange} required />
+                     <Input type="email" name="email" value={this.state.email} onChange={this.handleChange} isRequired={true}/>
+                    {/* <input type="email" name="email" value={this.state.email} onChange={this.handleChange} required /> */}
                   </div>
                   <div>
                     <label>Password</label>
-                    <input type="password" name="password" value={this.state.password} onChange={this.handleChange} required />
+                     <Input type="password" name="password" value={this.state.password} onChange={this.handleChange} isRequired={true}/>
+                    {/* <input type="password" name="password" value={this.state.password} onChange={this.handleChange} required /> */}
                   </div>
                   <div>
                     <label>Confirm</label>
-                    <input type="password" name="confirm" value={this.state.confirm} onChange={this.handleChange} required />
+                     <Input type="password" name="confirm" value={this.state.confirm} onChange={this.handleChange} isRequired={true}/>
+                    {/* <input type="password" name="confirm" value={this.state.confirm} onChange={this.handleChange} required /> */}
                   </div>
                 </div>
               </div>
@@ -123,7 +128,8 @@ export default class SignUpForm extends Component {
                   </div>
                   <div>
                     <label>Answer 1</label>
-                    <input type="text" name="answer1" value={this.state.answer1} onChange={this.handleChange} required />
+                    <Input type="text" name="answer1" value={this.state.answer1} onChange={this.handleChange} isRequired={true}/>
+                    {/* <input type="text" name="answer1" value={this.state.answer1} onChange={this.handleChange} required /> */}
                   </div>
                 </div>
                 <div className={styles.row}>
@@ -142,7 +148,8 @@ export default class SignUpForm extends Component {
                   </div>
                   <div>
                     <label>Answer 2</label>
-                    <input type="text" name="answer2" value={this.state.answer2} onChange={this.handleChange} required />
+                     <Input type="text" name="answer2" value={this.state.answer2} onChange={this.handleChange} isRequired={true}/>
+                    {/* <input type="text" name="answer2" value={this.state.answer2} onChange={this.handleChange} required /> */}
                   </div>
                 </div>
                 <div className={styles.row}>

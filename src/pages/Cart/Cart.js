@@ -2,6 +2,8 @@ import styles from './Cart.module.css'
 import * as cartAPI from '../../utilities/carts-api'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Input from '../../components/Input/Input'
+
 export default function Cart({user, cart, refresh, setRefresh}) {
     const navigate = useNavigate()
     const [invalid, setInvalid] = useState(false)
@@ -65,7 +67,7 @@ export default function Cart({user, cart, refresh, setRefresh}) {
                                     <div className={styles.Form}>
                                         <div>
                                             <label>Quantity:</label>
-                                            <input name="buyNumber" className={styles.input} style={{color: `${color}`}} type="number" onChange={(evt) => {handleChange(evt, idx)}} defaultValue={cartItem.quantity}/>
+                                            <Input  name="buyNumber" style={{color: `${color}`, width: '50px', margin: '0', padding: '0 3px'}} type="number" onChange={(evt) => {handleChange(evt, idx)}} defaultValue={cartItem.quantity}/>
                                         </div>
                                         {cartItem.games[0].qty > 0 ? <p className={styles.stock}>In Stock</p> : <p className={styles.stock} style={{color: 'red'}}>Out of Stock</p> }
                                         <button className='btn yes-btn' onClick={(evt) => {buyGame(evt, cartItem, idx)}} disabled={invalid}>Buy</button>

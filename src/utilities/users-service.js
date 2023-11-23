@@ -30,11 +30,6 @@ export function getToken() {
   if (!token) return null;
   try {
     const payload = decodeToken(token);
-    // Check if securityQuestions field exists
-    if (payload && 'securityQuestions' in payload) {
-      // Handle the new structure with security questions
-      console.log("Security Questions:", payload.securityQuestions);
-    }
     // A JWT's expiration is expressed in seconds, not miliseconds
     if (payload.exp < Date.now() / 1000) {
       // Token has expired
@@ -93,11 +88,6 @@ export function getTempToken(){
   if(!tempToken) return null
   try {
     const payload = decodeToken(tempToken)
-    // Check if the securityQuestions field exists
-    if (payload && 'securityQuestions' in payload) {
-      // Handle the new structure with security questions
-      console.log("Security Questions:", payload.securityQuestions);
-    }
     return tempToken;
   } catch (error) {
     
