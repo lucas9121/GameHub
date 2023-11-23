@@ -1,28 +1,7 @@
 import styles from './AdminDashboard.module.css'
-import { useState, useEffect } from "react";
-import * as UsersAPI from '../../utilities/users-api'
-import { getAllUsers } from "../../utilities/users-service";
-import Chart from '../chart/Chart';
 import { DataGrid } from '@mui/x-data-grid';
 
 export default function AdminDashboard({allUsers}){
-    // const [allUsers, setAllUsers] = useState([])
-    // const [date, setDate] = useState(new Date())
-    
-
-    // useEffect(() => {
-    //     (async() => {
-    //         //Finds every user. Only admin can use this function
-    //         try{
-    //             const res = await UsersAPI.getAll()
-    //             // setAllUsers(res)
-    //             sessionStorage.setItem('sessionToken', res)
-    //             setAllUsers(getAllUsers())
-    //         } catch(e){
-    //             console.log(e)
-    //         }
-    //     })()
-    // }, [])
     
     const columns = [
         {field: 'username', headerName: 'Username', headerAlign: 'center', align: 'center', width: 120 },
@@ -50,11 +29,6 @@ export default function AdminDashboard({allUsers}){
             )
         } }
     ]
-
-    const gridStyle = {
-        color: 'white', // Set the background color of the DataGrid
-        // ... other styles
-      };
 
     return(
         <>

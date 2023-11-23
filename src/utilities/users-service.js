@@ -87,10 +87,12 @@ export function getTempToken(){
   const tempToken = sessionStorage.getItem('tempToken');
   if(!tempToken) return null
   try {
-    const payload = decodeToken(tempToken)
+    decodeToken(tempToken)
     return tempToken;
   } catch (error) {
-    
+    console.error("Error decoding token:", error);
+    localStorage.removeItem('token');
+    return null;
   }
 }
 
@@ -107,8 +109,6 @@ export function logOut() {
 
 // Add a helper function to decode the token
 function decodeToken(token) {
-  const test = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1NTlhYjZkNzQ1ZjYwNmRjNWM3NjhmNyIsIm5hbWUiOiJ0ZXN0IHVzZXIiLCJ1c2VybmFtZSI6InRlc3RVc2VyMSIsImVtYWlsIjoidGVzdEB1c2VyLmNvbSIsImFjY291bnQiOiJnYW1lciIsImJvdWdodCI6W10sInF1ZXN0aW9uMSI6IldoYXQgaXMgdGhlIG5hbWUgb2YgeW91ciBmaXJzdCBwZXQ_IiwiYW5zd2VyMSI6InRlc3QiLCJxdWVzdGlvbjIiOiJXaGF0IGlzIHRoZSBuYW1lIG9mIHRoZSB0b3duIHdoZXJlIHlvdSB3ZXJlIGJvcm4_IiwiYW5zd2VyMiI6InRlcyIsImNyZWF0ZWRBdCI6IjIwMjMtMTEtMTlUMDY6MzA6MDUuNzQ5WiIsInVwZGF0ZWRBdCI6IjIwMjMtMTEtMTlUMDY6MzI6MjAuMDQ4WiIsIl9fdiI6MH0sImlhdCI6MTcwMDM3OTMwMSwiZXhwIjoxNzAwNDY1NzAxfQ.LvwwpeV7lZ-ps-DnQpNJCKDTf8nErj9lC4S6h9Sajgs'
-  // console.log(jwtDecode(test))
   try {
     return jwtDecode(token);
   } catch (error) {
